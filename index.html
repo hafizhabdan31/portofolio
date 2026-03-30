@@ -24,7 +24,6 @@ nav {
   transform: translateX(-50%);
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(15px);
-  border: 1px solid rgba(255,255,255,0.15);
   border-radius: 50px;
   padding: 10px 20px;
   z-index: 100;
@@ -44,7 +43,6 @@ nav {
 
 .nav-link:hover {
   opacity: 1;
-  transform: translateY(-2px);
 }
 
 .nav-link.active { opacity: 1; }
@@ -66,6 +64,7 @@ nav {
 .container {
   max-width: 900px;
   margin: auto;
+  text-align: center;
 }
 
 /* HERO */
@@ -74,33 +73,17 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
 }
 
-/* FOTO LEBIH BESAR */
+/* FOTO */
 .profile {
-  width: 160px;
-  height: 160px;
-}
-
-@media(min-width:768px){
-  .profile {
-    width: 200px;
-    height: 200px;
-  }
-}
-
-.profile {
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   object-fit: cover;
   border: 5px solid white;
   box-shadow: 0 15px 35px rgba(0,0,0,0.3);
   margin: auto;
-  transition: 0.3s;
-}
-
-.profile:hover {
-  transform: scale(1.06);
 }
 
 /* TITLE */
@@ -109,20 +92,12 @@ nav {
   font-weight: 700;
 }
 
-/* ABOUT */
-.about-text {
-  margin-top: 20px;
-  font-size: 15px;
-  line-height: 1.8;
-  color: rgba(255,255,255,0.85);
-}
-
-/* SOCIAL ICONS */
+/* SOCIAL */
 .socials {
   margin-top: 20px;
   display: flex;
   justify-content: center;
-  gap: 25px;
+  gap: 20px;
 }
 
 .socials a {
@@ -137,27 +112,33 @@ nav {
 }
 
 .socials a:hover {
-  transform: translateY(-4px) scale(1.1);
-  background: rgba(255,255,255,0.2);
+  transform: translateY(-4px);
 }
 
-/* ICON SIZE */
-.socials svg {
-  width: 20px;
-  height: 20px;
-  fill: white;
+/* CARD */
+.card {
+  background: white;
+  color: #10367D;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 15px;
+  cursor: pointer;
 }
 
-/* FADE */
-.fade {
-  opacity: 0;
-  transform: translateY(40px);
+.grid {
+  display: grid;
+  gap: 20px;
 }
 
-.fade.show {
-  opacity: 1;
-  transform: translateY(0);
-  transition: 0.8s;
+@media(min-width:768px){
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* MODAL */
+#modal {
+  backdrop-filter: blur(5px);
 }
 </style>
 </head>
@@ -180,66 +161,101 @@ nav {
 <section id="home" class="hero section">
   <div class="container">
 
-    <!-- FOTO -->
-    <img src="foto.jpg" class="profile fade">
+    <img src="foto.jpg" class="profile">
 
-    <h1 class="hero-title fade mt-6">Hi, I'm Hafizh</h1>
+    <h1 class="hero-title mt-6">Hi, I'm Hafizh</h1>
 
-    <p id="typing" class="mt-4 fade text-lg"></p>
+    <p class="mt-4">
+      Math Student | Ex-Product Development Intern at BCA Syariah
+    </p>
 
-    <!-- SOCIAL ICONS -->
-    <div class="socials fade">
-
-      <!-- LINKEDIN -->
+    <!-- SOCIAL -->
+    <div class="socials">
       <a href="https://linkedin.com" target="_blank">
-        <svg viewBox="0 0 24 24">
+        <svg viewBox="0 0 24 24" width="20" fill="white">
           <path d="M4.98 3.5C4.98 4.88 3.86 6 2.49 6S0 4.88 0 3.5 1.12 1 2.49 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7.5 0h4.7v2.2h.1c.7-1.2 2.4-2.5 5-2.5 5.3 0 6.3 3.5 6.3 8V24h-5v-7.1c0-1.7 0-3.9-2.4-3.9-2.4 0-2.8 1.9-2.8 3.8V24h-5V8z"/>
         </svg>
       </a>
 
-      <!-- GITHUB -->
       <a href="https://github.com" target="_blank">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 .5C5.4.5 0 5.9 0 12.6c0 5.3 3.4 9.8 8.2 11.4.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.5-1.4-1.9-1.4-1.9-1.2-.8.1-.8.1-.8 1.3.1 2 .4 2 .4 1.2 2.1 3.2 1.5 4 .1.1-.9.5-1.5.9-1.8-2.7-.3-5.5-1.4-5.5-6.2 0-1.4.5-2.6 1.3-3.5-.1-.3-.6-1.7.1-3.6 0 0 1.1-.4 3.6 1.3 1-.3 2.1-.5 3.2-.5s2.2.2 3.2.5c2.5-1.7 3.6-1.3 3.6-1.3.7 1.9.2 3.3.1 3.6.8.9 1.3 2.1 1.3 3.5 0 4.8-2.9 5.9-5.6 6.2.5.4.9 1.2.9 2.4v3.6c0 .3.2.7.8.6 4.8-1.6 8.2-6.1 8.2-11.4C24 5.9 18.6.5 12 .5z"/>
+        <svg viewBox="0 0 24 24" width="20" fill="white">
+          <path d="M12 .5C5.4.5 0 5.9 0 12.6c0 5.3 3.4 9.8 8.2 11.4..."/>
         </svg>
       </a>
-
     </div>
 
     <!-- ABOUT -->
-    <p class="about-text fade">
-      Undergraduate mathematics student with a good interpersonal skills. I’m a nice fun and friendly person, I’m honest and well-timed, I work well in a team but also on my own as I like to set myself goals which I will achieve, I have good listening skills. I have a good sense of humor and a pleasant approach. I am a family person with responsibilities, very reliable and trustworthy. I am having interest in technology and data analytics.
+    <p class="mt-6">
+      Undergraduate mathematics student with a good interpersonal skills...
     </p>
 
   </div>
 </section>
 
+<!-- PROJECTS -->
+<section id="projects" class="section">
+  <div class="container">
+    <h2 class="text-3xl mb-8">Projects</h2>
+
+    <div class="grid">
+      <div class="card" onclick="openModal('p1')">
+        Customer Deposit Prediction
+      </div>
+      <div class="card" onclick="openModal('p2')">
+        Sentiment Analysis
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section">
+  <div class="container">
+    <h2 class="text-3xl mb-8">Experience</h2>
+    <p>BCA Syariah — Product Development Intern</p>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section">
+  <div class="container">
+    <h2 class="text-3xl mb-8">Skills</h2>
+    <p>Python, SQL, Excel</p>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses" class="section">
+  <div class="container">
+    <h2 class="text-3xl mb-8">Courses</h2>
+    <p>Add your courses</p>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div id="modal" class="fixed inset-0 bg-black/70 hidden items-center justify-center">
+  <div class="bg-white text-[#10367D] p-6 rounded-xl">
+    <h2 id="modalTitle"></h2>
+    <p id="modalDesc"></p>
+  </div>
+</div>
+
 <script>
-const fades = document.querySelectorAll('.fade');
+const projectData = {
+  p1: {title:"Customer Deposit Prediction", desc:"ML model"},
+  p2: {title:"Sentiment Analysis", desc:"NLP model"}
+};
 
-function showOnScroll() {
-  fades.forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight * 0.85) {
-      el.classList.add('show');
-    }
-  });
+function openModal(id){
+  document.getElementById("modalTitle").innerText = projectData[id].title;
+  document.getElementById("modalDesc").innerText = projectData[id].desc;
+  document.getElementById("modal").classList.remove("hidden");
+  document.getElementById("modal").classList.add("flex");
 }
 
-window.addEventListener('scroll', showOnScroll);
-showOnScroll();
-
-const text = "Math Student | Ex-Product Development Intern at BCA Syariah";
-let i = 0;
-
-function typeWriter() {
-  if (i < text.length) {
-    document.getElementById("typing").innerHTML += text[i];
-    i++;
-    setTimeout(typeWriter, 40);
-  }
+document.getElementById("modal").onclick = () => {
+  document.getElementById("modal").classList.add("hidden");
 }
-
-typeWriter();
 </script>
 
 </body>
