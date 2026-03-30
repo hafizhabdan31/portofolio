@@ -1,90 +1,38 @@
-body {
-  font-family: 'Satoshi', sans-serif;
-  margin: 0;
-  background: #F8FAFC;
-  color: #384959;
-}
+// GSAP INTRO ANIMATION
+gsap.from(".hero-title", {
+  y: 100,
+  opacity: 0,
+  duration: 1.2,
+  ease: "power4.out"
+});
 
-/* NAVBAR */
-.navbar {
-  position: fixed;
-  width: 100%;
-  backdrop-filter: blur(10px);
-  background: rgba(255,255,255,0.6);
-  border-bottom: 1px solid #eee;
-  z-index: 10;
-}
+gsap.from(".hero-subtitle", {
+  y: 50,
+  opacity: 0,
+  duration: 1.2,
+  delay: 0.2,
+  ease: "power4.out"
+});
 
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
-}
+// SCROLL ANIMATION
+gsap.utils.toArray(".card").forEach((card, i) => {
+  gsap.from(card, {
+    scrollTrigger: {
+      trigger: card,
+      start: "top 85%"
+    },
+    y: 80,
+    opacity: 0,
+    duration: 1,
+    delay: i * 0.2,
+    ease: "power3.out"
+  });
+});
 
-.menu a {
-  margin-left: 20px;
-  text-decoration: none;
-  color: #384959;
-}
+// CUSTOM CURSOR
+const cursor = document.querySelector(".cursor");
 
-.menu a:hover {
-  color: #88BDF2;
-}
-
-/* HERO */
-.hero {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.hero-title {
-  font-size: 70px;
-  font-weight: 700;
-}
-
-.hero-subtitle {
-  margin-top: 10px;
-  color: #6A89A7;
-}
-
-/* SECTION */
-.section {
-  padding: 120px 20px;
-}
-
-.bg-soft {
-  background: #BDDDDC;
-}
-
-/* CARDS */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-}
-
-.card {
-  background: white;
-  padding: 30px;
-  border-radius: 20px;
-  transition: all 0.4s ease;
-}
-
-.card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-}
-
-/* CUSTOM CURSOR */
-.cursor {
-  width: 20px;
-  height: 20px;
-  border: 2px solid #384959;
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  transition: transform 0.15s ease;
-}
+document.addEventListener("mousemove", e => {
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+});
