@@ -15,7 +15,6 @@
       font-family: 'Manrope', sans-serif;
     }
 
-    /* Smooth animation */
     .fade-up {
       opacity: 0;
       transform: translateY(30px);
@@ -35,10 +34,11 @@
   <nav class="fixed top-0 w-full bg-[#F3E3D0]/80 backdrop-blur shadow-sm z-10">
     <div class="max-w-6xl mx-auto flex justify-between p-4">
       <h1 class="font-semibold">Hafizh</h1>
-      <div class="space-x-6">
-        <a href="#home" class="hover:text-[#7EA0B7]">Home</a>
-        <a href="#about" class="hover:text-[#7EA0B7]">About</a>
-        <a href="#projects" class="hover:text-[#7EA0B7]">Projects</a>
+      <div class="space-x-6 text-sm">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
       </div>
     </div>
   </nav>
@@ -47,11 +47,11 @@
   <section id="home" class="h-screen flex items-center justify-center text-center">
     <div class="fade-up">
       <h1 class="text-5xl font-semibold text-[#7EA0B7]">
-        Hi, I'm Hafizh 👋
+        Hafizh 'Abdan Dzikri
       </h1>
       <p class="mt-4 text-lg">Aspiring Data Scientist</p>
-      <p class="text-gray-600 mt-2">
-        Turning data into meaningful insights
+      <p class="text-gray-600 mt-2 max-w-xl mx-auto">
+        Mathematics student at Universitas Indonesia with strong interest in data analysis, statistics, and machine learning.
       </p>
     </div>
   </section>
@@ -61,45 +61,92 @@
     <div class="fade-up">
       <h2 class="text-3xl font-semibold mb-6 text-[#7EA0B7]">About Me</h2>
       <p class="text-gray-700 leading-relaxed">
-        I am a mathematics student passionate about data science and machine learning.
-        I enjoy solving real-world problems using data-driven approaches and building predictive models.
+        I am a mathematics student passionate about data science and analytics. 
+        I enjoy transforming data into actionable insights and building models to support decision-making.
+        I am continuously learning and developing my skills in statistics, machine learning, and data analysis.
       </p>
     </div>
   </section>
 
+  <!-- EXPERIENCE -->
+  <section id="experience" class="py-24 px-6 bg-[#A8C3D4]/30">
+    <div class="max-w-5xl mx-auto fade-up">
+      <h2 class="text-3xl font-semibold mb-10 text-[#7EA0B7]">Experience</h2>
+
+      <div class="bg-white/70 p-6 rounded-2xl shadow">
+        <h3 class="text-xl font-semibold">Product Development Intern</h3>
+        <p class="text-gray-600 mb-3">BCA Syariah • 2025</p>
+        <ul class="list-disc ml-5 text-gray-700 space-y-2">
+          <li>Analyzed onboarding data using Excel (PivotTable & filtering)</li>
+          <li>Categorized customer feedback from mobile app platforms</li>
+          <li>Tracked SMS delivery using VLOOKUP functions</li>
+          <li>Presented insights through PowerPoint visualization</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
   <!-- PROJECTS -->
-  <section id="projects" class="py-24 px-6 bg-[#A8C3D4]/30">
+  <section id="projects" class="py-24 px-6">
     <div class="max-w-5xl mx-auto">
       <h2 class="text-3xl font-semibold mb-10 text-[#7EA0B7]">Projects</h2>
 
       <div class="grid md:grid-cols-2 gap-8">
 
-        <div class="fade-up bg-white/70 backdrop-blur p-6 rounded-2xl shadow hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold">Churn Prediction</h3>
-          <p class="mt-2 text-gray-600">
-            Built a machine learning model to predict customer churn.
+        <div class="fade-up bg-white/70 p-6 rounded-2xl shadow">
+          <h3 class="text-xl font-semibold">Customer Deposit Prediction</h3>
+          <p class="text-gray-600 mt-2">
+            Developed a machine learning model to predict customer potential in opening deposits to improve marketing efficiency.
           </p>
-          <a href="#" class="text-[#7EA0B7] mt-3 inline-block">View Project →</a>
         </div>
 
-        <div class="fade-up bg-white/70 backdrop-blur p-6 rounded-2xl shadow hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold">Sales Forecasting</h3>
-          <p class="mt-2 text-gray-600">
-            Time series forecasting for sales prediction.
+        <div class="fade-up bg-white/70 p-6 rounded-2xl shadow">
+          <h3 class="text-xl font-semibold">Sentiment Analysis (Whoosh)</h3>
+          <p class="text-gray-600 mt-2">
+            Performed sentiment analysis on user reviews using NLP techniques to evaluate public perception.
           </p>
-          <a href="#" class="text-[#7EA0B7] mt-3 inline-block">View Project →</a>
+        </div>
+
+        <div class="fade-up bg-white/70 p-6 rounded-2xl shadow">
+          <h3 class="text-xl font-semibold">Graph Theory Research</h3>
+          <p class="text-gray-600 mt-2">
+            Studied local anti-magic vertex coloring on glasses graphs as part of mathematical research.
+          </p>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- SKILLS -->
+  <section class="py-24 px-6 bg-[#A8C3D4]/30">
+    <div class="max-w-5xl mx-auto fade-up">
+      <h2 class="text-3xl font-semibold mb-8 text-[#7EA0B7]">Skills</h2>
+
+      <div class="grid md:grid-cols-2 gap-6 text-gray-700">
+
+        <div>
+          <h3 class="font-semibold mb-2">Technical Skills</h3>
+          <p>Python, SQL, Excel, Machine Learning, Data Analysis</p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold mb-2">Soft Skills</h3>
+          <p>Communication, Leadership, Problem Solving, Analytical Thinking</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
   <footer class="text-center py-10 text-gray-600">
-    <p>© 2026 Hafizh</p>
+    <p>Email: hafizhabdan223@gmail.com</p>
+    <p>LinkedIn: linkedin.com/in/hafizh-abdan-dzikri</p>
   </footer>
 
-  <!-- ANIMATION SCRIPT -->
+  <!-- ANIMATION -->
   <script>
     const elements = document.querySelectorAll('.fade-up');
 
