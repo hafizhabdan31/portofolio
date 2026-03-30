@@ -19,7 +19,14 @@ body {
   color: #FFFFFF;
   position: relative;
 }
-
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("https://www.transparenttextures.com/patterns/noise.png");
+  opacity: 0.05;
+  pointer-events: none;
+}
 html { scroll-behavior: smooth; }
 
 /* NAVBAR */
