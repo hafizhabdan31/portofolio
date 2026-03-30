@@ -23,9 +23,13 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: url("https://www.transparenttextures.com/patterns/noise.png");
-  opacity: 0.05;
   pointer-events: none;
+
+  background-image:
+    radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 3px 3px;
+
+  opacity: 0.4;
 }
 html { scroll-behavior: smooth; }
 
