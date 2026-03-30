@@ -10,109 +10,60 @@
   <!-- TAILWIND -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <style>
-    body {
-      font-family: 'Satoshi', sans-serif;
-      background: #F8FAFC;
-    }
-
-    /* Smooth animation base */
-    .reveal {
-      opacity: 0;
-      transform: translateY(60px) scale(0.98);
-      transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  </style>
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="text-[#384959]">
 
   <!-- NAVBAR -->
-  <nav class="fixed top-0 w-full bg-white/70 backdrop-blur-md z-10 border-b">
-    <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
-      <h1 class="font-bold text-lg">Hafizh</h1>
-      <div class="space-x-6 text-sm">
-        <a href="#home" class="hover:text-[#88BDF2]">Home</a>
-        <a href="#about" class="hover:text-[#88BDF2]">About</a>
-        <a href="#projects" class="hover:text-[#88BDF2]">Projects</a>
+  <nav class="navbar">
+    <div class="container">
+      <h1 class="logo">Hafizh</h1>
+      <div class="menu">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
       </div>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section id="home" class="h-screen flex items-center justify-center text-center">
+  <section id="home" class="section hero">
     <div class="reveal">
-      <h1 class="text-6xl font-bold tracking-tight">
-        Hafizh 'Abdan
-      </h1>
-      <p class="mt-4 text-lg text-[#6A89A7] font-medium">
-        Data Scientist in Progress
-      </p>
+      <h1 class="title">Hafizh 'Abdan</h1>
+      <p class="subtitle">Data Scientist in Progress</p>
     </div>
   </section>
 
   <!-- ABOUT -->
-  <section id="about" class="max-w-5xl mx-auto py-32 px-6">
-    <div class="reveal">
-      <h2 class="text-4xl font-bold mb-6">About</h2>
-      <p class="text-gray-600 leading-relaxed">
-        I am passionate about data, machine learning, and building impactful solutions.
-      </p>
+  <section id="about" class="section">
+    <div class="container reveal">
+      <h2>About</h2>
+      <p>I am passionate about data and machine learning.</p>
     </div>
   </section>
 
   <!-- PROJECTS -->
-  <section id="projects" class="py-32 px-6 bg-[#BDDDDC]/30">
-    <div class="max-w-5xl mx-auto">
+  <section id="projects" class="section bg-soft">
+    <div class="container">
+      <h2 class="reveal">Projects</h2>
 
-      <h2 class="text-4xl font-bold mb-12 reveal">Projects</h2>
-
-      <div class="grid md:grid-cols-2 gap-10">
-
-        <div class="reveal bg-white p-6 rounded-2xl hover:shadow-xl transition duration-500">
-          <h3 class="text-xl font-bold">Churn Prediction</h3>
-          <p class="mt-2 text-gray-600">
-            Predict customer churn using ML.
-          </p>
+      <div class="grid">
+        <div class="card reveal">
+          <h3>Churn Prediction</h3>
+          <p>Predict customer churn using ML.</p>
         </div>
 
-        <div class="reveal bg-white p-6 rounded-2xl hover:shadow-xl transition duration-500">
-          <h3 class="text-xl font-bold">Sentiment Analysis</h3>
-          <p class="mt-2 text-gray-600">
-            NLP-based sentiment classification.
-          </p>
+        <div class="card reveal">
+          <h3>Sentiment Analysis</h3>
+          <p>NLP-based sentiment classification.</p>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- SCRIPT ANIMASI -->
-  <script>
-    const reveals = document.querySelectorAll('.reveal');
-
-    function revealOnScroll() {
-      const triggerBottom = window.innerHeight * 0.85;
-
-      reveals.forEach((el, index) => {
-        const boxTop = el.getBoundingClientRect().top;
-
-        if (boxTop < triggerBottom) {
-          setTimeout(() => {
-            el.classList.add('active');
-          }, index * 120); // stagger effect
-        }
-      });
-    }
-
-    window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll();
-  </script>
+  <script src="script.js"></script>
 
 </body>
 </html>
