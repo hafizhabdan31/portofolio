@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Hafizh Abdan Dzikri's Portfolio</title>
+<title>Hafizh Abdan Dzikri Portfolio</title>
 
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
@@ -26,24 +26,24 @@ nav {
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 50px;
-  padding: 10px 30px;
+  padding: 10px 20px;
   z-index: 100;
 }
 
-/* MENU */
+/* NAV MENU */
 #navMenu {
   display: flex;
-  gap: 50px;
+  gap: 20px;
   position: relative;
 }
 
-/* LINK */
+/* NAV LINK */
 .nav-link {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   opacity: 0.7;
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
 .nav-link:hover {
@@ -51,9 +51,7 @@ nav {
   transform: translateY(-2px);
 }
 
-.nav-link.active {
-  opacity: 1;
-}
+.nav-link.active { opacity: 1; }
 
 /* INDICATOR */
 .indicator {
@@ -65,10 +63,15 @@ nav {
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* SECTION */
+/* SECTION FULL WIDTH */
 .section {
-  padding: 140px 20px;
-  max-width: 1000px;
+  width: 100%;
+  padding: 120px 20px;
+}
+
+/* CONTENT WRAPPER */
+.container {
+  max-width: 1100px;
   margin: auto;
 }
 
@@ -76,52 +79,45 @@ nav {
 .hero {
   height: 100vh;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
   text-align: center;
-  position: relative;
-  overflow: hidden;
 }
 
+/* RESPONSIVE TITLE */
 .hero-title {
-  font-size: 64px;
+  font-size: clamp(32px, 6vw, 64px);
   font-weight: 700;
-}
-
-/* GRADIENT TEXT */
-.highlight {
-  background: linear-gradient(90deg, #ffffff, #a8c4ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-
-/* CURSOR */
-.cursor-text::after {
-  content: "|";
-  margin-left: 5px;
-  animation: blink 1s infinite;
-}
-
-@keyframes blink {
-  50% { opacity: 0; }
 }
 
 /* CARD */
 .card {
   background: #FFFFFF;
   color: #10367D;
-  padding: 25px;
+  padding: 20px;
   border-radius: 16px;
-  transition: all 0.4s ease;
+  transition: 0.3s;
 }
 
 .card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
 }
 
-/* ANIMATION */
+/* GRID RESPONSIVE */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media(min-width:768px){
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* FADE */
 .fade {
   opacity: 0;
   transform: translateY(40px);
@@ -130,7 +126,7 @@ nav {
 .fade.show {
   opacity: 1;
   transform: translateY(0);
-  transition: all 0.8s ease;
+  transition: 0.8s;
 }
 
 /* MODAL */
@@ -156,62 +152,61 @@ nav {
 
 <!-- HERO -->
 <section id="home" class="hero section">
-
-  <div class="relative z-10">
-    <h1 class="hero-title fade">Hi, I'm <span class="highlight">Hafizh</span></h1>
-    <p id="typing" class="mt-4 text-lg fade cursor-text"></p>
-    <p class="mt-6 max-w-xl mx-auto text-gray-200 fade">
-      Undergraduate mathematics student with a good interpersonal skills. I’m a nice fun and friendly person, I’m honest and well-timed, I work well in a team but also on my own as I like to set myself goals which I will achieve, I have good listening skills. I have a good sense of humor and a pleasant approach. I am a family person with responsibilities, very reliable and trustworthy. I am having interest in technology and data analytics.
-
-
-    </p>
+  <div class="container">
+    <h1 class="hero-title fade">Hi, I'm Hafizh</h1>
+    <p id="typing" class="mt-4 fade"></p>
   </div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects" class="section">
-  <h2 class="text-4xl font-bold mb-10 fade">Projects</h2>
+  <div class="container">
+    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Projects</h2>
 
-  <div class="space-y-6">
-    <div class="card fade cursor-pointer" onclick="openModal('p1')">
-      <h3 class="font-bold">Customer Deposit Prediction</h3>
-      <p>Machine learning model for marketing optimization.</p>
-    </div>
+    <div class="grid">
+      <div class="card fade cursor-pointer" onclick="openModal('p1')">
+        <h3 class="font-bold">Customer Deposit Prediction</h3>
+        <p>Machine learning model.</p>
+      </div>
 
-    <div class="card fade cursor-pointer" onclick="openModal('p2')">
-      <h3 class="font-bold">Sentiment Analysis</h3>
-      <p>NLP-based analysis from social media data.</p>
+      <div class="card fade cursor-pointer" onclick="openModal('p2')">
+        <h3 class="font-bold">Sentiment Analysis</h3>
+        <p>NLP model.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- EXPERIENCE -->
 <section id="experience" class="section">
-  <h2 class="text-4xl font-bold mb-10 fade">Experience</h2>
-  <p class="fade">BCA Syariah — Product Development Intern</p>
+  <div class="container">
+    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Experience</h2>
+    <p class="fade">BCA Syariah — Product Development Intern</p>
+  </div>
 </section>
 
 <!-- SKILLS -->
 <section id="skills" class="section">
-  <h2 class="text-4xl font-bold mb-10 fade">Skills</h2>
-  <p class="fade"><b>Python, SQL, Excel</b></p>
+  <div class="container">
+    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Skills</h2>
+    <p class="fade">Python, SQL, Excel</p>
+  </div>
 </section>
 
 <!-- COURSES -->
 <section id="courses" class="section">
-  <h2 class="text-4xl font-bold mb-10 fade">Courses</h2>
-  <p class="fade">Add your courses</p>
+  <div class="container">
+    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Courses</h2>
+    <p class="fade">Add your courses</p>
+  </div>
 </section>
 
 <!-- MODAL -->
 <div id="modal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
-  <div class="bg-white text-[#10367D] p-8 rounded-xl max-w-lg w-full relative">
-    <button onclick="closeModal()" class="absolute top-3 right-4 text-xl">✕</button>
-    <h2 id="modalTitle" class="text-2xl font-bold mb-4"></h2>
-    <p id="modalDesc" class="text-gray-600 mb-4"></p>
-    <a id="modalLink" href="#" target="_blank" class="text-blue-600 underline">
-      View Project
-    </a>
+  <div class="bg-white text-[#10367D] p-6 rounded-xl max-w-md w-full relative">
+    <button onclick="closeModal()" class="absolute top-3 right-4">✕</button>
+    <h2 id="modalTitle" class="font-bold text-xl mb-3"></h2>
+    <p id="modalDesc"></p>
   </div>
 </div>
 
@@ -270,29 +265,20 @@ function typeWriter() {
   if (i < text.length) {
     document.getElementById("typing").innerHTML += text[i];
     i++;
-    setTimeout(typeWriter, 50);
+    setTimeout(typeWriter, 40);
   }
 }
 typeWriter();
 
 const projectData = {
-  p1: {
-    title: "Customer Deposit Prediction",
-    desc: "Built a machine learning model to predict customer interest in deposit products.",
-    link: "https://github.com/"
-  },
-  p2: {
-    title: "Sentiment Analysis",
-    desc: "Developed NLP model for sentiment classification.",
-    link: "https://github.com/"
-  }
+  p1: { title:"Customer Deposit Prediction", desc:"ML model" },
+  p2: { title:"Sentiment Analysis", desc:"NLP model" }
 };
 
 function openModal(id) {
   const data = projectData[id];
   document.getElementById("modalTitle").innerText = data.title;
   document.getElementById("modalDesc").innerText = data.desc;
-  document.getElementById("modalLink").href = data.link;
   document.getElementById("modal").classList.remove("hidden");
   document.getElementById("modal").classList.add("flex");
 }
