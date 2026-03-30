@@ -16,7 +16,7 @@ body {
 
 html { scroll-behavior: smooth; }
 
-/* NAVBAR PREMIUM */
+/* NAVBAR */
 nav {
   position: fixed;
   top: 20px;
@@ -30,14 +30,12 @@ nav {
   z-index: 100;
 }
 
-/* NAV MENU */
 #navMenu {
   display: flex;
   gap: 20px;
   position: relative;
 }
 
-/* NAV LINK */
 .nav-link {
   font-size: 14px;
   font-weight: 500;
@@ -53,7 +51,6 @@ nav {
 
 .nav-link.active { opacity: 1; }
 
-/* INDICATOR */
 .indicator {
   position: absolute;
   bottom: -6px;
@@ -63,31 +60,37 @@ nav {
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* SECTION FULL WIDTH */
+/* SECTION */
 .section {
   width: 100%;
   padding: 120px 20px;
 }
 
-/* CONTENT WRAPPER */
 .container {
-  max-width: 1100px;
+  max-width: 900px;
   margin: auto;
 }
 
 /* HERO */
 .hero {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
 
-/* RESPONSIVE TITLE */
 .hero-title {
   font-size: clamp(32px, 6vw, 64px);
   font-weight: 700;
+}
+
+/* ABOUT TEXT */
+.about-text {
+  margin-top: 25px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.85);
 }
 
 /* CARD */
@@ -104,7 +107,7 @@ nav {
   box-shadow: 0 15px 30px rgba(0,0,0,0.2);
 }
 
-/* GRID RESPONSIVE */
+/* GRID */
 .grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -117,7 +120,7 @@ nav {
   }
 }
 
-/* FADE */
+/* ANIMATION */
 .fade {
   opacity: 0;
   transform: translateY(40px);
@@ -127,11 +130,6 @@ nav {
   opacity: 1;
   transform: translateY(0);
   transition: 0.8s;
-}
-
-/* MODAL */
-#modal {
-  backdrop-filter: blur(5px);
 }
 </style>
 </head>
@@ -150,11 +148,18 @@ nav {
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- HERO + ABOUT -->
 <section id="home" class="hero section">
   <div class="container">
     <h1 class="hero-title fade">Hi, I'm Hafizh</h1>
-    <p id="typing" class="mt-4 fade"></p>
+
+    <p id="typing" class="mt-4 fade text-lg"></p>
+
+    <!-- ABOUT -->
+    <p class="about-text fade">
+      Undergraduate mathematics student with a good interpersonal skills. I’m a nice fun and friendly person, I’m honest and well-timed, I work well in a team but also on my own as I like to set myself goals which I will achieve, I have good listening skills. I have a good sense of humor and a pleasant approach. I am a family person with responsibilities, very reliable and trustworthy. I am having interest in technology and data analytics.
+    </p>
+
   </div>
 </section>
 
@@ -201,15 +206,6 @@ nav {
   </div>
 </section>
 
-<!-- MODAL -->
-<div id="modal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
-  <div class="bg-white text-[#10367D] p-6 rounded-xl max-w-md w-full relative">
-    <button onclick="closeModal()" class="absolute top-3 right-4">✕</button>
-    <h2 id="modalTitle" class="font-bold text-xl mb-3"></h2>
-    <p id="modalDesc"></p>
-  </div>
-</div>
-
 <script>
 const links = document.querySelectorAll('.nav-link');
 const indicator = document.getElementById('indicator');
@@ -246,6 +242,7 @@ window.addEventListener('scroll', () => {
 
 window.onload = () => moveIndicator(links[0]);
 
+/* ANIMATION */
 const fades = document.querySelectorAll('.fade');
 
 function showOnScroll() {
@@ -259,6 +256,7 @@ function showOnScroll() {
 window.addEventListener('scroll', showOnScroll);
 showOnScroll();
 
+/* TYPING */
 const text = "Math Student | Ex-Product Development Intern at BCA Syariah";
 let i = 0;
 function typeWriter() {
@@ -269,23 +267,6 @@ function typeWriter() {
   }
 }
 typeWriter();
-
-const projectData = {
-  p1: { title:"Customer Deposit Prediction", desc:"ML model" },
-  p2: { title:"Sentiment Analysis", desc:"NLP model" }
-};
-
-function openModal(id) {
-  const data = projectData[id];
-  document.getElementById("modalTitle").innerText = data.title;
-  document.getElementById("modalDesc").innerText = data.desc;
-  document.getElementById("modal").classList.remove("hidden");
-  document.getElementById("modal").classList.add("flex");
-}
-
-function closeModal() {
-  document.getElementById("modal").classList.add("hidden");
-}
 </script>
 
 </body>
