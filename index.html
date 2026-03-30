@@ -10,8 +10,8 @@
 <style>
 body {
   font-family: 'Satoshi', sans-serif;
-  background: #EBEBEB;
-  color: #10367D;
+  background: #10367D;
+  color: #FFFFFF;
 }
 
 html {
@@ -23,8 +23,8 @@ nav {
   position: fixed;
   width: 100%;
   top: 0;
-  background: #EBEBEB;
-  border-bottom: 1px solid rgba(16,54,125,0.1);
+  background: #10367D;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
   z-index: 100;
 }
 
@@ -42,6 +42,17 @@ nav {
   font-weight: 500;
   cursor: pointer;
   padding-bottom: 6px;
+  color: #FFFFFF;
+  opacity: 0.7;
+}
+
+.nav-link:hover {
+  opacity: 1;
+}
+
+/* ACTIVE */
+.nav-link.active {
+  opacity: 1;
 }
 
 /* INDICATOR */
@@ -49,7 +60,7 @@ nav {
   position: absolute;
   bottom: 0;
   height: 3px;
-  background: #10367D;
+  background: #FFFFFF;
   border-radius: 10px;
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -72,7 +83,8 @@ nav {
 
 /* CARD */
 .card {
-  background: white;
+  background: #FFFFFF;
+  color: #10367D;
   padding: 25px;
   border-radius: 16px;
   transition: all 0.4s ease;
@@ -80,7 +92,7 @@ nav {
 
 .card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(16,54,125,0.15);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
 }
 
 /* ANIMATION */
@@ -106,7 +118,7 @@ nav {
     <h1 class="text-xl font-bold">Hafizh</h1>
 
     <div id="navMenu">
-      <a href="#home" class="nav-link">Home</a>
+      <a href="#home" class="nav-link active">Home</a>
       <a href="#projects" class="nav-link">Projects</a>
       <a href="#experience" class="nav-link">Experience</a>
       <a href="#skills" class="nav-link">Skills</a>
@@ -162,30 +174,52 @@ nav {
 <script>
 const links = document.querySelectorAll('.nav-link');
 const indicator = document.getElementById('indicator');
+const sections = document.querySelectorAll('section');
 
+/* MOVE INDICATOR */
 function moveIndicator(el) {
-  const parent = el.parentElement;
-
-  const width = el.offsetWidth;
-  const left = el.offsetLeft;
-
-  indicator.style.width = width + 'px';
-  indicator.style.left = left + 'px';
+  indicator.style.width = el.offsetWidth + 'px';
+  indicator.style.left = el.offsetLeft + 'px';
 }
 
-// CLICK
+/* SET ACTIVE */
+function setActive(link) {
+  links.forEach(l => l.classList.remove('active'));
+  link.classList.add('active');
+  moveIndicator(link);
+}
+
+/* CLICK */
 links.forEach(link => {
-  link.addEventListener('click', (e) => {
-    moveIndicator(e.target);
+  link.addEventListener('click', () => {
+    setActive(link);
   });
 });
 
-// INIT (FIX CENTER)
+/* AUTO UPDATE ON SCROLL */
+window.addEventListener('scroll', () => {
+  let current = "";
+
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 150;
+    if (scrollY >= sectionTop) {
+      current = section.getAttribute("id");
+    }
+  });
+
+  links.forEach(link => {
+    if (link.getAttribute("href") === "#" + current) {
+      setActive(link);
+    }
+  });
+});
+
+/* INIT */
 window.onload = () => {
   moveIndicator(links[0]);
 };
 
-// SCROLL ANIMATION
+/* SCROLL ANIMATION */
 const fades = document.querySelectorAll('.fade');
 
 function showOnScroll() {
