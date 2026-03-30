@@ -1,31 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Hafizh Portfolio</title>
 
   <!-- FONT -->
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
 
   <!-- TAILWIND -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
     body {
-      font-family: 'Manrope', sans-serif;
+      font-family: 'Satoshi', sans-serif;
       background: #F8FAFC;
     }
 
-    /* Smooth animation */
-    .fade-up {
+    /* Smooth animation base */
+    .reveal {
       opacity: 0;
-      transform: translateY(40px);
-      transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateY(60px) scale(0.98);
+      transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .fade-up.show {
+    .reveal.active {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
   </style>
 </head>
@@ -33,13 +33,12 @@
 <body class="text-[#384959]">
 
   <!-- NAVBAR -->
-  <nav class="fixed top-0 w-full bg-white/70 backdrop-blur-md z-10 border-b border-gray-200">
+  <nav class="fixed top-0 w-full bg-white/70 backdrop-blur-md z-10 border-b">
     <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
-      <h1 class="font-semibold text-[#384959]">Hafizh</h1>
+      <h1 class="font-bold text-lg">Hafizh</h1>
       <div class="space-x-6 text-sm">
         <a href="#home" class="hover:text-[#88BDF2]">Home</a>
         <a href="#about" class="hover:text-[#88BDF2]">About</a>
-        <a href="#experience" class="hover:text-[#88BDF2]">Experience</a>
         <a href="#projects" class="hover:text-[#88BDF2]">Projects</a>
       </div>
     </div>
@@ -47,95 +46,72 @@
 
   <!-- HERO -->
   <section id="home" class="h-screen flex items-center justify-center text-center">
-    <div class="fade-up">
-      <h1 class="text-5xl font-semibold text-[#384959]">
-        Hafizh 'Abdan Dzikri
+    <div class="reveal">
+      <h1 class="text-6xl font-bold tracking-tight">
+        Hafizh 'Abdan
       </h1>
-      <p class="mt-4 text-lg text-[#6A89A7]">
-        Aspiring Data Scientist
-      </p>
-      <p class="mt-3 max-w-xl mx-auto text-gray-500">
-        Transforming data into insights and building impactful models for better decision making.
+      <p class="mt-4 text-lg text-[#6A89A7] font-medium">
+        Data Scientist in Progress
       </p>
     </div>
   </section>
 
   <!-- ABOUT -->
-  <section id="about" class="max-w-5xl mx-auto py-24 px-6">
-    <div class="fade-up">
-      <h2 class="text-3xl font-semibold mb-6 text-[#6A89A7]">About Me</h2>
-      <p class="leading-relaxed text-gray-600">
-        I am a mathematics student at Universitas Indonesia with a strong passion for data science.
-        I enjoy working with data, building machine learning models, and solving real-world problems using analytical approaches.
+  <section id="about" class="max-w-5xl mx-auto py-32 px-6">
+    <div class="reveal">
+      <h2 class="text-4xl font-bold mb-6">About</h2>
+      <p class="text-gray-600 leading-relaxed">
+        I am passionate about data, machine learning, and building impactful solutions.
       </p>
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
-  <section id="experience" class="py-24 px-6 bg-[#BDDDDC]/40">
-    <div class="max-w-5xl mx-auto fade-up">
-      <h2 class="text-3xl font-semibold mb-10 text-[#6A89A7]">Experience</h2>
-
-      <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
-        <h3 class="text-xl font-semibold">Product Development Intern</h3>
-        <p class="text-gray-500 mb-3">BCA Syariah • 2025</p>
-        <ul class="list-disc ml-5 space-y-2 text-gray-600">
-          <li>Analyzed onboarding data using Excel (PivotTable & filtering)</li>
-          <li>Categorized user feedback from mobile platforms</li>
-          <li>Tracked SMS delivery performance using VLOOKUP</li>
-          <li>Delivered insights through data visualization presentations</li>
-        </ul>
-      </div>
-
-    </div>
-  </section>
-
   <!-- PROJECTS -->
-  <section id="projects" class="py-24 px-6">
+  <section id="projects" class="py-32 px-6 bg-[#BDDDDC]/30">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-semibold mb-10 text-[#6A89A7]">Projects</h2>
 
-      <div class="grid md:grid-cols-2 gap-8">
+      <h2 class="text-4xl font-bold mb-12 reveal">Projects</h2>
 
-        <div class="fade-up bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
-          <h3 class="text-xl font-semibold">Customer Deposit Prediction</h3>
+      <div class="grid md:grid-cols-2 gap-10">
+
+        <div class="reveal bg-white p-6 rounded-2xl hover:shadow-xl transition duration-500">
+          <h3 class="text-xl font-bold">Churn Prediction</h3>
           <p class="mt-2 text-gray-600">
-            Built a machine learning model to predict customer potential for deposit products.
+            Predict customer churn using ML.
           </p>
-          <a href="#" class="text-[#88BDF2] mt-3 inline-block">View Project →</a>
         </div>
 
-        <div class="fade-up bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
-          <h3 class="text-xl font-semibold">Sentiment Analysis (Whoosh)</h3>
+        <div class="reveal bg-white p-6 rounded-2xl hover:shadow-xl transition duration-500">
+          <h3 class="text-xl font-bold">Sentiment Analysis</h3>
           <p class="mt-2 text-gray-600">
-            NLP-based sentiment analysis to evaluate user perception from social media.
+            NLP-based sentiment classification.
           </p>
-          <a href="#" class="text-[#88BDF2] mt-3 inline-block">View Project →</a>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="text-center py-10 text-gray-500">
-    <p>Email: hafizhabdan223@gmail.com</p>
-    <p>LinkedIn: linkedin.com/in/hafizh-abdan-dzikri</p>
-  </footer>
-
-  <!-- ANIMATION -->
+  <!-- SCRIPT ANIMASI -->
   <script>
-    const elements = document.querySelectorAll('.fade-up');
+    const reveals = document.querySelectorAll('.reveal');
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add('show');
+    function revealOnScroll() {
+      const triggerBottom = window.innerHeight * 0.85;
+
+      reveals.forEach((el, index) => {
+        const boxTop = el.getBoundingClientRect().top;
+
+        if (boxTop < triggerBottom) {
+          setTimeout(() => {
+            el.classList.add('active');
+          }, index * 120); // stagger effect
         }
       });
-    });
+    }
 
-    elements.forEach(el => observer.observe(el));
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
   </script>
 
 </body>
