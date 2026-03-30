@@ -28,30 +28,25 @@ nav {
   z-index: 100;
 }
 
-/* NAV MENU */
 #navMenu {
   position: relative;
   display: flex;
   gap: 40px;
 }
 
-/* NAV LINK */
 .nav-link {
-  position: relative;
   font-size: 17px;
   font-weight: 500;
   cursor: pointer;
   padding-bottom: 6px;
-  color: #FFFFFF;
   opacity: 0.7;
 }
 
-.nav-link:hover {
+.nav-link.active {
   opacity: 1;
 }
 
-/* ACTIVE */
-.nav-link.active {
+.nav-link:hover {
   opacity: 1;
 }
 
@@ -79,6 +74,50 @@ nav {
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-title {
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+/* Gradient text */
+.highlight {
+  background: linear-gradient(90deg, #ffffff, #a8c4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Blob */
+.blob {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: float 8s ease-in-out infinite;
+}
+
+.blob2 { animation-delay: 4s; }
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-40px); }
+}
+
+/* Typing cursor */
+.cursor-text::after {
+  content: "|";
+  margin-left: 5px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
 }
 
 /* CARD */
@@ -132,8 +171,23 @@ nav {
 
 <!-- HERO -->
 <section id="home" class="hero section">
-  <h1 class="text-6xl font-bold fade">Hafizh 'Abdan Dzikri</h1>
-  <p class="mt-4 fade text-lg">Aspiring Data Scientist</p>
+
+  <div class="blob top-20 left-10"></div>
+  <div class="blob blob2 bottom-20 right-10"></div>
+
+  <div class="relative z-10">
+    <h1 class="hero-title fade">
+      Hi, I'm <span class="highlight">Hafizh</span>
+    </h1>
+
+    <p id="typing" class="mt-4 text-lg fade cursor-text"></p>
+
+    <p class="mt-6 max-w-xl mx-auto text-gray-200 fade">
+      Mathematics student passionate about data science, analytics,
+      and building impactful solutions.
+    </p>
+  </div>
+
 </section>
 
 <!-- PROJECTS -->
@@ -176,7 +230,7 @@ const links = document.querySelectorAll('.nav-link');
 const indicator = document.getElementById('indicator');
 const sections = document.querySelectorAll('section');
 
-/* MOVE INDICATOR */
+/* INDICATOR MOVE */
 function moveIndicator(el) {
   indicator.style.width = el.offsetWidth + 'px';
   indicator.style.left = el.offsetLeft + 'px';
@@ -196,7 +250,7 @@ links.forEach(link => {
   });
 });
 
-/* AUTO UPDATE ON SCROLL */
+/* AUTO SCROLL DETECT */
 window.addEventListener('scroll', () => {
   let current = "";
 
@@ -232,6 +286,20 @@ function showOnScroll() {
 
 window.addEventListener('scroll', showOnScroll);
 showOnScroll();
+
+/* TYPING EFFECT */
+const text = "Aspiring Data Scientist";
+let i = 0;
+
+function typeWriter() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 50);
+  }
+}
+
+typeWriter();
 </script>
 
 </body>
