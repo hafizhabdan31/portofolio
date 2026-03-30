@@ -7,14 +7,17 @@
   <!-- FONT -->
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
 
-  <!-- TAILWIND -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="text-[#384959]">
+<body>
+
+  <!-- CURSOR -->
+  <div class="cursor"></div>
 
   <!-- NAVBAR -->
   <nav class="navbar">
@@ -29,36 +32,29 @@
   </nav>
 
   <!-- HERO -->
-  <section id="home" class="section hero">
-    <div class="reveal">
-      <h1 class="title">Hafizh 'Abdan</h1>
-      <p class="subtitle">Data Scientist in Progress</p>
-    </div>
+  <section id="home" class="hero">
+    <h1 class="hero-title">Hafizh 'Abdan</h1>
+    <p class="hero-subtitle">Data Scientist in Progress</p>
   </section>
 
   <!-- ABOUT -->
   <section id="about" class="section">
-    <div class="container reveal">
+    <div class="container">
       <h2>About</h2>
-      <p>I am passionate about data and machine learning.</p>
+      <p>
+        Mathematics student passionate about data science and building impactful models.
+      </p>
     </div>
   </section>
 
   <!-- PROJECTS -->
   <section id="projects" class="section bg-soft">
     <div class="container">
-      <h2 class="reveal">Projects</h2>
+      <h2>Projects</h2>
 
       <div class="grid">
-        <div class="card reveal">
-          <h3>Churn Prediction</h3>
-          <p>Predict customer churn using ML.</p>
-        </div>
-
-        <div class="card reveal">
-          <h3>Sentiment Analysis</h3>
-          <p>NLP-based sentiment classification.</p>
-        </div>
+        <div class="card">Churn Prediction</div>
+        <div class="card">Sentiment Analysis</div>
       </div>
     </div>
   </section>
