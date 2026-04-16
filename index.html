@@ -382,6 +382,7 @@ Penelitian ini bertujuan menganalisis sentimen publik terhadap Kereta Cepat Whoo
 </section>
 
 <script>
+  
   p1: {
     title: "Prediksi Potensi Nasabah untuk Membuka Deposito dalam Upaya Meningkatkan Efisiensi Marketing dan Profit Penjualan",
     desc: "Penelitian ini bertujuan untuk memprediksi potensi nasabah dalam membuka deposito menggunakan pendekatan machine learning guna meningkatkan efisiensi marketing dan profit bank. Dataset yang digunakan dianalisis melalui tahapan preprocessing, feature engineering, serta pemodelan menggunakan algoritma seperti LightGBM dan XGBoost. Hasil evaluasi menunjukkan bahwa model LightGBM dipilih sebagai model terbaik dengan performa recall yang tinggi dan risiko kesalahan yang lebih terkendali. Implementasi model ini terbukti mampu meningkatkan keuntungan bisnis sebesar 5,5% dengan strategi targeting nasabah yang lebih efektif.",
@@ -395,6 +396,22 @@ Penelitian ini bertujuan menganalisis sentimen publik terhadap Kereta Cepat Whoo
     link: "https://drive.google.com/file/d/13aykfDFdicSE8Ukc22-Rb6MFO_DgxJLb/view?usp=drive_link"
   }
 };
+  function openModal(id) {
+  const data = projectData[id];
+
+  document.getElementById("modalTitle").innerText = data.title;
+  document.getElementById("modalDesc").innerText = data.desc;
+  document.getElementById("modalImg").src = data.img;
+  document.getElementById("modalLink").href = data.link;
+
+  const modal = document.getElementById("modal");
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+}
+
+function closeModal() {
+  document.getElementById("modal").classList.add("hidden");
+}
 const links = document.querySelectorAll('.nav-link');
 const indicator = document.getElementById('indicator');
 const sections = document.querySelectorAll('section');
