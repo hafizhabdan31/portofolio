@@ -266,20 +266,19 @@ nav {
   <div class="container">
     <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Projects</h2>
     <div class="card fade cursor-pointer" onclick="openModal('p1')">
-  <img src="project1.jpg"
-       style="width:100%; border-radius:10px; margin-bottom:10px;">
-  <h3 class="font-bold">Customer Deposit Prediction</h3>
-  <p style="opacity:0.7;">
-    Machine learning project presented in slide format.
-  </p>
-</div>
 
-      <div class="card fade cursor-pointer" onclick="openModal('p2')">
-        <h3 class="font-bold">Sentiment Analysis</h3>
-        <p>NLP model.</p>
-      </div>
+  <h3 class="font-bold">Prediksi Potensi Nasabah untuk Membuka Deposito dalam Upaya Meningkatkan Efisiensi Marketing dan Profit Penjualan</h3>
+  <p style="opacity:0.7;">
+    Penelitian ini bertujuan untuk memprediksi potensi nasabah dalam membuka deposito menggunakan pendekatan machine learning guna meningkatkan efisiensi marketing dan profit bank. Dataset yang digunakan dianalisis melalui tahapan preprocessing, feature engineering, serta pemodelan menggunakan algoritma seperti LightGBM dan XGBoost. Hasil evaluasi menunjukkan bahwa model LightGBM dipilih sebagai model terbaik dengan performa recall yang tinggi dan risiko kesalahan yang lebih terkendali. Implementasi model ini terbukti mampu meningkatkan keuntungan bisnis sebesar 5,5% dengan strategi targeting nasabah yang lebih efektif.
+  </p>
+      
+<div class="card fade cursor-pointer" onclick="openModal('p2')">
+
+  <h3 class="font-bold">Analisis Sentimen Pengguna Kereta Cepat Whoosh pada Aplikasi X Menggunakan Machine Learning dan NLP</h3>
+  <p style="opacity:0.7;">
+Penelitian ini bertujuan menganalisis sentimen publik terhadap Kereta Cepat Whoosh berdasarkan data tweet dari aplikasi X menggunakan pendekatan Machine Learning dan NLP. Model yang dibandingkan meliputi TF-IDF + SVM, IndoBERT, dan IndoBERTweet, dengan hasil menunjukkan bahwa IndoBERTweet memberikan performa terbaik, terutama setelah penerapan teknik data augmentasi. Hasil akhir menunjukkan peningkatan akurasi hingga sekitar 90%, membuktikan efektivitas augmentasi dalam meningkatkan kemampuan model memahami teks media sosial. Analisis sentimen juga mengungkap bahwa pengguna cenderung memberikan respons positif terhadap aspek layanan, namun menunjukkan sentimen negatif pada aspek kebijakan dan infrastruktur.  </p>
+</div>
     </div>
-  </div>
 </section>
 
 <!-- EXPERIENCE -->
@@ -383,6 +382,19 @@ nav {
 </section>
 
 <script>
+  p1: {
+    title: "Prediksi Potensi Nasabah untuk Membuka Deposito dalam Upaya Meningkatkan Efisiensi Marketing dan Profit Penjualan",
+    desc: "Penelitian ini bertujuan untuk memprediksi potensi nasabah dalam membuka deposito menggunakan pendekatan machine learning guna meningkatkan efisiensi marketing dan profit bank. Dataset yang digunakan dianalisis melalui tahapan preprocessing, feature engineering, serta pemodelan menggunakan algoritma seperti LightGBM dan XGBoost. Hasil evaluasi menunjukkan bahwa model LightGBM dipilih sebagai model terbaik dengan performa recall yang tinggi dan risiko kesalahan yang lebih terkendali. Implementasi model ini terbukti mampu meningkatkan keuntungan bisnis sebesar 5,5% dengan strategi targeting nasabah yang lebih efektif.",
+    img: "project1.jpg",
+    link: "https://drive.google.com/file/d/1IIXX1d2Sg-sM2bsPgzT5lGpfVSunbNrj/view?usp=drive_link"
+  },
+  p2: {
+    title: "Analisis Sentimen Pengguna Kereta Cepat Whoosh pada Aplikasi X Menggunakan Machine Learning dan NLP",
+    desc: "Penelitian ini bertujuan menganalisis sentimen publik terhadap Kereta Cepat Whoosh berdasarkan data tweet dari aplikasi X menggunakan pendekatan Machine Learning dan NLP. Model yang dibandingkan meliputi TF-IDF + SVM, IndoBERT, dan IndoBERTweet, dengan hasil menunjukkan bahwa IndoBERTweet memberikan performa terbaik, terutama setelah penerapan teknik data augmentasi. Hasil akhir menunjukkan peningkatan akurasi hingga sekitar 90%, membuktikan efektivitas augmentasi dalam meningkatkan kemampuan model memahami teks media sosial. Analisis sentimen juga mengungkap bahwa pengguna cenderung memberikan respons positif terhadap aspek layanan, namun menunjukkan sentimen negatif pada aspek kebijakan dan infrastruktur.",
+    img: "project2.jpg",
+    link: "https://drive.google.com/file/d/13aykfDFdicSE8Ukc22-Rb6MFO_DgxJLb/view?usp=drive_link"
+  }
+};
 const links = document.querySelectorAll('.nav-link');
 const indicator = document.getElementById('indicator');
 const sections = document.querySelectorAll('section');
@@ -444,6 +456,27 @@ function typeWriter() {
 }
 typeWriter();
 </script>
+<!-- MODAL -->
+<div id="modal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
+  <div class="bg-white text-[#10367D] p-6 rounded-xl max-w-xl w-full relative">
 
+    <button onclick="closeModal()" 
+      style="position:absolute; top:10px; right:15px; font-size:18px;">
+      ✕
+    </button>
+
+    <img id="modalImg" 
+         style="width:100%; border-radius:10px; margin-bottom:15px;">
+
+    <h2 id="modalTitle" class="text-xl font-bold mb-2"></h2>
+    <p id="modalDesc" style="opacity:0.7;"></p>
+
+    <a id="modalLink" target="_blank"
+       style="display:inline-block; margin-top:15px; text-decoration:underline;">
+       View Presentation →
+    </a>
+
+  </div>
+</div>
 </body>
 </html>
