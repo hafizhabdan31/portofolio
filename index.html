@@ -24,9 +24,11 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
+
   background-image:
     radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
   background-size: 3px 3px;
+
   opacity: 0.4;
 }
 html { scroll-behavior: smooth; }
@@ -95,7 +97,7 @@ nav {
   text-align: center;
 }
 
-/* FOTO */
+/* FOTO BESAR */
 .profile {
   width: 180px;
   height: 180px;
@@ -123,11 +125,11 @@ nav {
   font-weight: 700;
 }
 
-/* SOCIAL */
+/* SOCIAL BUTTON */
 .socials {
   margin-top: 20px;
   display: flex;
-  justify-content: center;
+  justify-content: center; /* ini penting */
   align-items: center;
   gap: 20px;
 }
@@ -155,7 +157,7 @@ nav {
   fill: white;
 }
 
-/* ABOUT */
+/* ABOUT TEXT */
 .about-text {
   margin-top: 25px;
   font-size: 15px;
@@ -218,28 +220,46 @@ nav {
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- HERO + ABOUT -->
 <section id="home" class="hero section">
   <div class="container">
 
-    <img src="foto.jpg" class="profile fade">
+    <!-- FOTO -->
+    <img src="foto.jpg" alt="Hafizh Photo" class="profile fade">
 
     <h1 class="hero-title fade mt-6">Hi, I'm Hafizh Abdan Dzikri</h1>
 
     <p id="typing" class="mt-4 fade text-lg"></p>
 
+    <!-- SOCIAL -->
     <div class="socials fade">
-      <a href="https://www.linkedin.com/in/hafizh-abdan-dzikri-4699b51a2/" target="_blank" class="social-btn">...</a>
-      <a href="https://github.com/hafizhabdan31" target="_blank" class="social-btn">...</a>
-      <a href="https://instagram.com/hafizhabdan_" target="_blank" class="social-btn">...</a>
-    </div>
+      <a href="https://www.linkedin.com/in/hafizh-abdan-dzikri-4699b51a2/" target="_blank" class="social-btn">
+        <svg viewBox="0 0 24 24">
+          <path d="M4.98 3.5C4.98 4.88 3.86 6 2.49 6S0 4.88 0 3.5 1.12 1 2.49 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7.5 0h4.7v2.2h.1c.7-1.2 2.4-2.5 5-2.5 5.3 0 6.3 3.5 6.3 8V24h-5v-7.1c0-1.7 0-3.9-2.4-3.9-2.4 0-2.8 1.9-2.8 3.8V24h-5V8z"/>
+        </svg>
+      </a>
 
+      <a href="https://github.com/hafizhabdan31" target="_blank" class="social-btn">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 .5C5.4.5 0 5.9 0 12.6c0 5.3 3.4 9.8 8.2 11.4.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.5-1.4-1.9-1.4-1.9-1.2-.8.1-.8.1-.8 1.3.1 2 .4 2 .4 1.2 2.1 3.2 1.5 4 .1.1-.9.5-1.5.9-1.8-2.7-.3-5.5-1.4-5.5-6.2 0-1.4.5-2.6 1.3-3.5-.1-.3-.6-1.7.1-3.6 0 0 1.1-.4 3.6 1.3 1-.3 2.1-.5 3.2-.5s2.2.2 3.2.5c2.5-1.7 3.6-1.3 3.6-1.3.7 1.9.2 3.3.1 3.6.8.9 1.3 2.1 1.3 3.5 0 4.8-2.9 5.9-5.6 6.2.5.4.9 1.2.9 2.4v3.6c0 .3.2.7.8.6 4.8-1.6 8.2-6.1 8.2-11.4C24 5.9 18.6.5 12 .5z"/>
+        </svg>
+      </a>
+       <!-- INSTAGRAM -->
+ <a href="https://instagram.com/hafizhabdan_" target="_blank" class="social-btn">
+  <svg viewBox="0 0 24 24">
+    <path d="M7.75 2C4.57 2 2 4.57 2 7.75v8.5C2 19.43 4.57 22 7.75 22h8.5C19.43 22 22 19.43 22 16.25v-8.5C22 4.57 19.43 2 16.25 2h-8.5zm0 2h8.5C18.55 4 20 5.45 20 7.75v8.5c0 2.3-1.45 3.75-3.75 3.75h-8.5C5.45 20 4 18.55 4 16.25v-8.5C4 5.45 5.45 4 7.75 4zm4.25 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm5.5-.75a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5z"/>
+  </svg>
+</a>
+    </div>
+    <!-- ABOUT -->
     <p class="about-text fade">
-      Undergraduate mathematics student with a good interpersonal skills...
+      Undergraduate mathematics student with a good interpersonal skills. I’m a nice fun and friendly person, I’m honest and well-timed, I work well in a team but also on my own as I like to set myself goals which I will achieve, I have good listening skills. I have a good sense of humor and a pleasant approach. I am a family person with responsibilities, very reliable and trustworthy. I am having interest in technology and data analytics.
     </p>
 
   </div>
 </section>
+
+<!-- (SEMUA SECTION LAIN TETAP SAMA) -->
 
 <!-- PROJECTS -->
 <section id="projects" class="section">
@@ -247,12 +267,12 @@ nav {
     <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Projects</h2>
 
     <div class="grid">
-      <div class="card fade">
+      <div class="card fade cursor-pointer" onclick="openModal('p1')">
         <h3 class="font-bold">Customer Deposit Prediction</h3>
         <p>Machine learning model.</p>
       </div>
 
-      <div class="card fade">
+      <div class="card fade cursor-pointer" onclick="openModal('p2')">
         <h3 class="font-bold">Sentiment Analysis</h3>
         <p>NLP model.</p>
       </div>
@@ -265,23 +285,25 @@ nav {
   <div class="container">
     <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Experience</h2>
 
-    <div class="card fade" style="text-align:left; display:flex; gap:15px;">
+    <div class="card fade" style="text-align:left; display:flex; gap:15px; align-items:flex-start;">
 
-      <img src="bca-syariah.png" style="width:50px;">
+  <!-- LOGO -->
+  <img src="bca-syariah.png" alt="BCA Syariah Logo"
+       style="width:50px; height:50px; object-fit:contain; border-radius:8px; background:white; padding:5px;">
 
-      <div>
-        <h3 class="font-bold text-lg">Product Development Intern</h3>
-        <p style="opacity:0.7;">BCA Syariah • Aug 2025</p>
+  <!-- TEXT -->
+  <div>
+    <h3 class="font-bold text-lg">Product Development Intern</h3>
+    <p style="opacity:0.7;">BCA Syariah • Aug 2025</p>
 
-        <div style="margin-top:15px; line-height:1.8;">
-          <p>• Assisted in processing and analyzing onboarding data...</p>
-          <p>• Categorized customer feedback...</p>
-          <p>• Utilized VLOOKUP...</p>
-        </div>
-      </div>
-
-    </div>
+    <div style="margin-top:15px; line-height:1.8;">
+  <p>• Assisted in processing and analyzing onboarding data using Microsoft Excel, including PivotTable and filtering features, and presented insights through PowerPoint visualizations.</p>
+  <p>• Categorized customer feedback and reviews from the App Store and Google Play Store related to the BSya mobile application to identify common issues and improvement opportunities.</p>
+  <p>• Utilized VLOOKUP functions in Excel to track SMS blast delivery statuses, monitoring whether messages were successfully sent, rejected, or still ongoing.</p>
+</div>
   </div>
+
+</div>
 </section>
 
 <!-- SKILLS -->
@@ -298,15 +320,103 @@ nav {
     <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Courses & Certifications</h2>
 
     <div class="grid">
+
+      <!-- COURSE 1 -->
       <div class="card fade">
-        <img src="Certificate-Hafizh Abdan Dzikri-AI For Everyone.jpg" style="width:100%;">
+        <img src="Certificate-Hafizh Abdan Dzikri-AI For Everyone.jpg
+" alt="Certificate" 
+             style="border-radius:10px; margin-bottom:10px; width:100%;">
+
         <h3 class="font-bold">AI for Everyone</h3>
+        <p style="opacity:0.7;">KORIKA • 2026</p>
       </div>
+
+      <!-- COURSE 2 -->
+      <div class="card fade">
+        <img src="Sertifikat Fundamental Database MySQL.jpg" alt="Certificate" 
+             style="border-radius:10px; margin-bottom:10px; width:100%;">
+
+        <h3 class="font-bold">Fundamental Database MySQL</h3>
+        <p style="opacity:0.7;">Coding Studio • 2025</p>
+      </div>
+
+      <!-- COURSE 3 -->
+      <div class="card fade">
+        <img src="Introduction to Excel.jpg" alt="Certificate" 
+             style="border-radius:10px; margin-bottom:10px; width:100%;">
+
+        <h3 class="font-bold">Introduction to Excel</h3>
+        <p style="opacity:0.7;">DataCamp • 2025</p>
+      </div>
+
+      <!-- COURSE 4 -->
+      <div class="card fade">
+        <img src="Learning Data Analytics 1 Foundations.jpg" alt="Certificate" 
+             style="border-radius:10px; margin-bottom:10px; width:100%;">
+
+        <h3 class="font-bold">Learning Data Analytics 1: Foundations</h3>
+        <p style="opacity:0.7;">LinkedIn • 2025</p>
+      </div>
+
+        <!-- COURSE 5 -->
+      <div class="card fade">
+        <img src="Guided Lab Python Data Structures Project.jpg" alt="Certificate" 
+             style="border-radius:10px; margin-bottom:10px; width:100%;">
+
+        <h3 class="font-bold">Guided Lab: Python Data Structures Project</h3>
+        <p style="opacity:0.7;">LinkedIn • 2025</p>
+      </div>
+
+        <!-- COURSE 6 -->
+      <div class="card fade">
+        <img src="Communication Foundations.jpg" alt="Certificate" 
+             style="border-radius:10px; margin-bottom:10px; width:100%;">
+
+        <h3 class="font-bold">Communication Foundations</h3>
+        <p style="opacity:0.7;">LinkedIn • 2025</p>
+      </div>
+      
     </div>
   </div>
 </section>
 
 <script>
+const links = document.querySelectorAll('.nav-link');
+const indicator = document.getElementById('indicator');
+const sections = document.querySelectorAll('section');
+
+function moveIndicator(el) {
+  indicator.style.width = el.offsetWidth + 'px';
+  indicator.style.left = el.offsetLeft + 'px';
+}
+
+function setActive(link) {
+  links.forEach(l => l.classList.remove('active'));
+  link.classList.add('active');
+  moveIndicator(link);
+}
+
+links.forEach(link => {
+  link.addEventListener('click', () => setActive(link));
+});
+
+window.addEventListener('scroll', () => {
+  let current = "";
+  sections.forEach(section => {
+    const top = section.offsetTop - 150;
+    if (scrollY >= top) current = section.id;
+  });
+
+  links.forEach(link => {
+    if (link.getAttribute("href") === "#" + current) {
+      setActive(link);
+    }
+  });
+});
+
+window.onload = () => moveIndicator(links[0]);
+
+/* ANIMATION */
 const fades = document.querySelectorAll('.fade');
 
 function showOnScroll() {
@@ -319,6 +429,18 @@ function showOnScroll() {
 
 window.addEventListener('scroll', showOnScroll);
 showOnScroll();
+
+/* TYPING */
+const text = "Math Student | Ex-Product Development Intern at BCA Syariah";
+let i = 0;
+function typeWriter() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML += text[i];
+    i++;
+    setTimeout(typeWriter, 40);
+  }
+}
+typeWriter();
 </script>
 
 </body>
