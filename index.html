@@ -444,6 +444,37 @@ nav {
 </section>
 
 <script>
+let currentPage = 1;
+let currentPDF = "";
+
+function openModal(pdf) {
+  currentPDF = pdf;
+  currentPage = 1;
+
+  document.getElementById("modal").style.display = "flex";
+  loadPDF();
+}
+
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+
+function loadPDF() {
+  document.getElementById("pdfViewer").src =
+    currentPDF + "#page=" + currentPage;
+}
+
+function nextPage() {
+  currentPage++;
+  loadPDF();
+}
+
+function prevPage() {
+  if (currentPage > 1) {
+    currentPage--;
+    loadPDF();
+  }
+}
 const links = document.querySelectorAll('.nav-link');
 const indicator = document.getElementById('indicator');
 const sections = document.querySelectorAll('section');
