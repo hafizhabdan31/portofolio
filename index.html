@@ -191,7 +191,42 @@ nav {
     grid-template-columns: 1fr 1fr;
   }
 }
+  /* FLIP CARD*/
+.flip-card {
+  perspective: 1000px;
+  cursor: pointer;
+}
 
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front, .flip-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.flip-front {
+  background: #FFFFFF;
+  color: #10367D;
+}
+
+.flip-back {
+  background: #10367D;
+  color: white;
+  transform: rotateY(180deg);
+}
 /* ANIMATION */
 .fade {
   opacity: 0;
@@ -264,19 +299,47 @@ nav {
 <!-- PROJECTS -->
 <section id="projects" class="section">
   <div class="container">
-    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Projects</h2>
+
+    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">
+      Projects
+    </h2>
 
     <div class="grid">
-      <div class="card fade cursor-pointer" onclick="openModal('p1')">
-        <h3 class="font-bold">Customer Deposit Prediction</h3>
-        <p>Machine learning model.</p>
+
+      <!-- PROJECT 1 -->
+      <div class="flip-card fade" onclick="openModal('project1.pdf')">
+        <div class="flip-inner">
+
+          <div class="flip-front">
+            <h3 class="font-bold">Customer Deposit Prediction</h3>
+            <p>Machine Learning</p>
+          </div>
+
+          <div class="flip-back">
+            <p>Klik untuk lihat detail project</p>
+          </div>
+
+        </div>
       </div>
 
-      <div class="card fade cursor-pointer" onclick="openModal('p2')">
-        <h3 class="font-bold">Sentiment Analysis</h3>
-        <p>NLP model.</p>
+      <!-- PROJECT 2 -->
+      <div class="flip-card fade" onclick="openModal('project2.pdf')">
+        <div class="flip-inner">
+
+          <div class="flip-front">
+            <h3 class="font-bold">Sentiment Analysis</h3>
+            <p>NLP Project</p>
+          </div>
+
+          <div class="flip-back">
+            <p>Klik untuk lihat PDF</p>
+          </div>
+
+        </div>
       </div>
+
     </div>
+
   </div>
 </section>
 
@@ -442,6 +505,36 @@ function typeWriter() {
 }
 typeWriter();
 </script>
+<!-- MODAL -->
+<div id="modal" style="
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.8);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:999;
+">
 
+  <div style="
+  width:90%;
+  max-width:900px;
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+  ">
+
+    <!-- HEADER -->
+    <div style="padding:10px; display:flex; justify-content:space-between;">
+      <button onclick="prevPage()">⬅️</button>
+      <button onclick="nextPage()">➡️</button>
+      <button onclick="closeModal()">❌</button>
+    </div>
+
+    <!-- PDF VIEW -->
+    <iframe id="pdfViewer" style="width:100%; height:500px;"></iframe>
+
+  </div>
+</div>
 </body>
 </html>
