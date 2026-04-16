@@ -444,15 +444,13 @@ nav {
 </section>
 
 <script>
-let currentPage = 1;
-let currentPDF = "";
 
 function openModal(pdf) {
 
   const descriptions = {
-    "project1.pdf": "This project focuses on predicting whether a customer will subscribe to a term deposit using machine learning models. The dataset was processed and analyzed using classification techniques to improve marketing strategies.",
+    "project1.pdf": "Penelitian ini bertujuan untuk memprediksi potensi nasabah dalam membuka deposito menggunakan pendekatan machine learning guna meningkatkan efisiensi marketing dan profit bank. Dataset yang digunakan dianalisis melalui tahapan preprocessing, feature engineering, serta pemodelan menggunakan algoritma seperti LightGBM dan XGBoost. Hasil evaluasi menunjukkan bahwa model LightGBM dipilih sebagai model terbaik dengan performa recall yang tinggi dan risiko kesalahan yang lebih terkendali. Implementasi model ini terbukti mampu meningkatkan keuntungan bisnis sebesar 5,5% dengan strategi targeting nasabah yang lebih efektif.",
 
-    "project2.pdf": "This project performs sentiment analysis on text data using NLP techniques. The goal is to classify opinions into positive, negative, or neutral sentiments."
+    "project2.pdf": "Penelitian ini bertujuan menganalisis sentimen publik terhadap Kereta Cepat Whoosh berdasarkan data tweet dari aplikasi X menggunakan pendekatan Machine Learning dan NLP. Model yang dibandingkan meliputi TF-IDF + SVM, IndoBERT, dan IndoBERTweet, dengan hasil menunjukkan bahwa IndoBERTweet memberikan performa terbaik, terutama setelah penerapan teknik data augmentasi. Hasil akhir menunjukkan peningkatan akurasi hingga sekitar 90%, membuktikan efektivitas augmentasi dalam meningkatkan kemampuan model memahami teks media sosial. Analisis sentimen juga mengungkap bahwa pengguna cenderung memberikan respons positif terhadap aspek layanan, namun menunjukkan sentimen negatif pada aspek kebijakan dan infrastruktur."
   };
 
   document.getElementById("modal").style.display = "flex";
@@ -465,22 +463,6 @@ function closeModal() {
   document.getElementById("modal").style.display = "none";
 }
 
-function loadPDF() {
-  document.getElementById("pdfViewer").src =
-    currentPDF + "#page=" + currentPage;
-}
-
-function nextPage() {
-  currentPage++;
-  loadPDF();
-}
-
-function prevPage() {
-  if (currentPage > 1) {
-    currentPage--;
-    loadPDF();
-  }
-}
 const links = document.querySelectorAll('.nav-link');
 const indicator = document.getElementById('indicator');
 const sections = document.querySelectorAll('section');
