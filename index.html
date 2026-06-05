@@ -256,13 +256,18 @@ nav {
 <section id="projects" class="section">
   <div class="container">
 
-    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">
-      Projects
-    </h2>
+    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Projects</h2>
 
     <div class="grid-2">
 
       <!-- PROJECT 1 -->
+      <!--
+        CARA PAKAI:
+        - pdf="project1.pdf"  → ganti dengan nama file PDF kamu (taruh 1 folder dengan index.html)
+        - ppt="https://docs.google.com/presentation/d/1TlejguqK5Aq-NyYtKU6NgL12upWHQOPQJDQQ8neqFQg/edit?usp=sharing"              → isi jika kamu punya Google Slides embed URL atau OneDrive URL
+        Contoh Google Slides embed: https://docs.google.com/presentation/d/ID/embed?start=false&loop=false
+        Contoh OneDrive embed: https://onedrive.live.com/embed?...
+      -->
       <div class="flip-card fade"
            onclick="openModal(
              'Prediksi Potensi Nasabah untuk Membuka Deposito',
@@ -270,36 +275,20 @@ nav {
              'project1.pdf',
              'https://docs.google.com/presentation/d/1TlejguqK5Aq-NyYtKU6NgL12upWHQOPQJDQQ8neqFQg/edit?usp=sharing'
            )">
-
         <div class="flip-inner">
           <div class="flip-front">
-            <h3 class="font-bold" style="margin-bottom:8px;">
-              Prediksi Potensi Nasabah untuk Membuka Deposito
-            </h3>
-
-            <p style="font-size:13px; opacity:0.75; line-height:1.5;">
-              Penelitian ini bertujuan untuk memprediksi potensi nasabah dalam membuka deposito menggunakan pendekatan machine learning guna meningkatkan efisiensi marketing dan profit bank.
-            </p>
-
+            <h3 class="font-bold" style="margin-bottom:8px;">Prediksi Potensi Nasabah untuk Membuka Deposito</h3>
+            <p style="font-size:13px; opacity:0.75; line-height:1.5;">Penelitian ini bertujuan untuk memprediksi potensi nasabah dalam membuka deposito menggunakan pendekatan machine learning guna meningkatkan efisiensi marketing dan profit bank. Dataset yang digunakan dianalisis melalui tahapan preprocessing, feature engineering, serta pemodelan menggunakan algoritma seperti LightGBM dan XGBoost. Hasil evaluasi menunjukkan bahwa model LightGBM dipilih sebagai model terbaik dengan performa recall yang tinggi dan risiko kesalahan yang lebih terkendali. Implementasi model ini terbukti mampu meningkatkan keuntungan bisnis sebesar 5,5% dengan strategi targeting nasabah yang lebih efektif.</p>
             <div style="margin-top:12px; display:flex; gap:6px; flex-wrap:wrap;">
-              <span class="tag">Machine Learning</span>
-              <span class="tag">LightGBM</span>
-              <span class="tag">XGBoost</span>
+              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Machine Learning</span>
+              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">LightGBM</span>
+              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">XGBoost</span>
             </div>
           </div>
-
           <div class="flip-back">
-            <svg width="36" height="36" fill="white" viewBox="0 0 24 24">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
-            </svg>
-
-            <p style="font-size:14px; font-weight:600;">
-              Lihat Detail Project
-            </p>
-
-            <button class="view-btn" onclick="event.stopPropagation()">
-              Buka →
-            </button>
+            <svg width="36" height="36" fill="white" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
+            <p style="font-size:14px; font-weight:600;">Lihat Detail Project</p>
+            <button class="view-btn" onclick="event.stopPropagation()">Buka →</button>
           </div>
         </div>
       </div>
@@ -308,92 +297,61 @@ nav {
       <div class="flip-card fade"
            onclick="openModal(
              'Analisis Sentimen Pengguna Kereta Cepat Whoosh',
-             'Penelitian ini bertujuan menganalisis sentimen publik terhadap Kereta Cepat Whoosh berdasarkan data tweet dari aplikasi X menggunakan pendekatan Machine Learning dan NLP. Model yang dibandingkan meliputi TF-IDF + SVM, IndoBERT, dan IndoBERTweet.',
+             'Penelitian ini bertujuan menganalisis sentimen publik terhadap Kereta Cepat Whoosh berdasarkan data tweet dari aplikasi X menggunakan pendekatan Machine Learning dan NLP. Model yang dibandingkan meliputi TF-IDF + SVM, IndoBERT, dan IndoBERTweet, dengan hasil menunjukkan bahwa IndoBERTweet memberikan performa terbaik, terutama setelah penerapan teknik data augmentasi. Hasil akhir menunjukkan peningkatan akurasi hingga sekitar 90%, membuktikan efektivitas augmentasi dalam meningkatkan kemampuan model memahami teks media sosial.',
              'project2.pdf',
              ''
            )">
-
         <div class="flip-inner">
           <div class="flip-front">
-            <h3 class="font-bold" style="margin-bottom:8px;">
-              Analisis Sentimen Pengguna Kereta Cepat Whoosh
-            </h3>
-
-            <p style="font-size:13px; opacity:0.75; line-height:1.5;">
-              Penelitian ini bertujuan menganalisis sentimen publik terhadap Kereta Cepat Whoosh berdasarkan data tweet dari aplikasi X menggunakan pendekatan Machine Learning dan NLP.
-            </p>
-
+            <h3 class="font-bold" style="margin-bottom:8px;">Analisis Sentimen Pengguna Kereta Cepat Whoosh</h3>
+            <p style="font-size:13px; opacity:0.75; line-height:1.5;">Penelitian ini bertujuan menganalisis sentimen publik terhadap Kereta Cepat Whoosh berdasarkan data tweet dari aplikasi X menggunakan pendekatan Machine Learning dan NLP. Model yang dibandingkan meliputi TF-IDF + SVM, IndoBERT, dan IndoBERTweet, dengan hasil menunjukkan bahwa IndoBERTweet memberikan performa terbaik, terutama setelah penerapan teknik data augmentasi. Hasil akhir menunjukkan peningkatan akurasi hingga sekitar 90%, membuktikan efektivitas augmentasi dalam meningkatkan kemampuan model memahami teks media sosial.</p>
             <div style="margin-top:12px; display:flex; gap:6px; flex-wrap:wrap;">
-              <span class="tag">NLP</span>
-              <span class="tag">IndoBERTweet</span>
-              <span class="tag">Sentiment Analysis</span>
+              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">NLP</span>
+              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">IndoBERTweet</span>
+              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Sentiment Analysis</span>
             </div>
           </div>
-
           <div class="flip-back">
-            <svg width="36" height="36" fill="white" viewBox="0 0 24 24">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
-            </svg>
-
-            <p style="font-size:14px; font-weight:600;">
-              Lihat Detail Project
-            </p>
-
-            <button class="view-btn" onclick="event.stopPropagation()">
-              Buka →
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- PROJECT 3 -->
-      <div class="flip-card fade"
-           onclick="openModal(
-             'Membangun Model IndoBERT untuk Deteksi Dini Risiko Bunuh Diri',
-             'Membangun model klasifikasi berbasis IndoBERT untuk mendeteksi dini risiko bunuh diri pada unggahan media sosial berbahasa Indonesia. Proyek ini mencakup pengumpulan dan pelabelan data, pra-pemrosesan teks, fine-tuning model NLP, serta evaluasi performa menggunakan pendekatan Focal Loss untuk menangani ketidakseimbangan kelas.',
-             'project3.pdf',
-             ''
-           )">
-
-        <div class="flip-inner">
-          <div class="flip-front">
-            <h3 class="font-bold" style="margin-bottom:8px;">
-              Membangun Model IndoBERT untuk Deteksi Dini Risiko Bunuh Diri
-            </h3>
-
-            <p style="font-size:13px; opacity:0.75; line-height:1.5;">
-              Membangun model klasifikasi berbasis IndoBERT untuk mendeteksi dini risiko bunuh diri pada unggahan media sosial berbahasa Indonesia.
-            </p>
-
-            <div style="margin-top:12px; display:flex; gap:6px; flex-wrap:wrap;">
-              <span class="tag">NLP</span>
-              <span class="tag">IndoBERT</span>
-              <span class="tag">Text Classification</span>
-              <span class="tag">Focal Loss</span>
-            </div>
-          </div>
-
-          <div class="flip-back">
-            <svg width="36" height="36" fill="white" viewBox="0 0 24 24">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
-            </svg>
-
-            <p style="font-size:14px; font-weight:600;">
-              Lihat Detail Project
-            </p>
-
-            <button class="view-btn" onclick="event.stopPropagation()">
-              Buka →
-            </button>
+            <svg width="36" height="36" fill="white" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
+            <p style="font-size:14px; font-weight:600;">Lihat Detail Project</p>
+            <button class="view-btn" onclick="event.stopPropagation()">Buka →</button>
           </div>
         </div>
       </div>
 
     </div>
-
   </div>
 </section>
-  
+
+        <!-- PROJECT 3 -->
+      <div class="flip-card fade"
+           onclick="openModal(
+             'Membangun Model IndoBERT untuk Deteksi Dini Risiko Bunuh Diri pada Data Teks Unggahan di Media Sosial',
+             'Membangun model klasifikasi berbasis IndoBERT untuk mendeteksi dini risiko bunuh diri pada unggahan media sosial berbahasa Indonesia. Proyek ini mencakup pengumpulan dan pelabelan data, pra-pemrosesan teks, fine-tuning model NLP, serta evaluasi performa menggunakan pendekatan Focal Loss untuk menangani ketidakseimbangan kelas.',
+             'project3.pdf',
+             ''
+           )">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <h3 class="font-bold" style="margin-bottom:8px;">Membangun Model IndoBERT untuk Deteksi Dini Risiko Bunuh Diri pada Data Teks Unggahan di Media Sosial</h3>
+            <p style="font-size:13px; opacity:0.75; line-height:1.5;">Membangun model klasifikasi berbasis IndoBERT untuk mendeteksi dini risiko bunuh diri pada unggahan media sosial berbahasa Indonesia. Proyek ini mencakup pengumpulan dan pelabelan data, pra-pemrosesan teks, fine-tuning model NLP, serta evaluasi performa menggunakan pendekatan Focal Loss untuk menangani ketidakseimbangan kelas.</p>
+            <div style="margin-top:12px; display:flex; gap:6px; flex-wrap:wrap;">
+              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">NLP</span>
+              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">IndoBERTweet</span>
+              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Sentiment Analysis</span>
+            </div>
+          </div>
+          <div class="flip-back">
+            <svg width="36" height="36" fill="white" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
+            <p style="font-size:14px; font-weight:600;">Lihat Detail Project</p>
+            <button class="view-btn" onclick="event.stopPropagation()">Buka →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 <!-- EXPERIENCE -->
 <section id="experience" class="section">
   <div class="container">
