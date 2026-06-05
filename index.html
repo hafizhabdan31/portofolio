@@ -252,16 +252,29 @@ nav {
 </section>
 
 <!-- PROJECTS -->
+<!-- ==================== PROJECTS ==================== -->
 <section id="projects" class="section">
   <div class="container">
+
     <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Projects</h2>
+
     <div class="grid-2">
 
+      <!-- PROJECT 1 -->
+      <!--
+        CARA PAKAI:
+        - pdf="project1.pdf"  → ganti dengan nama file PDF kamu (taruh 1 folder dengan index.html)
+        - ppt="https://docs.google.com/presentation/d/1TlejguqK5Aq-NyYtKU6NgL12upWHQOPQJDQQ8neqFQg/edit?usp=sharing"              → isi jika kamu punya Google Slides embed URL atau OneDrive URL
+        Contoh Google Slides embed: https://docs.google.com/presentation/d/ID/embed?start=false&loop=false
+        Contoh OneDrive embed: https://onedrive.live.com/embed?...
+      -->
       <div class="flip-card fade"
            onclick="openModal(
              'Prediksi Potensi Nasabah untuk Membuka Deposito',
              'Penelitian ini bertujuan untuk memprediksi potensi nasabah dalam membuka deposito menggunakan pendekatan machine learning guna meningkatkan efisiensi marketing dan profit bank. Dataset yang digunakan dianalisis melalui tahapan preprocessing, feature engineering, serta pemodelan menggunakan algoritma seperti LightGBM dan XGBoost. Hasil evaluasi menunjukkan bahwa model LightGBM dipilih sebagai model terbaik dengan performa recall yang tinggi dan risiko kesalahan yang lebih terkendali. Implementasi model ini terbukti mampu meningkatkan keuntungan bisnis sebesar 5,5% dengan strategi targeting nasabah yang lebih efektif.',
-             'project1.pdf', '')">
+             'project1.pdf',
+             ''
+           )">
         <div class="flip-inner">
           <div class="flip-front">
             <h3 class="font-bold" style="margin-bottom:8px;">Prediksi Potensi Nasabah untuk Membuka Deposito</h3>
@@ -280,11 +293,14 @@ nav {
         </div>
       </div>
 
+      <!-- PROJECT 2 -->
       <div class="flip-card fade"
            onclick="openModal(
              'Analisis Sentimen Pengguna Kereta Cepat Whoosh',
-             'Penelitian ini bertujuan menganalisis sentimen publik terhadap Kereta Cepat Whoosh berdasarkan data tweet dari aplikasi X menggunakan pendekatan Machine Learning dan NLP. Model yang dibandingkan meliputi TF-IDF + SVM, IndoBERT, dan IndoBERTweet, dengan hasil menunjukkan bahwa IndoBERTweet memberikan performa terbaik, terutama setelah penerapan teknik data augmentasi. Hasil akhir menunjukkan peningkatan akurasi hingga sekitar 90%.',
-             'project2.pdf', '')">
+             'Penelitian ini bertujuan menganalisis sentimen publik terhadap Kereta Cepat Whoosh berdasarkan data tweet dari aplikasi X menggunakan pendekatan Machine Learning dan NLP. Model yang dibandingkan meliputi TF-IDF + SVM, IndoBERT, dan IndoBERTweet, dengan hasil menunjukkan bahwa IndoBERTweet memberikan performa terbaik, terutama setelah penerapan teknik data augmentasi. Hasil akhir menunjukkan peningkatan akurasi hingga sekitar 90%, membuktikan efektivitas augmentasi dalam meningkatkan kemampuan model memahami teks media sosial.',
+             'project2.pdf',
+             ''
+           )">
         <div class="flip-inner">
           <div class="flip-front">
             <h3 class="font-bold" style="margin-bottom:8px;">Analisis Sentimen Pengguna Kereta Cepat Whoosh</h3>
@@ -303,7 +319,7 @@ nav {
         </div>
       </div>
 
-    </div><!-- /grid-2 projects -->
+    </div>
   </div>
 </section>
 
