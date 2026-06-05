@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hafizh Abdan Dzikri Portfolio</title>
 
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
@@ -10,12 +11,7 @@
 <style>
 body {
   font-family: 'Satoshi', sans-serif;
-  background: linear-gradient(
-    135deg,
-    #10367D 0%,
-    #1e4fa3 50%,
-    #10367D 100%
-  );
+  background: linear-gradient(135deg, #10367D 0%, #1e4fa3 50%, #10367D 100%);
   color: #FFFFFF;
   position: relative;
 }
@@ -24,11 +20,8 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-
-  background-image:
-    radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
   background-size: 3px 3px;
-
   opacity: 0.4;
 }
 html { scroll-behavior: smooth; }
@@ -45,6 +38,7 @@ nav {
   border-radius: 50px;
   padding: 10px 20px;
   z-index: 100;
+  white-space: nowrap;
 }
 
 #navMenu {
@@ -59,6 +53,8 @@ nav {
   cursor: pointer;
   opacity: 0.7;
   transition: 0.3s;
+  text-decoration: none;
+  color: white;
 }
 
 .nav-link:hover {
@@ -97,7 +93,6 @@ nav {
   text-align: center;
 }
 
-/* FOTO BESAR */
 .profile {
   width: 180px;
   height: 180px;
@@ -109,15 +104,10 @@ nav {
   transition: 0.3s;
 }
 
-.profile:hover {
-  transform: scale(1.05);
-}
+.profile:hover { transform: scale(1.05); }
 
 @media(min-width:768px){
-  .profile {
-    width: 220px;
-    height: 220px;
-  }
+  .profile { width: 220px; height: 220px; }
 }
 
 .hero-title {
@@ -125,11 +115,10 @@ nav {
   font-weight: 700;
 }
 
-/* SOCIAL BUTTON */
 .socials {
   margin-top: 20px;
   display: flex;
-  justify-content: center; /* ini penting */
+  justify-content: center;
   align-items: center;
   gap: 20px;
 }
@@ -157,7 +146,6 @@ nav {
   fill: white;
 }
 
-/* ABOUT TEXT */
 .about-text {
   margin-top: 25px;
   font-size: 15px;
@@ -180,18 +168,17 @@ nav {
 }
 
 /* GRID */
-.grid {
+.grid-2 {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
 }
 
 @media(min-width:768px){
-  .grid {
-    grid-template-columns: 1fr 1fr;
-  }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
 }
-  /* FLIP CARD*/
+
+/* FLIP CARD — BUG FIX: height auto, min-height bukan fixed */
 .flip-card {
   perspective: 1000px;
   cursor: pointer;
@@ -200,7 +187,7 @@ nav {
 .flip-inner {
   position: relative;
   width: 100%;
-  height: 150px;
+  min-height: 200px;           /* was: fixed 150px → content bisa overflow */
   transition: transform 0.6s;
   transform-style: preserve-3d;
 }
@@ -213,6 +200,7 @@ nav {
   position: absolute;
   inset: 0;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   border-radius: 16px;
   padding: 20px;
 }
@@ -220,13 +208,39 @@ nav {
 .flip-front {
   background: #FFFFFF;
   color: #10367D;
+  overflow: hidden;           /* text clip agar rapi */
 }
 
 .flip-back {
   background: #10367D;
+  border: 2px solid rgba(255,255,255,0.3);
   color: white;
   transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
 }
+
+.flip-back .view-btn {
+  margin-top: 8px;
+  padding: 10px 22px;
+  background: white;
+  color: #10367D;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.flip-back .view-btn:hover {
+  background: #e0e7ff;
+}
+
 /* ANIMATION */
 .fade {
   opacity: 0;
@@ -238,246 +252,499 @@ nav {
   transform: translateY(0);
   transition: 0.8s;
 }
+
+/* ===== MODAL ===== */
+#modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+#modal.open { display: flex; }
+
+.modal-box {
+  width: 100%;
+  max-width: 920px;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  animation: slideUp 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.modal-header {
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  background: #f8f9ff;
+}
+
+.modal-header h4 {
+  color: #10367D;
+  font-weight: 700;
+  font-size: 15px;
+  margin: 0;
+  flex: 1;
+  padding-right: 12px;
+}
+
+.modal-close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+  flex-shrink: 0;
+}
+
+.modal-close-btn:hover { background: rgba(0,0,0,0.08); }
+
+.modal-desc {
+  padding: 16px 20px;
+  color: #444;
+  line-height: 1.7;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+  overflow-y: auto;
+  max-height: 120px;
+}
+
+.modal-embed-area {
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Embed toggle tabs */
+.embed-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #f0f3ff;
+  border-bottom: 1px solid #dde;
+}
+
+.embed-tab {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid transparent;
+  background: transparent;
+  color: #10367D;
+  opacity: 0.6;
+  transition: 0.2s;
+}
+
+.embed-tab.active {
+  background: #10367D;
+  color: white;
+  opacity: 1;
+}
+
+.embed-frame {
+  display: none;
+  width: 100%;
+  height: 500px;
+  border: none;
+}
+
+.embed-frame.active { display: block; }
+
+/* placeholder jika tidak ada file */
+.no-file-msg {
+  display: none;
+  padding: 40px;
+  text-align: center;
+  color: #aaa;
+  font-size: 14px;
+}
 </style>
 </head>
-
 <body>
 
 <!-- NAVBAR -->
 <nav>
   <div id="navMenu">
-    <a href="#home" class="nav-link active">Home</a>
-    <a href="#projects" class="nav-link">Projects</a>
+    <a href="#home"       class="nav-link active">Home</a>
+    <a href="#projects"   class="nav-link">Projects</a>
     <a href="#experience" class="nav-link">Experience</a>
-    <a href="#skills" class="nav-link">Skills</a>
-    <a href="#courses" class="nav-link">Courses</a>
+    <a href="#skills"     class="nav-link">Skills</a>
+    <a href="#courses"    class="nav-link">Courses</a>
     <div class="indicator" id="indicator"></div>
   </div>
 </nav>
 
-<!-- HERO + ABOUT -->
+<!-- ==================== HERO + ABOUT ==================== -->
 <section id="home" class="hero section">
   <div class="container">
 
-    <!-- FOTO -->
     <img src="foto.jpg" alt="Hafizh Photo" class="profile fade">
 
     <h1 class="hero-title fade mt-6">Hi, I'm Hafizh Abdan Dzikri</h1>
 
     <p id="typing" class="mt-4 fade text-lg"></p>
 
-    <!-- SOCIAL -->
     <div class="socials fade">
+      <!-- LinkedIn -->
       <a href="https://www.linkedin.com/in/hafizh-abdan-dzikri-4699b51a2/" target="_blank" class="social-btn">
         <svg viewBox="0 0 24 24">
           <path d="M4.98 3.5C4.98 4.88 3.86 6 2.49 6S0 4.88 0 3.5 1.12 1 2.49 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7.5 0h4.7v2.2h.1c.7-1.2 2.4-2.5 5-2.5 5.3 0 6.3 3.5 6.3 8V24h-5v-7.1c0-1.7 0-3.9-2.4-3.9-2.4 0-2.8 1.9-2.8 3.8V24h-5V8z"/>
         </svg>
       </a>
-
+      <!-- GitHub -->
       <a href="https://github.com/hafizhabdan31" target="_blank" class="social-btn">
         <svg viewBox="0 0 24 24">
           <path d="M12 .5C5.4.5 0 5.9 0 12.6c0 5.3 3.4 9.8 8.2 11.4.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.5-1.4-1.9-1.4-1.9-1.2-.8.1-.8.1-.8 1.3.1 2 .4 2 .4 1.2 2.1 3.2 1.5 4 .1.1-.9.5-1.5.9-1.8-2.7-.3-5.5-1.4-5.5-6.2 0-1.4.5-2.6 1.3-3.5-.1-.3-.6-1.7.1-3.6 0 0 1.1-.4 3.6 1.3 1-.3 2.1-.5 3.2-.5s2.2.2 3.2.5c2.5-1.7 3.6-1.3 3.6-1.3.7 1.9.2 3.3.1 3.6.8.9 1.3 2.1 1.3 3.5 0 4.8-2.9 5.9-5.6 6.2.5.4.9 1.2.9 2.4v3.6c0 .3.2.7.8.6 4.8-1.6 8.2-6.1 8.2-11.4C24 5.9 18.6.5 12 .5z"/>
         </svg>
       </a>
-       <!-- INSTAGRAM -->
- <a href="https://instagram.com/hafizhabdan_" target="_blank" class="social-btn">
-  <svg viewBox="0 0 24 24">
-    <path d="M7.75 2C4.57 2 2 4.57 2 7.75v8.5C2 19.43 4.57 22 7.75 22h8.5C19.43 22 22 19.43 22 16.25v-8.5C22 4.57 19.43 2 16.25 2h-8.5zm0 2h8.5C18.55 4 20 5.45 20 7.75v8.5c0 2.3-1.45 3.75-3.75 3.75h-8.5C5.45 20 4 18.55 4 16.25v-8.5C4 5.45 5.45 4 7.75 4zm4.25 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm5.5-.75a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5z"/>
-  </svg>
-</a>
+      <!-- Instagram -->
+      <a href="https://instagram.com/hafizhabdan_" target="_blank" class="social-btn">
+        <svg viewBox="0 0 24 24">
+          <path d="M7.75 2C4.57 2 2 4.57 2 7.75v8.5C2 19.43 4.57 22 7.75 22h8.5C19.43 22 22 19.43 22 16.25v-8.5C22 4.57 19.43 2 16.25 2h-8.5zm0 2h8.5C18.55 4 20 5.45 20 7.75v8.5c0 2.3-1.45 3.75-3.75 3.75h-8.5C5.45 20 4 18.55 4 16.25v-8.5C4 5.45 5.45 4 7.75 4zm4.25 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm5.5-.75a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5z"/>
+        </svg>
+      </a>
     </div>
-    <!-- ABOUT -->
+
     <p class="about-text fade">
-      Undergraduate mathematics student with a good interpersonal skills. I’m a nice fun and friendly person, I’m honest and well-timed, I work well in a team but also on my own as I like to set myself goals which I will achieve, I have good listening skills. I have a good sense of humor and a pleasant approach. I am a family person with responsibilities, very reliable and trustworthy. I am having interest in technology and data analytics.
+      Undergraduate mathematics student with good interpersonal skills. I'm a nice, fun and friendly person — honest and reliable. I work well in a team but also on my own as I like to set myself goals and achieve them. I have good listening skills and a pleasant approach. I am trustworthy and have a strong interest in technology and data analytics.
     </p>
 
   </div>
 </section>
 
-<!-- (SEMUA SECTION LAIN TETAP SAMA) -->
-
-<!-- PROJECTS -->
+<!-- ==================== PROJECTS ==================== -->
 <section id="projects" class="section">
   <div class="container">
 
-    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">
-      Projects
-    </h2>
+    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Projects</h2>
 
-    <div class="grid">
+    <div class="grid-2">
 
       <!-- PROJECT 1 -->
-      <div class="flip-card fade" onclick="Modal('project1.pdf')">
+      <!--
+        CARA PAKAI:
+        - pdf="project1.pdf"  → ganti dengan nama file PDF kamu (taruh 1 folder dengan index.html)
+        - ppt=""              → isi jika kamu punya Google Slides embed URL atau OneDrive URL
+        Contoh Google Slides embed: https://docs.google.com/presentation/d/ID/embed?start=false&loop=false
+        Contoh OneDrive embed: https://onedrive.live.com/embed?...
+      -->
+      <div class="flip-card fade"
+           onclick="openModal(
+             'Prediksi Potensi Nasabah untuk Membuka Deposito',
+             'Penelitian ini bertujuan untuk memprediksi potensi nasabah dalam membuka deposito menggunakan pendekatan machine learning guna meningkatkan efisiensi marketing dan profit bank. Dataset yang digunakan dianalisis melalui tahapan preprocessing, feature engineering, serta pemodelan menggunakan algoritma seperti LightGBM dan XGBoost. Hasil evaluasi menunjukkan bahwa model LightGBM dipilih sebagai model terbaik dengan performa recall yang tinggi dan risiko kesalahan yang lebih terkendali. Implementasi model ini terbukti mampu meningkatkan keuntungan bisnis sebesar 5,5% dengan strategi targeting nasabah yang lebih efektif.',
+             'project1.pdf',
+             ''
+           )">
         <div class="flip-inner">
-
           <div class="flip-front">
-            <h3 class="font-bold">Prediksi Potensi Nasabah untuk Membuka Deposito dalam Upaya Meningkatkan Efisiensi Marketing dan Profit Penjualan</h3>
-            <p>Penelitian ini bertujuan untuk memprediksi potensi nasabah dalam membuka deposito menggunakan pendekatan machine learning guna meningkatkan efisiensi marketing dan profit bank. Dataset yang digunakan dianalisis melalui tahapan preprocessing, feature engineering, serta pemodelan menggunakan algoritma seperti LightGBM dan XGBoost. Hasil evaluasi menunjukkan bahwa model LightGBM dipilih sebagai model terbaik dengan performa recall yang tinggi dan risiko kesalahan yang lebih terkendali. Implementasi model ini terbukti mampu meningkatkan keuntungan bisnis sebesar 5,5% dengan strategi targeting nasabah yang lebih efektif.</p>
+            <h3 class="font-bold" style="margin-bottom:8px;">Prediksi Potensi Nasabah untuk Membuka Deposito</h3>
+            <p style="font-size:13px; opacity:0.75; line-height:1.5;">Meningkatkan efisiensi marketing bank menggunakan LightGBM & XGBoost untuk memprediksi nasabah potensial.</p>
+            <div style="margin-top:12px; display:flex; gap:6px; flex-wrap:wrap;">
+              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Machine Learning</span>
+              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">LightGBM</span>
+              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">XGBoost</span>
+            </div>
           </div>
-
           <div class="flip-back">
-            <p>Klik untuk lihat detail project</p>
+            <svg width="36" height="36" fill="white" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
+            <p style="font-size:14px; font-weight:600;">Lihat Detail Project</p>
+            <button class="view-btn" onclick="event.stopPropagation()">Buka →</button>
           </div>
-
         </div>
       </div>
 
       <!-- PROJECT 2 -->
-      <div class="flip-card fade" onclick="Modal('project2.pdf')">
+      <div class="flip-card fade"
+           onclick="openModal(
+             'Analisis Sentimen Pengguna Kereta Cepat Whoosh',
+             'Penelitian ini bertujuan menganalisis sentimen publik terhadap Kereta Cepat Whoosh berdasarkan data tweet dari aplikasi X menggunakan pendekatan Machine Learning dan NLP. Model yang dibandingkan meliputi TF-IDF + SVM, IndoBERT, dan IndoBERTweet, dengan hasil menunjukkan bahwa IndoBERTweet memberikan performa terbaik, terutama setelah penerapan teknik data augmentasi. Hasil akhir menunjukkan peningkatan akurasi hingga sekitar 90%, membuktikan efektivitas augmentasi dalam meningkatkan kemampuan model memahami teks media sosial.',
+             'project2.pdf',
+             ''
+           )">
         <div class="flip-inner">
-
           <div class="flip-front">
-            <h3 class="font-bold">Analisis Sentimen Pengguna Kereta Cepat Whoosh pada Aplikasi X Menggunakan Machine Learning dan NLP</h3>
-            <p>Penelitian ini bertujuan menganalisis sentimen publik terhadap Kereta Cepat Whoosh berdasarkan data tweet dari aplikasi X menggunakan pendekatan Machine Learning dan NLP. Model yang dibandingkan meliputi TF-IDF + SVM, IndoBERT, dan IndoBERTweet, dengan hasil menunjukkan bahwa IndoBERTweet memberikan performa terbaik, terutama setelah penerapan teknik data augmentasi. Hasil akhir menunjukkan peningkatan akurasi hingga sekitar 90%, membuktikan efektivitas augmentasi dalam meningkatkan kemampuan model memahami teks media sosial. Analisis sentimen juga mengungkap bahwa pengguna cenderung memberikan respons positif terhadap aspek layanan, namun menunjukkan sentimen negatif pada aspek kebijakan dan infrastruktur.</p>
+            <h3 class="font-bold" style="margin-bottom:8px;">Analisis Sentimen Pengguna Kereta Cepat Whoosh</h3>
+            <p style="font-size:13px; opacity:0.75; line-height:1.5;">Analisis tweet menggunakan IndoBERTweet dengan akurasi ~90% untuk memahami opini publik terhadap KA Whoosh.</p>
+            <div style="margin-top:12px; display:flex; gap:6px; flex-wrap:wrap;">
+              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">NLP</span>
+              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">IndoBERTweet</span>
+              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Sentiment Analysis</span>
+            </div>
           </div>
-
           <div class="flip-back">
-            <p>Klik untuk lihat PDF</p>
+            <svg width="36" height="36" fill="white" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
+            <p style="font-size:14px; font-weight:600;">Lihat Detail Project</p>
+            <button class="view-btn" onclick="event.stopPropagation()">Buka →</button>
           </div>
-
         </div>
       </div>
 
     </div>
-
   </div>
 </section>
 
-<!-- EXPERIENCE -->
+<!-- ==================== EXPERIENCE ==================== -->
 <section id="experience" class="section">
   <div class="container">
     <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Experience</h2>
 
     <div class="card fade" style="text-align:left; display:flex; gap:15px; align-items:flex-start;">
+      <img src="bca-syariah.png" alt="BCA Syariah Logo"
+           style="width:50px; height:50px; object-fit:contain; border-radius:8px; background:#f0f4ff; padding:5px; flex-shrink:0;">
+      <div>
+        <h3 class="font-bold text-lg">Product Development Intern</h3>
+        <p style="opacity:0.7;">BCA Syariah • Aug 2025</p>
+        <div style="margin-top:15px; line-height:1.8;">
+          <p>• Assisted in processing and analyzing onboarding data using Microsoft Excel, including PivotTable and filtering features, and presented insights through PowerPoint visualizations.</p>
+          <p>• Categorized customer feedback and reviews from the App Store and Google Play Store related to the BSya mobile application to identify common issues and improvement opportunities.</p>
+          <p>• Utilized VLOOKUP functions in Excel to track SMS blast delivery statuses, monitoring whether messages were successfully sent, rejected, or still ongoing.</p>
+        </div>
+      </div>
+    </div>
 
-  <!-- LOGO -->
-  <img src="bca-syariah.png" alt="BCA Syariah Logo"
-       style="width:50px; height:50px; object-fit:contain; border-radius:8px; background:white; padding:5px;">
-
-  <!-- TEXT -->
-  <div>
-    <h3 class="font-bold text-lg">Product Development Intern</h3>
-    <p style="opacity:0.7;">BCA Syariah • Aug 2025</p>
-
-    <div style="margin-top:15px; line-height:1.8;">
-  <p>• Assisted in processing and analyzing onboarding data using Microsoft Excel, including PivotTable and filtering features, and presented insights through PowerPoint visualizations.</p>
-  <p>• Categorized customer feedback and reviews from the App Store and Google Play Store related to the BSya mobile application to identify common issues and improvement opportunities.</p>
-  <p>• Utilized VLOOKUP functions in Excel to track SMS blast delivery statuses, monitoring whether messages were successfully sent, rejected, or still ongoing.</p>
-</div>
   </div>
-
-</div>
 </section>
 
-<!-- SKILLS -->
+<!-- ==================== SKILLS ==================== -->
 <section id="skills" class="section">
   <div class="container">
     <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Skills</h2>
-    <p class="fade">Python, SQL, Excel</p>
-  </div>
-</section>
 
-<!-- COURSES -->
-<section id="courses" class="section">
-  <div class="container">
-    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Courses & Certifications</h2>
-
-    <div class="grid">
-
-      <!-- COURSE 1 -->
+    <div class="grid-2">
       <div class="card fade">
-        <img src="Certificate-Hafizh Abdan Dzikri-AI For Everyone.jpg
-" alt="Certificate" 
-             style="border-radius:10px; margin-bottom:10px; width:100%;">
-
-        <h3 class="font-bold">AI for Everyone</h3>
-        <p style="opacity:0.7;">KORIKA • 2026</p>
+        <div style="font-size:28px; margin-bottom:8px;">🐍</div>
+        <h3 class="font-bold">Python</h3>
+        <p style="font-size:13px; opacity:0.7; margin-top:4px;">Data analysis, ML modeling, NLP</p>
       </div>
-
-      <!-- COURSE 2 -->
       <div class="card fade">
-        <img src="Sertifikat Fundamental Database MySQL.jpg" alt="Certificate" 
-             style="border-radius:10px; margin-bottom:10px; width:100%;">
-
-        <h3 class="font-bold">Fundamental Database MySQL</h3>
-        <p style="opacity:0.7;">Coding Studio • 2025</p>
+        <div style="font-size:28px; margin-bottom:8px;">🗃️</div>
+        <h3 class="font-bold">SQL</h3>
+        <p style="font-size:13px; opacity:0.7; margin-top:4px;">MySQL, data querying & management</p>
       </div>
-
-      <!-- COURSE 3 -->
       <div class="card fade">
-        <img src="Introduction to Excel.jpg" alt="Certificate" 
-             style="border-radius:10px; margin-bottom:10px; width:100%;">
-
-        <h3 class="font-bold">Introduction to Excel</h3>
-        <p style="opacity:0.7;">DataCamp • 2025</p>
+        <div style="font-size:28px; margin-bottom:8px;">📊</div>
+        <h3 class="font-bold">Excel</h3>
+        <p style="font-size:13px; opacity:0.7; margin-top:4px;">PivotTable, VLOOKUP, data visualization</p>
       </div>
-
-      <!-- COURSE 4 -->
-      <div class="card fade">
-        <img src="Learning Data Analytics 1 Foundations.jpg" alt="Certificate" 
-             style="border-radius:10px; margin-bottom:10px; width:100%;">
-
-        <h3 class="font-bold">Learning Data Analytics 1: Foundations</h3>
-        <p style="opacity:0.7;">LinkedIn • 2025</p>
-      </div>
-
-        <!-- COURSE 5 -->
-      <div class="card fade">
-        <img src="Guided Lab Python Data Structures Project.jpg" alt="Certificate" 
-             style="border-radius:10px; margin-bottom:10px; width:100%;">
-
-        <h3 class="font-bold">Guided Lab: Python Data Structures Project</h3>
-        <p style="opacity:0.7;">LinkedIn • 2025</p>
-      </div>
-
-        <!-- COURSE 6 -->
-      <div class="card fade">
-        <img src="Communication Foundations.jpg" alt="Certificate" 
-             style="border-radius:10px; margin-bottom:10px; width:100%;">
-
-        <h3 class="font-bold">Communication Foundations</h3>
-        <p style="opacity:0.7;">LinkedIn • 2025</p>
-      </div>
-        <!-- COURSE 7 -->
-      <div class="card fade">
-        <img src="FoundationsDataData.jpg" alt="Certificate" 
-             style="border-radius:10px; margin-bottom:10px; width:100%;">
-
-        <h3 class="font-bold">Foundations: Data, Data, Everywhere</h3>
-        <p style="opacity:0.7;">Google • 2026</p>
-      </div>
-      
     </div>
   </div>
 </section>
 
+<!-- ==================== COURSES ==================== -->
+<section id="courses" class="section">
+  <div class="container">
+    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Courses & Certifications</h2>
+
+    <div class="grid-2">
+
+      <div class="card fade">
+        <img src="Certificate-Hafizh Abdan Dzikri-AI For Everyone.jpg" alt="Certificate"
+             style="border-radius:10px; margin-bottom:10px; width:100%;">
+        <h3 class="font-bold">AI for Everyone</h3>
+        <p style="opacity:0.7;">KORIKA • 2026</p>
+      </div>
+
+      <div class="card fade">
+        <img src="Sertifikat Fundamental Database MySQL.jpg" alt="Certificate"
+             style="border-radius:10px; margin-bottom:10px; width:100%;">
+        <h3 class="font-bold">Fundamental Database MySQL</h3>
+        <p style="opacity:0.7;">Coding Studio • 2025</p>
+      </div>
+
+      <div class="card fade">
+        <img src="Introduction to Excel.jpg" alt="Certificate"
+             style="border-radius:10px; margin-bottom:10px; width:100%;">
+        <h3 class="font-bold">Introduction to Excel</h3>
+        <p style="opacity:0.7;">DataCamp • 2025</p>
+      </div>
+
+      <div class="card fade">
+        <img src="Learning Data Analytics 1 Foundations.jpg" alt="Certificate"
+             style="border-radius:10px; margin-bottom:10px; width:100%;">
+        <h3 class="font-bold">Learning Data Analytics 1: Foundations</h3>
+        <p style="opacity:0.7;">LinkedIn • 2025</p>
+      </div>
+
+      <div class="card fade">
+        <img src="Guided Lab Python Data Structures Project.jpg" alt="Certificate"
+             style="border-radius:10px; margin-bottom:10px; width:100%;">
+        <h3 class="font-bold">Guided Lab: Python Data Structures Project</h3>
+        <p style="opacity:0.7;">LinkedIn • 2025</p>
+      </div>
+
+      <div class="card fade">
+        <img src="Communication Foundations.jpg" alt="Certificate"
+             style="border-radius:10px; margin-bottom:10px; width:100%;">
+        <h3 class="font-bold">Communication Foundations</h3>
+        <p style="opacity:0.7;">LinkedIn • 2025</p>
+      </div>
+
+      <div class="card fade">
+        <img src="FoundationsDataData.jpg" alt="Certificate"
+             style="border-radius:10px; margin-bottom:10px; width:100%;">
+        <h3 class="font-bold">Foundations: Data, Data, Everywhere</h3>
+        <p style="opacity:0.7;">Google • 2026</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MODAL ==================== -->
+<div id="modal" onclick="handleOverlayClick(event)">
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <h4 id="modalTitle">Project Title</h4>
+      <button class="modal-close-btn" onclick="closeModal()" title="Tutup">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M6 6L18 18M6 18L18 6" stroke="#333" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div id="modalDesc" class="modal-desc"></div>
+
+    <!-- TABS: PDF | PPT -->
+    <div class="embed-tabs" id="embedTabs"></div>
+
+    <!-- FRAMES -->
+    <iframe id="framePDF" class="embed-frame" title="PDF Viewer"></iframe>
+    <iframe id="framePPT" class="embed-frame" title="PPT Viewer"></iframe>
+    <div id="noFileMsg" class="no-file-msg">
+      <p>📄 File tidak tersedia.<br>Tambahkan path file PDF/PPT di parameter <code>openModal()</code>.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== SCRIPT ==================== -->
 <script>
 
-function openModal(pdf) {
+/* ---------- MODAL ---------- */
+function openModal(title, desc, pdfSrc, pptSrc) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalDesc').textContent  = desc;
 
-  const descriptions = {
-    "project1.pdf": "Penelitian ini bertujuan untuk memprediksi potensi nasabah dalam membuka deposito menggunakan pendekatan machine learning guna meningkatkan efisiensi marketing dan profit bank. Dataset yang digunakan dianalisis melalui tahapan preprocessing, feature engineering, serta pemodelan menggunakan algoritma seperti LightGBM dan XGBoost. Hasil evaluasi menunjukkan bahwa model LightGBM dipilih sebagai model terbaik dengan performa recall yang tinggi dan risiko kesalahan yang lebih terkendali. Implementasi model ini terbukti mampu meningkatkan keuntungan bisnis sebesar 5,5% dengan strategi targeting nasabah yang lebih efektif.",
+  const framePDF  = document.getElementById('framePDF');
+  const framePPT  = document.getElementById('framePPT');
+  const tabs      = document.getElementById('embedTabs');
+  const noFileMsg = document.getElementById('noFileMsg');
 
-    "project2.pdf": "Penelitian ini bertujuan menganalisis sentimen publik terhadap Kereta Cepat Whoosh berdasarkan data tweet dari aplikasi X menggunakan pendekatan Machine Learning dan NLP. Model yang dibandingkan meliputi TF-IDF + SVM, IndoBERT, dan IndoBERTweet, dengan hasil menunjukkan bahwa IndoBERTweet memberikan performa terbaik, terutama setelah penerapan teknik data augmentasi. Hasil akhir menunjukkan peningkatan akurasi hingga sekitar 90%, membuktikan efektivitas augmentasi dalam meningkatkan kemampuan model memahami teks media sosial. Analisis sentimen juga mengungkap bahwa pengguna cenderung memberikan respons positif terhadap aspek layanan, namun menunjukkan sentimen negatif pada aspek kebijakan dan infrastruktur."
-  };
+  // reset
+  framePDF.classList.remove('active');
+  framePPT.classList.remove('active');
+  framePDF.src = '';
+  framePPT.src = '';
+  tabs.innerHTML  = '';
+  noFileMsg.style.display = 'none';
 
-  document.getElementById("modal").style.display = "flex";
-  document.getElementById("pdfViewer").src = pdf;
-  document.getElementById("projectDesc").innerText =
-    descriptions[pdf] || "";
+  const hasPDF = pdfSrc && pdfSrc.trim() !== '';
+  const hasPPT = pptSrc && pptSrc.trim() !== '';
+
+  if (!hasPDF && !hasPPT) {
+    noFileMsg.style.display = 'block';
+  } else {
+    // build tabs
+    if (hasPDF) {
+      const btn = document.createElement('button');
+      btn.className = 'embed-tab active';
+      btn.textContent = '📄 PDF';
+      btn.onclick = () => switchTab('pdf', pdfSrc, pptSrc);
+      tabs.appendChild(btn);
+    }
+    if (hasPPT) {
+      const btn = document.createElement('button');
+      btn.className = 'embed-tab' + (hasPDF ? '' : ' active');
+      btn.textContent = '📊 Presentasi';
+      btn.onclick = () => switchTab('ppt', pdfSrc, pptSrc);
+      tabs.appendChild(btn);
+    }
+
+    // show default frame
+    if (hasPDF) {
+      framePDF.src = pdfSrc;
+      framePDF.classList.add('active');
+    } else {
+      framePPT.src = pptSrc;
+      framePPT.classList.add('active');
+    }
+  }
+
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function switchTab(which, pdfSrc, pptSrc) {
+  const framePDF = document.getElementById('framePDF');
+  const framePPT = document.getElementById('framePPT');
+  const btns = document.querySelectorAll('.embed-tab');
+
+  framePDF.classList.remove('active');
+  framePPT.classList.remove('active');
+
+  if (which === 'pdf') {
+    framePDF.src = pdfSrc;
+    framePDF.classList.add('active');
+    btns[0].classList.add('active');
+    if (btns[1]) btns[1].classList.remove('active');
+  } else {
+    framePPT.src = pptSrc;
+    framePPT.classList.add('active');
+    btns[btns.length - 1].classList.add('active');
+    if (btns.length > 1) btns[0].classList.remove('active');
+  }
 }
 
 function closeModal() {
-  document.getElementById("modal").style.display = "none";
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('framePDF').src = '';
+  document.getElementById('framePPT').src = '';
 }
 
-const links = document.querySelectorAll('.nav-link');
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+/* ---------- NAVBAR INDICATOR ---------- */
+const links     = document.querySelectorAll('.nav-link');
 const indicator = document.getElementById('indicator');
-const sections = document.querySelectorAll('section');
+const sections  = document.querySelectorAll('section');
 
 function moveIndicator(el) {
   indicator.style.width = el.offsetWidth + 'px';
-  indicator.style.left = el.offsetLeft + 'px';
+  indicator.style.left  = el.offsetLeft + 'px';
 }
 
 function setActive(link) {
@@ -491,27 +758,26 @@ links.forEach(link => {
 });
 
 window.addEventListener('scroll', () => {
-  let current = "";
+  let current = '';
   sections.forEach(section => {
-    const top = section.offsetTop - 150;
-    if (scrollY >= top) current = section.id;
-  });
-
-  links.forEach(link => {
-    if (link.getAttribute("href") === "#" + current) {
-      setActive(link);
+    if (window.scrollY >= section.offsetTop - 150) {
+      current = section.id;
     }
+  });
+  links.forEach(link => {
+    if (link.getAttribute('href') === '#' + current) setActive(link);
   });
 });
 
-window.onload = () => moveIndicator(links[0]);
+// BUG FIX: indicator init — pakai requestAnimationFrame agar font sudah render
+requestAnimationFrame(() => moveIndicator(links[0]));
 
-/* ANIMATION */
+/* ---------- SCROLL ANIMATION ---------- */
 const fades = document.querySelectorAll('.fade');
 
 function showOnScroll() {
   fades.forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight * 0.85) {
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.88) {
       el.classList.add('show');
     }
   });
@@ -520,83 +786,18 @@ function showOnScroll() {
 window.addEventListener('scroll', showOnScroll);
 showOnScroll();
 
-/* TYPING */
+/* ---------- TYPING ---------- */
 const text = "Math Student | Ex-Product Development Intern at BCA Syariah";
 let i = 0;
 function typeWriter() {
   if (i < text.length) {
-    document.getElementById("typing").innerHTML += text[i];
+    document.getElementById('typing').innerHTML += text[i];
     i++;
     setTimeout(typeWriter, 40);
   }
 }
 typeWriter();
+
 </script>
-<!-- MODAL -->
-<div id="modal" style="
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.8);
-display:none;
-align-items:center;
-justify-content:center;
-z-index:999;
-">
-
-  <div style="
-  width:90%;
-  max-width:900px;
-  background:white;
-  border-radius:16px;
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  ">
-
-    <!-- HEADER -->
-    <div style="
-    padding:12px 16px;
-    display:flex;
-    justify-content:flex-end;
-    border-bottom:1px solid #eee;
-    ">
-      <button onclick="closeModal()" style="
-      width:36px;
-      height:36px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:50%;
-      transition:0.3s;
-      " onmouseover="this.style.background='rgba(0,0,0,0.08)'"
-         onmouseout="this.style.background='transparent'">
-
-        <svg width="18" height="18" viewBox="0 0 24 24">
-          <path d="M6 6L18 18M6 18L18 6"
-            stroke="black"
-            stroke-width="2"
-            stroke-linecap="round"/>
-        </svg>
-
-      </button>
-    </div>
-
-    <!-- DESCRIPTION -->
-    <div id="projectDesc" style="
-    padding:16px;
-    color:#333;
-    line-height:1.6;
-    font-size:14px;
-    border-bottom:1px solid #eee;
-    ">
-    </div>
-
-    <!-- PDF VIEW -->
-    <iframe id="pdfViewer"
-      style="width:100%; height:500px; border:none;">
-    </iframe>
-
-  </div>
-</div>
 </body>
 </html>
