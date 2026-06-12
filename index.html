@@ -4,78 +4,230 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hafizh Abdan Dzikri Portfolio</title>
-
-<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
-
 <style>
+
+/* ===== ROOT VARIABLES & THEMES ===== */
+:root {
+  --bg-primary: #10367D;
+  --bg-secondary: #1e4fa3;
+  --text-primary: #FFFFFF;
+  --text-muted: rgba(255,255,255,0.75);
+  --card-bg: #FFFFFF;
+  --card-text: #10367D;
+  --card-text-muted: rgba(16,54,125,0.65);
+  --nav-bg: rgba(255,255,255,0.08);
+  --nav-border: rgba(255,255,255,0.15);
+  --tag-bg: #e0e7ff;
+  --tag-text: #3730a3;
+  --flip-back: #10367D;
+  --stat-bg: rgba(255,255,255,0.10);
+  --skill-track: rgba(255,255,255,0.15);
+  --timeline-line: rgba(255,255,255,0.2);
+  --timeline-dot: #FFFFFF;
+  --modal-overlay: rgba(0,0,0,0.75);
+  --modal-bg: #FFFFFF;
+  --modal-header: #f8f9ff;
+  --modal-text: #444;
+  --modal-title: #10367D;
+  --embed-tab-active-bg: #10367D;
+  --embed-tab-active-text: white;
+  --embed-tab-text: #10367D;
+  --embed-area: #f0f3ff;
+  --progress-bar-border: #dde;
+  --cursor-color: #FFFFFF;
+  --glow-blue: rgba(255,255,255,0.25);
+}
+
+[data-theme="light"] {
+  --bg-primary: #f0f4ff;
+  --bg-secondary: #e8eeff;
+  --text-primary: #10367D;
+  --text-muted: rgba(16,54,125,0.7);
+  --card-bg: #FFFFFF;
+  --card-text: #10367D;
+  --card-text-muted: rgba(16,54,125,0.55);
+  --nav-bg: rgba(255,255,255,0.85);
+  --nav-border: rgba(16,54,125,0.15);
+  --tag-bg: #e0e7ff;
+  --tag-text: #3730a3;
+  --flip-back: #10367D;
+  --stat-bg: rgba(16,54,125,0.07);
+  --skill-track: rgba(16,54,125,0.12);
+  --timeline-line: rgba(16,54,125,0.15);
+  --timeline-dot: #10367D;
+  --modal-overlay: rgba(0,0,0,0.6);
+  --modal-bg: #FFFFFF;
+  --modal-header: #f8f9ff;
+  --modal-text: #444;
+  --modal-title: #10367D;
+  --embed-tab-active-bg: #10367D;
+  --embed-tab-active-text: white;
+  --embed-tab-text: #10367D;
+  --embed-area: #f0f3ff;
+  --progress-bar-border: #dde;
+  --cursor-color: #10367D;
+  --glow-blue: rgba(16,54,125,0.15);
+}
+
+/* ===== RESET & BASE ===== */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
 body {
   font-family: 'Satoshi', sans-serif;
-  background: linear-gradient(135deg, #10367D 0%, #1e4fa3 50%, #10367D 100%);
-  color: #FFFFFF;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
+  color: var(--text-primary);
   position: relative;
+  cursor: none;
+  transition: background 0.5s ease, color 0.3s ease;
 }
+
+[data-theme="light"] body {
+  cursor: auto;
+}
+
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
   background-size: 3px 3px;
-  opacity: 0.4;
+  opacity: 0.45;
+  z-index: 0;
 }
-html { scroll-behavior: smooth; }
 
+/* ===== SCROLL PROGRESS BAR ===== */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,255,255,0.5));
+  z-index: 9999;
+  transition: width 0.1s linear;
+  border-radius: 0 3px 3px 0;
+}
+
+[data-theme="light"] #scroll-progress {
+  background: linear-gradient(90deg, #10367D, #1e4fa3);
+}
+
+/* ===== CUSTOM CURSOR ===== */
+#cursor {
+  width: 10px; height: 10px;
+  background: var(--cursor-color);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease, background 0.3s;
+  mix-blend-mode: difference;
+}
+
+#cursor-ring {
+  width: 38px; height: 38px;
+  border: 1.5px solid rgba(255,255,255,0.5);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.18s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+}
+
+body:hover #cursor { opacity: 1; }
+a:hover ~ #cursor, button:hover ~ #cursor { transform: translate(-50%,-50%) scale(2.5); }
+
+/* ===== DARK/LIGHT TOGGLE ===== */
+#theme-toggle {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 20px;
+}
+
+[data-theme="light"] #theme-toggle {
+  background: rgba(16,54,125,0.08);
+  border-color: rgba(16,54,125,0.2);
+  color: #10367D;
+}
+
+#theme-toggle:hover {
+  transform: scale(1.1) rotate(20deg);
+  background: rgba(255,255,255,0.2);
+}
+
+/* ===== CANVAS (PARTICLES) ===== */
+#particles-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.55;
+}
+
+/* ===== NAVBAR ===== */
 nav {
   position: fixed;
-  top: 20px;
-  left: 50%;
+  top: 20px; left: 50%;
   transform: translateX(-50%);
-  background: rgba(255,255,255,0.08);
+  background: var(--nav-bg);
   backdrop-filter: blur(15px);
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid var(--nav-border);
   border-radius: 50px;
   padding: 10px 20px;
   z-index: 100;
   white-space: nowrap;
+  transition: background 0.4s, border-color 0.4s;
 }
 
 #navMenu {
-  display: flex;
-  gap: 20px;
+  display: flex; gap: 20px;
   position: relative;
 }
 
 .nav-link {
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: 0.3s;
-  text-decoration: none;
-  color: white;
+  font-size: 14px; font-weight: 500;
+  cursor: pointer; opacity: 0.7;
+  transition: 0.3s; text-decoration: none;
+  color: var(--text-primary);
 }
 
 .nav-link:hover { opacity: 1; transform: translateY(-2px); }
 .nav-link.active { opacity: 1; }
 
 .indicator {
-  position: absolute;
-  bottom: -6px;
+  position: absolute; bottom: -6px;
   height: 3px;
-  background: #FFFFFF;
+  background: var(--text-primary);
   border-radius: 10px;
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.section { width: 100%; padding: 120px 20px; }
+/* ===== LAYOUT ===== */
+.section { width: 100%; padding: 120px 20px; position: relative; z-index: 2; }
 .container { max-width: 900px; margin: auto; }
 
+/* ===== HERO ===== */
 .hero {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   text-align: center;
 }
 
@@ -83,10 +235,18 @@ nav {
   width: 180px; height: 180px;
   border-radius: 50%; object-fit: cover;
   border: 5px solid white;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-  margin: auto; transition: 0.3s;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3), 0 0 0 0 rgba(255,255,255,0);
+  margin: auto; transition: 0.4s;
+  animation: profile-pulse 3s ease-in-out infinite;
 }
-.profile:hover { transform: scale(1.05); }
+
+@keyframes profile-pulse {
+  0%,100% { box-shadow: 0 15px 35px rgba(0,0,0,0.3), 0 0 0 0 rgba(255,255,255,0.3); }
+  50% { box-shadow: 0 15px 35px rgba(0,0,0,0.3), 0 0 0 14px rgba(255,255,255,0); }
+}
+
+.profile:hover { transform: scale(1.06) rotate(2deg); }
+
 @media(min-width:768px){ .profile { width: 220px; height: 220px; } }
 
 .hero-title { font-size: clamp(32px, 6vw, 64px); font-weight: 700; }
@@ -102,35 +262,80 @@ nav {
   display: flex; align-items: center; justify-content: center;
   transition: 0.3s;
 }
+
 .social-btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-  background: rgba(255,255,255,0.15);
+  transform: translateY(-6px) scale(1.1);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.35);
+  background: rgba(255,255,255,0.18);
 }
-.social-btn svg { width: 22px; height: 22px; fill: white; }
 
-.about-text { margin-top: 25px; font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.85); }
+.social-btn svg { width: 22px; height: 22px; fill: var(--text-primary); transition: fill 0.3s; }
 
+.about-text {
+  margin-top: 25px; font-size: 15px;
+  line-height: 1.8; color: var(--text-muted);
+}
+
+/* ===== STATS COUNTER ===== */
+.stats-row {
+  display: flex; justify-content: center;
+  gap: 24px; flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.stat-box {
+  background: var(--stat-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 18px 28px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.stat-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+.stat-number {
+  font-size: 36px; font-weight: 700;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-size: 13px; margin-top: 6px;
+  color: var(--text-muted);
+}
+
+/* ===== CARDS ===== */
 .card {
-  background: #FFFFFF; color: #10367D;
-  padding: 20px; border-radius: 16px; transition: 0.3s;
+  background: var(--card-bg);
+  color: var(--card-text);
+  padding: 20px; border-radius: 16px;
+  transition: transform 0.3s, box-shadow 0.35s;
 }
-.card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
 
-/* GRID — semua card pakai ini */
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.22);
+}
+
+/* ===== GRID ===== */
 .grid-2 {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
+  display: grid; grid-template-columns: 1fr; gap: 20px;
 }
 @media(min-width:768px){ .grid-2 { grid-template-columns: 1fr 1fr; } }
 
+/* ===== FLIP CARDS ===== */
 .flip-card { perspective: 1000px; cursor: pointer; }
 
 .flip-inner {
   position: relative; width: 100%; min-height: 200px;
   transition: transform 0.6s; transform-style: preserve-3d;
 }
+
 .flip-card:hover .flip-inner { transform: rotateY(180deg); }
 
 .flip-front, .flip-back {
@@ -138,39 +343,137 @@ nav {
   backface-visibility: hidden; -webkit-backface-visibility: hidden;
   border-radius: 16px; padding: 20px;
 }
-.flip-front { background: #FFFFFF; color: #10367D; overflow: hidden; }
+
+.flip-front {
+  background: var(--card-bg); color: var(--card-text); overflow: hidden;
+  transition: box-shadow 0.35s;
+}
+
+.flip-card:hover .flip-front {
+  box-shadow: 0 0 0 2px rgba(55,138,221,0.35), 0 16px 40px rgba(55,138,221,0.2);
+}
+
 .flip-back {
-  background: #10367D; border: 2px solid rgba(255,255,255,0.3);
+  background: var(--flip-back);
+  border: 2px solid rgba(255,255,255,0.3);
   color: white; transform: rotateY(180deg);
   display: flex; flex-direction: column; align-items: center;
   justify-content: center; gap: 12px; text-align: center;
 }
+
 .flip-back .view-btn {
   margin-top: 8px; padding: 10px 22px;
   background: white; color: #10367D; border-radius: 30px;
   font-weight: 600; font-size: 14px; transition: 0.2s; border: none; cursor: pointer;
 }
+
 .flip-back .view-btn:hover { background: #e0e7ff; }
 
-.fade { opacity: 0; transform: translateY(40px); }
-.fade.show { opacity: 1; transform: translateY(0); transition: 0.8s; }
+/* ===== PROJECT TAGS ===== */
+.tag {
+  background: var(--tag-bg); color: var(--tag-text);
+  padding: 3px 10px; border-radius: 20px;
+  font-size: 11px; font-weight: 600;
+}
 
-/* MODAL */
+/* ===== FADE ANIMATION ===== */
+.fade { opacity: 0; transform: translateY(40px); }
+.fade.show { opacity: 1; transform: translateY(0); transition: 0.75s cubic-bezier(0.22,1,0.36,1); }
+
+/* ===== SKILL BARS ===== */
+.skill-item {
+  background: var(--card-bg);
+  color: var(--card-text);
+  padding: 18px 20px;
+  border-radius: 16px;
+  transition: transform 0.3s, box-shadow 0.35s;
+}
+
+.skill-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(0,0,0,0.18);
+}
+
+.skill-header {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+}
+
+.skill-header img { width: 36px; height: 36px; object-fit: contain; }
+
+.skill-name { font-weight: 700; font-size: 15px; }
+.skill-sub { font-size: 12px; opacity: 0.6; margin-top: 2px; }
+
+.skill-bar-track {
+  width: 100%; height: 6px;
+  background: var(--skill-track);
+  border-radius: 10px; overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%; border-radius: 10px;
+  width: 0%;
+  transition: width 1.4s cubic-bezier(0.22,1,0.36,1);
+}
+
+.skill-percent {
+  font-size: 12px; font-weight: 600;
+  text-align: right; margin-top: 5px;
+  opacity: 0.7;
+}
+
+/* ===== EXPERIENCE / TIMELINE ===== */
+.timeline { position: relative; padding-left: 32px; }
+
+.timeline::before {
+  content: '';
+  position: absolute; left: 6px; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--timeline-line);
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative; margin-bottom: 28px;
+}
+
+.timeline-dot {
+  position: absolute; left: -30px; top: 4px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--timeline-dot);
+  border: 2px solid var(--bg-primary);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+[data-theme="light"] .timeline-dot {
+  border-color: var(--bg-primary);
+  box-shadow: 0 0 0 3px rgba(16,54,125,0.12);
+}
+
+.timeline-item:hover .timeline-dot {
+  transform: scale(1.4);
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.15);
+}
+
+/* ===== MODAL ===== */
 #modal {
   position: fixed; inset: 0;
-  background: rgba(0,0,0,0.75);
+  background: var(--modal-overlay);
   display: none; align-items: center; justify-content: center;
   z-index: 999; padding: 20px;
 }
+
 #modal.open { display: flex; }
 
 .modal-box {
   width: 100%; max-width: 920px;
-  background: white; border-radius: 20px;
+  background: var(--modal-bg); border-radius: 20px;
   overflow: hidden; display: flex; flex-direction: column;
   max-height: 90vh;
   animation: slideUp 0.3s cubic-bezier(0.22,1,0.36,1);
 }
+
 @keyframes slideUp {
   from { transform: translateY(30px); opacity: 0; }
   to   { transform: translateY(0);    opacity: 1; }
@@ -179,9 +482,10 @@ nav {
 .modal-header {
   padding: 14px 20px;
   display: flex; justify-content: space-between; align-items: center;
-  border-bottom: 1px solid #eee; background: #f8f9ff;
+  border-bottom: 1px solid #eee; background: var(--modal-header);
 }
-.modal-header h4 { color: #10367D; font-weight: 700; font-size: 15px; margin: 0; flex: 1; padding-right: 12px; }
+
+.modal-header h4 { color: var(--modal-title); font-weight: 700; font-size: 15px; margin: 0; flex: 1; padding-right: 12px; }
 
 .modal-close-btn {
   width: 36px; height: 36px; border-radius: 50%; border: none;
@@ -189,32 +493,119 @@ nav {
   display: flex; align-items: center; justify-content: center;
   transition: 0.2s; flex-shrink: 0;
 }
+
 .modal-close-btn:hover { background: rgba(0,0,0,0.08); }
 
 .modal-desc {
-  padding: 16px 20px; color: #444; line-height: 1.7;
+  padding: 16px 20px; color: var(--modal-text); line-height: 1.7;
   font-size: 14px; border-bottom: 1px solid #eee;
   overflow-y: auto; max-height: 120px;
 }
 
 .embed-tabs {
   display: flex; gap: 8px; padding: 10px 20px;
-  background: #f0f3ff; border-bottom: 1px solid #dde;
+  background: var(--embed-area); border-bottom: 1px solid var(--progress-bar-border);
 }
+
 .embed-tab {
   padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
   cursor: pointer; border: 2px solid transparent;
-  background: transparent; color: #10367D; opacity: 0.6; transition: 0.2s;
+  background: transparent; color: var(--embed-tab-text); opacity: 0.6; transition: 0.2s;
 }
-.embed-tab.active { background: #10367D; color: white; opacity: 1; }
+
+.embed-tab.active { background: var(--embed-tab-active-bg); color: var(--embed-tab-active-text); opacity: 1; }
 
 .embed-frame { display: none; width: 100%; height: 500px; border: none; }
 .embed-frame.active { display: block; }
 
 .no-file-msg { display: none; padding: 40px; text-align: center; color: #aaa; font-size: 14px; }
+
+/* ===== CERTIFICATE CARD ===== */
+.cert-card {
+  background: var(--card-bg); color: var(--card-text);
+  padding: 16px; border-radius: 16px;
+  transition: transform 0.3s, box-shadow 0.35s;
+}
+
+.cert-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(0,0,0,0.2);
+}
+
+.cert-card img {
+  border-radius: 10px; margin-bottom: 10px; width: 100%;
+  transition: opacity 0.3s;
+}
+
+.cert-card:hover img { opacity: 0.92; }
+
+/* ===== SECTION HEADING ===== */
+.section-heading {
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 700;
+  margin-bottom: 40px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -8px; left: 0;
+  width: 48px; height: 3px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+[data-theme="light"] .section-heading::after {
+  background: rgba(16,54,125,0.4);
+}
+
+.section-heading:hover::after { width: 100%; }
+
+/* ===== SCROLL TO TOP ===== */
+#back-to-top {
+  position: fixed; bottom: 88px; right: 28px;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 200;
+  opacity: 0; transform: translateY(12px);
+  transition: all 0.3s ease;
+  color: white; font-size: 18px;
+}
+
+[data-theme="light"] #back-to-top {
+  background: rgba(16,54,125,0.08);
+  border-color: rgba(16,54,125,0.2);
+  color: #10367D;
+}
+
+#back-to-top.visible { opacity: 1; transform: translateY(0); }
+#back-to-top:hover { transform: translateY(-4px); background: rgba(255,255,255,0.2); }
+
 </style>
 </head>
 <body>
+
+<!-- SCROLL PROGRESS BAR -->
+<div id="scroll-progress"></div>
+
+<!-- CUSTOM CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- PARTICLE CANVAS -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- DARK/LIGHT TOGGLE -->
+<button id="theme-toggle" onclick="toggleTheme()" title="Toggle theme">☀️</button>
+
+<!-- BACK TO TOP -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
 
 <!-- NAVBAR -->
 <nav>
@@ -228,7 +619,7 @@ nav {
   </div>
 </nav>
 
-<!-- HOME -->
+<!-- ===== HOME ===== -->
 <section id="home" class="hero section">
   <div class="container">
     <img src="foto.jpg" alt="Hafizh Photo" class="profile fade">
@@ -248,20 +639,35 @@ nav {
     <p class="about-text fade">
       Undergraduate mathematics student with good interpersonal skills. I'm a nice, fun and friendly person — honest and reliable. I work well in a team but also on my own as I like to set myself goals and achieve them. I have good listening skills and a pleasant approach. I am trustworthy and have a strong interest in technology and data analytics.
     </p>
+
+    <!-- STATS COUNTER -->
+    <div class="stats-row fade">
+      <div class="stat-box">
+        <div class="stat-number" data-target="3">0</div>
+        <div class="stat-label">Projects</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" data-target="11">0</div>
+        <div class="stat-label">Certificates</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" data-target="1">0</div>
+        <div class="stat-label">Internship</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" data-target="3">0</div>
+        <div class="stat-label">Skills</div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- PROJECTS -->
-<!-- ==================== PROJECTS ==================== -->
-<!-- ==================== PROJECTS ==================== -->
+<!-- ===== PROJECTS ===== -->
 <section id="projects" class="section">
   <div class="container">
-
-    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Projects</h2>
-
+    <h2 class="section-heading fade">Projects</h2>
     <div class="grid-2">
 
-      <!-- PROJECT 1 -->
       <div class="flip-card fade"
            onclick="openModal(
              'Prediksi Potensi Nasabah untuk Membuka Deposito',
@@ -272,202 +678,229 @@ nav {
         <div class="flip-inner">
           <div class="flip-front">
             <h3 class="font-bold" style="margin-bottom:8px;">Prediksi Potensi Nasabah untuk Membuka Deposito</h3>
-            <p style="font-size:13px; opacity:0.75; line-height:1.5;">Penelitian ini bertujuan untuk memprediksi potensi nasabah dalam membuka deposito menggunakan pendekatan machine learning guna meningkatkan efisiensi marketing dan profit bank. Dataset yang digunakan dianalisis melalui tahapan preprocessing, feature engineering, serta pemodelan menggunakan algoritma. Hasil evaluasi menunjukkan bahwa model LightGBM dipilih sebagai model terbaik dengan performa recall yang tinggi dan risiko kesalahan yang lebih terkendali.</p>
-            <div style="margin-top:12px; display:flex; gap:6px; flex-wrap:wrap;">
-              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Machine Learning</span>
-              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">LightGBM</span>
-              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">XGBoost</span>
+            <p style="font-size:13px;opacity:0.75;line-height:1.5;">Machine learning untuk memprediksi potensi nasabah membuka deposito. Model LightGBM dipilih sebagai model terbaik dengan performa recall tinggi.</p>
+            <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="tag">Machine Learning</span>
+              <span class="tag">LightGBM</span>
+              <span class="tag">XGBoost</span>
             </div>
           </div>
           <div class="flip-back">
             <svg width="36" height="36" fill="white" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
-            <p style="font-size:14px; font-weight:600;">Lihat Detail Project</p>
+            <p style="font-size:14px;font-weight:600;">Lihat Detail Project</p>
             <button class="view-btn" onclick="event.stopPropagation()">Buka →</button>
           </div>
         </div>
       </div>
 
-      <!-- PROJECT 2 -->
       <div class="flip-card fade"
            onclick="openModal(
              'Analisis Sentimen Pengguna Kereta Cepat Whoosh',
-             'Penelitian ini bertujuan menganalisis sentimen publik terhadap Kereta Cepat Whoosh berdasarkan data tweet dari aplikasi X menggunakan pendekatan Machine Learning dan NLP. Model yang dibandingkan meliputi TF-IDF + SVM, IndoBERT, dan IndoBERTweet, dengan hasil menunjukkan bahwa IndoBERTweet memberikan performa terbaik, terutama setelah penerapan teknik data augmentasi. Hasil akhir menunjukkan peningkatan akurasi hingga sekitar 90%, membuktikan efektivitas augmentasi dalam meningkatkan kemampuan model memahami teks media sosial.',
+             'Penelitian ini bertujuan menganalisis sentimen publik terhadap Kereta Cepat Whoosh berdasarkan data tweet dari aplikasi X menggunakan pendekatan Machine Learning dan NLP. Model yang dibandingkan meliputi TF-IDF + SVM, IndoBERT, dan IndoBERTweet. IndoBERTweet memberikan performa terbaik setelah augmentasi data dengan akurasi sekitar 90%.',
              'project2.pdf',
              ''
            )">
         <div class="flip-inner">
           <div class="flip-front">
             <h3 class="font-bold" style="margin-bottom:8px;">Analisis Sentimen Pengguna Kereta Cepat Whoosh</h3>
-            <p style="font-size:13px; opacity:0.75; line-height:1.5;">Penelitian ini bertujuan menganalisis sentimen publik terhadap Kereta Cepat Whoosh berdasarkan data tweet dari aplikasi X menggunakan pendekatan Machine Learning dan NLP. Model yang dibandingkan meliputi TF-IDF + SVM, IndoBERT, dan IndoBERTweet, dengan hasil menunjukkan bahwa IndoBERTweet memberikan performa terbaik, terutama setelah penerapan teknik data augmentasi. Hasil akhir menunjukkan peningkatan akurasi hingga sekitar 90%, membuktikan efektivitas augmentasi dalam meningkatkan kemampuan model memahami teks media sosial.</p>
-            <div style="margin-top:12px; display:flex; gap:6px; flex-wrap:wrap;">
-              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">NLP</span>
-              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">IndoBERTweet</span>
-              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Sentiment Analysis</span>
+            <p style="font-size:13px;opacity:0.75;line-height:1.5;">NLP untuk menganalisis sentimen tweet tentang Kereta Cepat Whoosh. IndoBERTweet mencapai akurasi ~90% setelah data augmentasi.</p>
+            <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="tag">NLP</span>
+              <span class="tag">IndoBERTweet</span>
+              <span class="tag">Sentiment Analysis</span>
             </div>
           </div>
           <div class="flip-back">
             <svg width="36" height="36" fill="white" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
-            <p style="font-size:14px; font-weight:600;">Lihat Detail Project</p>
+            <p style="font-size:14px;font-weight:600;">Lihat Detail Project</p>
             <button class="view-btn" onclick="event.stopPropagation()">Buka →</button>
           </div>
         </div>
       </div>
 
-      <!-- PROJECT 3 -->
       <div class="flip-card fade"
            onclick="openModal(
-             'Membangun Model IndoBERT untuk Deteksi Dini Risiko Bunuh Diri pada Data Teks Unggahan di Media Sosial',
-             'Membangun model klasifikasi berbasis IndoBERT untuk mendeteksi dini risiko bunuh diri pada unggahan media sosial berbahasa Indonesia. Proyek ini mencakup pengumpulan dan pelabelan data, pra-pemrosesan teks, fine-tuning model NLP, serta evaluasi performa menggunakan pendekatan Focal Loss untuk menangani ketidakseimbangan kelas.',
+             'IndoBERT untuk Deteksi Dini Risiko Bunuh Diri di Media Sosial',
+             'Membangun model klasifikasi berbasis IndoBERT untuk mendeteksi dini risiko bunuh diri pada unggahan media sosial berbahasa Indonesia. Proyek mencakup pengumpulan dan pelabelan data, pra-pemrosesan teks, fine-tuning model NLP, serta evaluasi performa menggunakan Focal Loss untuk menangani ketidakseimbangan kelas.',
              'project3.pdf',
              ''
            )">
         <div class="flip-inner">
           <div class="flip-front">
-            <h3 class="font-bold" style="margin-bottom:8px;">Membangun Model IndoBERT untuk Deteksi Dini Risiko Bunuh Diri pada Data Teks Unggahan di Media Sosial</h3>
-            <p style="font-size:13px; opacity:0.75; line-height:1.5;">Membangun model klasifikasi berbasis IndoBERT untuk mendeteksi dini risiko bunuh diri pada unggahan media sosial berbahasa Indonesia. Proyek ini mencakup pengumpulan dan pelabelan data, pra-pemrosesan teks, fine-tuning model NLP, serta evaluasi performa menggunakan pendekatan Focal Loss untuk menangani ketidakseimbangan kelas.</p>
-            <div style="margin-top:12px; display:flex; gap:6px; flex-wrap:wrap;">
-              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">NLP</span>
-              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">IndoBERT</span>
-              <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Classification</span>
+            <h3 class="font-bold" style="margin-bottom:8px;">IndoBERT untuk Deteksi Dini Risiko Bunuh Diri di Media Sosial</h3>
+            <p style="font-size:13px;opacity:0.75;line-height:1.5;">Fine-tuning IndoBERT untuk klasifikasi teks bahasa Indonesia. Menggunakan Focal Loss untuk menangani class imbalance.</p>
+            <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="tag">NLP</span>
+              <span class="tag">IndoBERT</span>
+              <span class="tag">Classification</span>
             </div>
           </div>
           <div class="flip-back">
             <svg width="36" height="36" fill="white" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
-            <p style="font-size:14px; font-weight:600;">Lihat Detail Project</p>
+            <p style="font-size:14px;font-weight:600;">Lihat Detail Project</p>
             <button class="view-btn" onclick="event.stopPropagation()">Buka →</button>
           </div>
         </div>
       </div>
 
-    </div><!-- akhir .grid-2 -->
-  </div><!-- akhir .container -->
-</section><!-- akhir #projects -->
-<!-- EXPERIENCE -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE ===== -->
 <section id="experience" class="section">
   <div class="container">
-    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Experience</h2>
-    <div class="card fade" style="text-align:left; display:flex; gap:15px; align-items:flex-start;">
-      <img src="bca-syariah.png" alt="BCA Syariah Logo"
-           style="width:50px; height:50px; object-fit:contain; border-radius:8px; background:#f0f4ff; padding:5px; flex-shrink:0;">
-      <div>
-        <h3 class="font-bold text-lg">Product Development Intern</h3>
-        <p style="opacity:0.7;">BCA Syariah • Aug 2025</p>
-        <div style="margin-top:15px; line-height:1.8;">
-          <p>• Assisted in processing and analyzing onboarding data using Microsoft Excel, including PivotTable and filtering features, and presented insights through PowerPoint visualizations.</p>
-          <p>• Categorized customer feedback and reviews from the App Store and Google Play Store related to the BSya mobile application to identify common issues and improvement opportunities.</p>
-          <p>• Utilized VLOOKUP functions in Excel to track SMS blast delivery statuses, monitoring whether messages were successfully sent, rejected, or still ongoing.</p>
+    <h2 class="section-heading fade">Experience</h2>
+    <div class="timeline fade">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="card" style="display:flex;gap:15px;align-items:flex-start;">
+          <img src="bca-syariah.png" alt="BCA Syariah"
+               style="width:50px;height:50px;object-fit:contain;border-radius:8px;background:#f0f4ff;padding:5px;flex-shrink:0;">
+          <div>
+            <h3 class="font-bold text-lg">Product Development Intern</h3>
+            <p style="opacity:0.65;font-size:14px;margin-top:2px;">BCA Syariah • Aug 2025</p>
+            <div style="margin-top:14px;line-height:1.8;font-size:14px;">
+              <p>• Assisted in processing and analyzing onboarding data using Microsoft Excel, including PivotTable and filtering features, and presented insights through PowerPoint visualizations.</p>
+              <p>• Categorized customer feedback and reviews from the App Store and Google Play Store related to the BSya mobile application to identify common issues and improvement opportunities.</p>
+              <p>• Utilized VLOOKUP functions in Excel to track SMS blast delivery statuses, monitoring whether messages were successfully sent, rejected, or still ongoing.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SKILLS -->
+<!-- ===== SKILLS ===== -->
 <section id="skills" class="section">
   <div class="container">
-    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Skills</h2>
+    <h2 class="section-heading fade">Skills</h2>
     <div class="grid-2">
 
-      <div class="card fade">
-        <img src="icons/python.png" alt="Python" style="width:40px; height:40px; object-fit:contain; margin-bottom:8px;">
-        <h3 class="font-bold">Python</h3>
-        <p style="font-size:13px; opacity:0.7; margin-top:4px;">Data analysis, ML modeling, NLP</p>
+      <div class="skill-item fade" data-skill="85">
+        <div class="skill-header">
+          <img src="icons/python.png" alt="Python">
+          <div>
+            <div class="skill-name">Python</div>
+            <div class="skill-sub">Data analysis, ML modeling, NLP</div>
+          </div>
+        </div>
+        <div class="skill-bar-track">
+          <div class="skill-bar-fill" style="background: linear-gradient(90deg, #378ADD, #185FA5);"></div>
+        </div>
+        <div class="skill-percent">85%</div>
       </div>
 
-      <div class="card fade">
-        <img src="icons/sql.png" alt="SQL" style="width:40px; height:40px; object-fit:contain; margin-bottom:8px;">
-        <h3 class="font-bold">SQL</h3>
-        <p style="font-size:13px; opacity:0.7; margin-top:4px;">MySQL, Data querying & management</p>
+      <div class="skill-item fade" data-skill="75">
+        <div class="skill-header">
+          <img src="icons/sql.png" alt="SQL">
+          <div>
+            <div class="skill-name">SQL</div>
+            <div class="skill-sub">MySQL, Data querying & management</div>
+          </div>
+        </div>
+        <div class="skill-bar-track">
+          <div class="skill-bar-fill" style="background: linear-gradient(90deg, #1D9E75, #0F6E56);"></div>
+        </div>
+        <div class="skill-percent">75%</div>
       </div>
 
-      <div class="card fade">
-        <img src="icons/excel.png" alt="Excel" style="width:40px; height:40px; object-fit:contain; margin-bottom:8px;">
-        <h3 class="font-bold">Excel</h3>
-        <p style="font-size:13px; opacity:0.7; margin-top:4px;">PivotTable, VLOOKUP, Data visualization</p>
+      <div class="skill-item fade" data-skill="80">
+        <div class="skill-header">
+          <img src="icons/excel.png" alt="Excel">
+          <div>
+            <div class="skill-name">Excel</div>
+            <div class="skill-sub">PivotTable, VLOOKUP, Data visualization</div>
+          </div>
+        </div>
+        <div class="skill-bar-track">
+          <div class="skill-bar-fill" style="background: linear-gradient(90deg, #D4537E, #993556);"></div>
+        </div>
+        <div class="skill-percent">80%</div>
       </div>
 
-    </div><!-- /grid-2 skills -->
+    </div>
   </div>
 </section>
 
-<!-- COURSES -->
+<!-- ===== COURSES ===== -->
 <section id="courses" class="section">
   <div class="container">
-    <h2 class="text-3xl md:text-4xl font-bold mb-10 fade">Courses & Certifications</h2>
+    <h2 class="section-heading fade">Courses & Certifications</h2>
+    <div class="grid-2">
 
-    <div class="grid-2"><!-- ← BUKA grid di sini -->
-
-      <div class="card fade">
-        <img src="Certificate-Hafizh Abdan Dzikri-AI For Everyone.jpg" alt="Certificate" style="border-radius:10px; margin-bottom:10px; width:100%;">
+      <div class="cert-card fade">
+        <img src="Certificate-Hafizh Abdan Dzikri-AI For Everyone.jpg" alt="Certificate">
         <h3 class="font-bold">AI for Everyone</h3>
-        <p style="opacity:0.7;">KORIKA • 2026</p>
+        <p style="opacity:0.65;font-size:13px;margin-top:4px;">KORIKA • 2026</p>
       </div>
 
-      <div class="card fade">
-        <img src="Sertifikat Fundamental Database MySQL.jpg" alt="Certificate" style="border-radius:10px; margin-bottom:10px; width:100%;">
+      <div class="cert-card fade">
+        <img src="Sertifikat Fundamental Database MySQL.jpg" alt="Certificate">
         <h3 class="font-bold">Fundamental Database MySQL</h3>
-        <p style="opacity:0.7;">Coding Studio • 2025</p>
+        <p style="opacity:0.65;font-size:13px;margin-top:4px;">Coding Studio • 2025</p>
       </div>
 
-      <div class="card fade">
-        <img src="Introduction to Excel.jpg" alt="Certificate" style="border-radius:10px; margin-bottom:10px; width:100%;">
+      <div class="cert-card fade">
+        <img src="Introduction to Excel.jpg" alt="Certificate">
         <h3 class="font-bold">Introduction to Excel</h3>
-        <p style="opacity:0.7;">DataCamp • 2025</p>
+        <p style="opacity:0.65;font-size:13px;margin-top:4px;">DataCamp • 2025</p>
       </div>
 
-      <div class="card fade">
-        <img src="Learning Data Analytics 1 Foundations.jpg" alt="Certificate" style="border-radius:10px; margin-bottom:10px; width:100%;">
+      <div class="cert-card fade">
+        <img src="Learning Data Analytics 1 Foundations.jpg" alt="Certificate">
         <h3 class="font-bold">Learning Data Analytics 1: Foundations</h3>
-        <p style="opacity:0.7;">LinkedIn • 2025</p>
+        <p style="opacity:0.65;font-size:13px;margin-top:4px;">LinkedIn • 2025</p>
       </div>
 
-      <div class="card fade">
-        <img src="Guided Lab Python Data Structures Project.jpg" alt="Certificate" style="border-radius:10px; margin-bottom:10px; width:100%;">
+      <div class="cert-card fade">
+        <img src="Guided Lab Python Data Structures Project.jpg" alt="Certificate">
         <h3 class="font-bold">Guided Lab: Python Data Structures Project</h3>
-        <p style="opacity:0.7;">LinkedIn • 2025</p>
+        <p style="opacity:0.65;font-size:13px;margin-top:4px;">LinkedIn • 2025</p>
       </div>
 
-      <div class="card fade">
-        <img src="Communication Foundations.jpg" alt="Certificate" style="border-radius:10px; margin-bottom:10px; width:100%;">
+      <div class="cert-card fade">
+        <img src="Communication Foundations.jpg" alt="Certificate">
         <h3 class="font-bold">Communication Foundations</h3>
-        <p style="opacity:0.7;">LinkedIn • 2025</p>
+        <p style="opacity:0.65;font-size:13px;margin-top:4px;">LinkedIn • 2025</p>
       </div>
 
-      <div class="card fade">
-        <img src="FoundationsDataData.jpg" alt="Certificate" style="border-radius:10px; margin-bottom:10px; width:100%;">
+      <div class="cert-card fade">
+        <img src="FoundationsDataData.jpg" alt="Certificate">
         <h3 class="font-bold">Foundations: Data, Data, Everywhere</h3>
-        <p style="opacity:0.7;">Google • 2026</p>
+        <p style="opacity:0.65;font-size:13px;margin-top:4px;">Google • 2026</p>
       </div>
 
-      <div class="card fade">
-        <img src="IntroductionSQL.jpg" alt="Certificate" style="border-radius:10px; margin-bottom:10px; width:100%;">
+      <div class="cert-card fade">
+        <img src="IntroductionSQL.jpg" alt="Certificate">
         <h3 class="font-bold">Introduction to SQL</h3>
-        <p style="opacity:0.7;">DataCamp • 2026</p>
+        <p style="opacity:0.65;font-size:13px;margin-top:4px;">DataCamp • 2026</p>
       </div>
 
-      <div class="card fade">
-        <img src="IntermediateSQL.jpg" alt="Certificate" style="border-radius:10px; margin-bottom:10px; width:100%;">
+      <div class="cert-card fade">
+        <img src="IntermediateSQL.jpg" alt="Certificate">
         <h3 class="font-bold">Intermediate SQL</h3>
-        <p style="opacity:0.7;">DataCamp • 2026</p>
+        <p style="opacity:0.65;font-size:13px;margin-top:4px;">DataCamp • 2026</p>
       </div>
 
-      <div class="card fade">
-        <img src="AskQuestions.jpg" alt="Certificate" style="border-radius:10px; margin-bottom:10px; width:100%;">
+      <div class="cert-card fade">
+        <img src="AskQuestions.jpg" alt="Certificate">
         <h3 class="font-bold">Ask Questions to Make Data-Driven Decisions</h3>
-        <p style="opacity:0.7;">Google • 2026</p>
+        <p style="opacity:0.65;font-size:13px;margin-top:4px;">Google • 2026</p>
       </div>
 
-      <div class="card fade">
-        <img src="PrepareDataforExploration.jpg" alt="Certificate" style="border-radius:10px; margin-bottom:10px; width:100%;">
+      <div class="cert-card fade">
+        <img src="PrepareDataforExploration.jpg" alt="Certificate">
         <h3 class="font-bold">Prepare Data for Exploration</h3>
-        <p style="opacity:0.7;">Google • 2026</p>
+        <p style="opacity:0.65;font-size:13px;margin-top:4px;">Google • 2026</p>
       </div>
 
-    </div><!-- ← TUTUP grid di sini, setelah semua card -->
-  </div><!-- /container -->
+    </div>
+  </div>
 </section>
 
-<!-- MODAL -->
+<!-- ===== MODAL ===== -->
 <div id="modal" onclick="handleOverlayClick(event)">
   <div class="modal-box">
     <div class="modal-header">
@@ -483,13 +916,238 @@ nav {
     <iframe id="framePDF" class="embed-frame" title="PDF Viewer"></iframe>
     <iframe id="framePPT" class="embed-frame" title="PPT Viewer"></iframe>
     <div id="noFileMsg" class="no-file-msg">
-      <p>📄 File tidak tersedia.<br>Tambahkan path file PDF/PPT di parameter <code>openModal()</code>.</p>
+      <p>📄 File tidak tersedia.</p>
     </div>
   </div>
 </div>
 
+<!-- ===== SCRIPTS ===== -->
 <script>
-/* MODAL */
+
+/* ===== PARTICLE BACKGROUND ===== */
+(function() {
+  const canvas = document.getElementById('particles-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [], mouse = { x: -999, y: -999 };
+  const MAX = 70, CONNECT_DIST = 130;
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function Particle() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.vx = (Math.random() - 0.5) * 0.45;
+    this.vy = (Math.random() - 0.5) * 0.45;
+    this.r  = Math.random() * 2 + 1;
+  }
+
+  Particle.prototype.update = function() {
+    this.x += this.vx;
+    this.y += this.vy;
+    if (this.x < 0 || this.x > W) this.vx *= -1;
+    if (this.y < 0 || this.y > H) this.vy *= -1;
+  };
+
+  function isLight() { return document.documentElement.dataset.theme === 'light'; }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const dotColor = isLight() ? 'rgba(16,54,125,0.5)' : 'rgba(255,255,255,0.6)';
+    const lineColor = isLight() ? 'rgba(16,54,125,' : 'rgba(255,255,255,';
+
+    particles.forEach(p => {
+      p.update();
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = dotColor;
+      ctx.fill();
+    });
+
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if (d < CONNECT_DIST) {
+          const alpha = (1 - d / CONNECT_DIST) * 0.28;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = lineColor + alpha + ')';
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+
+      const dx = particles[i].x - mouse.x;
+      const dy = particles[i].y - mouse.y;
+      const d  = Math.sqrt(dx*dx + dy*dy);
+      if (d < 120) {
+        const alpha = (1 - d / 120) * 0.55;
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(mouse.x, mouse.y);
+        ctx.strokeStyle = lineColor + alpha + ')';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  for (let i = 0; i < MAX; i++) particles.push(new Particle());
+  window.addEventListener('resize', resize);
+  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+  draw();
+})();
+
+/* ===== CUSTOM CURSOR ===== */
+(function() {
+  const dot  = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    dot.style.left  = e.clientX + 'px';
+    dot.style.top   = e.clientY + 'px';
+    rx += (e.clientX - rx) * 0.12;
+    ry += (e.clientY - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+  });
+
+  function animRing() {
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  document.querySelectorAll('a,button,.flip-card,.card,.social-btn').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      dot.style.transform  = 'translate(-50%,-50%) scale(2.2)';
+      ring.style.transform = 'translate(-50%,-50%) scale(1.5)';
+      ring.style.opacity   = '0.4';
+    });
+    el.addEventListener('mouseleave', () => {
+      dot.style.transform  = 'translate(-50%,-50%) scale(1)';
+      ring.style.transform = 'translate(-50%,-50%) scale(1)';
+      ring.style.opacity   = '1';
+    });
+  });
+})();
+
+/* ===== SCROLL PROGRESS BAR ===== */
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = (scrollTop / docH) * 100;
+  document.getElementById('scroll-progress').style.width = pct + '%';
+
+  const btn = document.getElementById('back-to-top');
+  if (scrollTop > 400) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
+
+/* ===== THEME TOGGLE ===== */
+function toggleTheme() {
+  const html = document.documentElement;
+  const isLight = html.dataset.theme === 'light';
+  html.dataset.theme = isLight ? 'dark' : 'light';
+  document.getElementById('theme-toggle').textContent = isLight ? '☀️' : '🌙';
+  document.body.style.cursor = isLight ? 'none' : 'auto';
+}
+
+/* ===== NAVBAR ===== */
+const links     = document.querySelectorAll('.nav-link');
+const indicator = document.getElementById('indicator');
+const sections  = document.querySelectorAll('section');
+
+function moveIndicator(el) {
+  indicator.style.width = el.offsetWidth + 'px';
+  indicator.style.left  = el.offsetLeft + 'px';
+}
+
+function setActive(link) {
+  links.forEach(l => l.classList.remove('active'));
+  link.classList.add('active');
+  moveIndicator(link);
+}
+
+links.forEach(link => link.addEventListener('click', () => setActive(link)));
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 180) current = s.id; });
+  links.forEach(l => { if (l.getAttribute('href') === '#' + current) setActive(l); });
+});
+
+requestAnimationFrame(() => moveIndicator(links[0]));
+
+/* ===== FADE ON SCROLL ===== */
+const fades = document.querySelectorAll('.fade');
+
+function showOnScroll() {
+  fades.forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.88) {
+      el.classList.add('show');
+      // trigger skill bars
+      if (el.classList.contains('skill-item')) animateSkillBar(el);
+      // trigger counters
+      if (el.classList.contains('stats-row')) animateCounters();
+    }
+  });
+}
+
+window.addEventListener('scroll', showOnScroll);
+showOnScroll();
+
+/* ===== SKILL BAR ANIMATION ===== */
+let skillsAnimated = false;
+
+function animateSkillBar(el) {
+  const fill = el.querySelector('.skill-bar-fill');
+  const pct  = el.dataset.skill || 0;
+  setTimeout(() => { fill.style.width = pct + '%'; }, 100);
+}
+
+/* ===== COUNTER ANIMATION ===== */
+let countersStarted = false;
+
+function animateCounters() {
+  if (countersStarted) return;
+  countersStarted = true;
+  document.querySelectorAll('.stat-number').forEach(el => {
+    const target = parseInt(el.dataset.target, 10);
+    const duration = 1800;
+    const start = performance.now();
+    function step(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(ease * target) + (progress < 1 ? '' : '+');
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target + '+';
+    }
+    requestAnimationFrame(step);
+  });
+}
+
+/* ===== TYPING EFFECT ===== */
+const text = "Math Student | Ex-Product Development Intern at BCA Syariah";
+let i = 0;
+function typeWriter() {
+  if (i < text.length) {
+    document.getElementById('typing').innerHTML += text[i];
+    i++;
+    setTimeout(typeWriter, 40);
+  }
+}
+typeWriter();
+
+/* ===== MODAL ===== */
 function openModal(title, desc, pdfSrc, pptSrc) {
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('modalDesc').textContent  = desc;
@@ -554,45 +1212,6 @@ function handleOverlayClick(e) {
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-/* NAVBAR */
-const links     = document.querySelectorAll('.nav-link');
-const indicator = document.getElementById('indicator');
-const sections  = document.querySelectorAll('section');
-
-function moveIndicator(el) {
-  indicator.style.width = el.offsetWidth + 'px';
-  indicator.style.left  = el.offsetLeft + 'px';
-}
-function setActive(link) {
-  links.forEach(l => l.classList.remove('active'));
-  link.classList.add('active');
-  moveIndicator(link);
-}
-links.forEach(link => link.addEventListener('click', () => setActive(link)));
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 150) current = s.id; });
-  links.forEach(l => { if (l.getAttribute('href') === '#' + current) setActive(l); });
-});
-requestAnimationFrame(() => moveIndicator(links[0]));
-
-/* FADE */
-const fades = document.querySelectorAll('.fade');
-function showOnScroll() {
-  fades.forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight * 0.88) el.classList.add('show');
-  });
-}
-window.addEventListener('scroll', showOnScroll);
-showOnScroll();
-
-/* TYPING */
-const text = "Math Student | Ex-Product Development Intern at BCA Syariah";
-let i = 0;
-function typeWriter() {
-  if (i < text.length) { document.getElementById('typing').innerHTML += text[i]; i++; setTimeout(typeWriter, 40); }
-}
-typeWriter();
 </script>
 </body>
 </html>
