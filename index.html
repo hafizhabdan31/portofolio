@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hafizh Abdan Dzikri Portfolio</title>
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
 <style>
 
 /* ===== ROOT VARIABLES & THEMES ===== */
@@ -16,7 +15,6 @@
   --text-muted: rgba(255,255,255,0.75);
   --card-bg: #FFFFFF;
   --card-text: #10367D;
-  --card-text-muted: rgba(16,54,125,0.65);
   --nav-bg: rgba(255,255,255,0.08);
   --nav-border: rgba(255,255,255,0.15);
   --tag-bg: #e0e7ff;
@@ -32,12 +30,7 @@
   --modal-text: #444;
   --modal-title: #10367D;
   --embed-tab-active-bg: #10367D;
-  --embed-tab-active-text: white;
-  --embed-tab-text: #10367D;
   --embed-area: #f0f3ff;
-  --progress-bar-border: #dde;
-  --cursor-color: #FFFFFF;
-  --glow-blue: rgba(255,255,255,0.25);
 }
 
 [data-theme="light"] {
@@ -47,32 +40,17 @@
   --text-muted: rgba(16,54,125,0.7);
   --card-bg: #FFFFFF;
   --card-text: #10367D;
-  --card-text-muted: rgba(16,54,125,0.55);
-  --nav-bg: rgba(255,255,255,0.85);
+  --nav-bg: rgba(255,255,255,0.88);
   --nav-border: rgba(16,54,125,0.15);
-  --tag-bg: #e0e7ff;
-  --tag-text: #3730a3;
-  --flip-back: #10367D;
   --stat-bg: rgba(16,54,125,0.07);
   --skill-track: rgba(16,54,125,0.12);
   --timeline-line: rgba(16,54,125,0.15);
   --timeline-dot: #10367D;
   --modal-overlay: rgba(0,0,0,0.6);
-  --modal-bg: #FFFFFF;
-  --modal-header: #f8f9ff;
-  --modal-text: #444;
-  --modal-title: #10367D;
-  --embed-tab-active-bg: #10367D;
-  --embed-tab-active-text: white;
-  --embed-tab-text: #10367D;
-  --embed-area: #f0f3ff;
-  --progress-bar-border: #dde;
-  --cursor-color: #10367D;
-  --glow-blue: rgba(16,54,125,0.15);
 }
 
 /* ===== RESET & BASE ===== */
-* { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
 body {
@@ -80,12 +58,7 @@ body {
   background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
   color: var(--text-primary);
   position: relative;
-  cursor: none;
   transition: background 0.5s ease, color 0.3s ease;
-}
-
-[data-theme="light"] body {
-  cursor: auto;
 }
 
 body::before {
@@ -105,12 +78,11 @@ body::before {
   top: 0; left: 0;
   height: 3px;
   width: 0%;
-  background: linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,255,255,0.5));
+  background: linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,255,255,0.4));
   z-index: 9999;
   transition: width 0.1s linear;
   border-radius: 0 3px 3px 0;
 }
-
 [data-theme="light"] #scroll-progress {
   background: linear-gradient(90deg, #10367D, #1e4fa3);
 }
@@ -118,35 +90,30 @@ body::before {
 /* ===== CUSTOM CURSOR ===== */
 #cursor {
   width: 10px; height: 10px;
-  background: var(--cursor-color);
+  background: white;
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
   z-index: 99999;
   transform: translate(-50%, -50%);
-  transition: transform 0.08s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease, background 0.3s;
+  transition: transform 0.1s ease, opacity 0.2s;
   mix-blend-mode: difference;
 }
-
 #cursor-ring {
-  width: 38px; height: 38px;
-  border: 1.5px solid rgba(255,255,255,0.5);
+  width: 36px; height: 36px;
+  border: 1.5px solid rgba(255,255,255,0.45);
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
   z-index: 99998;
   transform: translate(-50%, -50%);
-  transition: transform 0.18s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.18s ease, opacity 0.2s;
 }
 
-body:hover #cursor { opacity: 1; }
-a:hover ~ #cursor, button:hover ~ #cursor { transform: translate(-50%,-50%) scale(2.5); }
-
-/* ===== DARK/LIGHT TOGGLE ===== */
+/* ===== THEME TOGGLE ===== */
 #theme-toggle {
   position: fixed;
-  bottom: 28px;
-  right: 28px;
+  bottom: 28px; right: 28px;
   width: 48px; height: 48px;
   border-radius: 50%;
   background: rgba(255,255,255,0.12);
@@ -155,29 +122,43 @@ a:hover ~ #cursor, button:hover ~ #cursor { transform: translate(-50%,-50%) scal
   cursor: pointer;
   z-index: 200;
   display: flex; align-items: center; justify-content: center;
-  transition: all 0.3s ease;
-  color: white;
+  transition: transform 0.3s, background 0.3s;
   font-size: 20px;
+  color: white;
 }
-
 [data-theme="light"] #theme-toggle {
-  background: rgba(16,54,125,0.08);
+  background: rgba(16,54,125,0.09);
+  border-color: rgba(16,54,125,0.2);
+}
+#theme-toggle:hover { transform: scale(1.12) rotate(18deg); }
+
+/* ===== BACK TO TOP ===== */
+#back-to-top {
+  position: fixed;
+  bottom: 88px; right: 28px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 200;
+  opacity: 0; transform: translateY(12px);
+  transition: opacity 0.3s, transform 0.3s, background 0.3s;
+  font-size: 18px; color: white; font-weight: 700;
+}
+[data-theme="light"] #back-to-top {
+  background: rgba(16,54,125,0.09);
   border-color: rgba(16,54,125,0.2);
   color: #10367D;
 }
+#back-to-top.visible { opacity: 1; transform: translateY(0); }
+#back-to-top:hover { background: rgba(255,255,255,0.2); transform: translateY(-4px); }
 
-#theme-toggle:hover {
-  transform: scale(1.1) rotate(20deg);
-  background: rgba(255,255,255,0.2);
-}
-
-/* ===== CANVAS (PARTICLES) ===== */
+/* ===== CANVAS ===== */
 #particles-canvas {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.55;
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 1; opacity: 0.55;
 }
 
 /* ===== NAVBAR ===== */
@@ -194,33 +175,29 @@ nav {
   white-space: nowrap;
   transition: background 0.4s, border-color 0.4s;
 }
-
 #navMenu {
   display: flex; gap: 20px;
   position: relative;
+  align-items: center;
 }
-
 .nav-link {
   font-size: 14px; font-weight: 500;
   cursor: pointer; opacity: 0.7;
-  transition: 0.3s; text-decoration: none;
+  transition: opacity 0.3s, transform 0.3s;
+  text-decoration: none;
   color: var(--text-primary);
 }
-
 .nav-link:hover { opacity: 1; transform: translateY(-2px); }
 .nav-link.active { opacity: 1; }
-
 .indicator {
-  position: absolute; bottom: -6px;
-  height: 3px;
-  background: var(--text-primary);
-  border-radius: 10px;
+  position: absolute; bottom: -6px; height: 3px;
+  background: var(--text-primary); border-radius: 10px;
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ===== LAYOUT ===== */
 .section { width: 100%; padding: 120px 20px; position: relative; z-index: 2; }
-.container { max-width: 900px; margin: auto; }
+.container { max-width: 900px; margin: 0 auto; }
 
 /* ===== HERO ===== */
 .hero {
@@ -228,59 +205,68 @@ nav {
   display: flex; align-items: center; justify-content: center;
   text-align: center;
 }
+.hero-inner { display: flex; flex-direction: column; align-items: center; }
 
 .profile {
   width: 180px; height: 180px;
   border-radius: 50%; object-fit: cover;
   border: 5px solid white;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.3), 0 0 0 0 rgba(255,255,255,0);
-  margin: auto; transition: 0.4s;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+  display: block; margin: 0 auto;
+  transition: transform 0.4s;
   animation: profile-pulse 3s ease-in-out infinite;
 }
-
+@media(min-width:768px){ .profile { width: 220px; height: 220px; } }
 @keyframes profile-pulse {
   0%,100% { box-shadow: 0 15px 35px rgba(0,0,0,0.3), 0 0 0 0 rgba(255,255,255,0.3); }
-  50% { box-shadow: 0 15px 35px rgba(0,0,0,0.3), 0 0 0 14px rgba(255,255,255,0); }
+  50%      { box-shadow: 0 15px 35px rgba(0,0,0,0.3), 0 0 0 14px rgba(255,255,255,0); }
 }
-
 .profile:hover { transform: scale(1.06) rotate(2deg); }
 
-@media(min-width:768px){ .profile { width: 220px; height: 220px; } }
-
-.hero-title { font-size: clamp(32px, 6vw, 64px); font-weight: 700; }
-
-.socials {
-  margin-top: 20px;
-  display: flex; justify-content: center; align-items: center; gap: 20px;
+.hero-title {
+  font-size: clamp(28px, 6vw, 58px);
+  font-weight: 700;
+  margin-top: 1.5rem;
+  line-height: 1.15;
+}
+#typing {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  min-height: 1.6rem;
+}
+.about-text {
+  margin-top: 1.5rem;
+  font-size: 15px; line-height: 1.8;
+  color: var(--text-muted);
+  max-width: 640px;
 }
 
+/* ===== SOCIALS ===== */
+.socials {
+  margin-top: 1.25rem;
+  display: flex; justify-content: center; align-items: center; gap: 20px;
+}
 .social-btn {
   width: 48px; height: 48px; border-radius: 50%;
   background: rgba(255,255,255,0.08);
   display: flex; align-items: center; justify-content: center;
-  transition: 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  text-decoration: none;
 }
-
 .social-btn:hover {
   transform: translateY(-6px) scale(1.1);
-  box-shadow: 0 14px 28px rgba(0,0,0,0.35);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.3);
   background: rgba(255,255,255,0.18);
 }
+.social-btn svg { width: 22px; height: 22px; fill: var(--text-primary); }
 
-.social-btn svg { width: 22px; height: 22px; fill: var(--text-primary); transition: fill 0.3s; }
-
-.about-text {
-  margin-top: 25px; font-size: 15px;
-  line-height: 1.8; color: var(--text-muted);
-}
-
-/* ===== STATS COUNTER ===== */
+/* ===== STATS ===== */
 .stats-row {
   display: flex; justify-content: center;
-  gap: 24px; flex-wrap: wrap;
-  margin-top: 40px;
+  gap: 16px; flex-wrap: wrap;
+  margin-top: 2.5rem;
 }
-
 .stat-box {
   background: var(--stat-bg);
   backdrop-filter: blur(10px);
@@ -289,253 +275,12 @@ nav {
   padding: 18px 28px;
   text-align: center;
   transition: transform 0.3s, box-shadow 0.3s;
+  min-width: 110px;
 }
-
-.stat-box:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-}
-
-.stat-number {
-  font-size: 36px; font-weight: 700;
-  line-height: 1;
-  color: var(--text-primary);
-}
-
-.stat-label {
-  font-size: 13px; margin-top: 6px;
-  color: var(--text-muted);
-}
-
-/* ===== CARDS ===== */
-.card {
-  background: var(--card-bg);
-  color: var(--card-text);
-  padding: 20px; border-radius: 16px;
-  transition: transform 0.3s, box-shadow 0.35s;
-}
-
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.22);
-}
-
-/* ===== GRID ===== */
-.grid-2 {
-  display: grid; grid-template-columns: 1fr; gap: 20px;
-}
-@media(min-width:768px){ .grid-2 { grid-template-columns: 1fr 1fr; } }
-
-/* ===== FLIP CARDS ===== */
-.flip-card { perspective: 1000px; cursor: pointer; }
-
-.flip-inner {
-  position: relative; width: 100%; min-height: 200px;
-  transition: transform 0.6s; transform-style: preserve-3d;
-}
-
-.flip-card:hover .flip-inner { transform: rotateY(180deg); }
-
-.flip-front, .flip-back {
-  position: absolute; inset: 0;
-  backface-visibility: hidden; -webkit-backface-visibility: hidden;
-  border-radius: 16px; padding: 20px;
-}
-
-.flip-front {
-  background: var(--card-bg); color: var(--card-text); overflow: hidden;
-  transition: box-shadow 0.35s;
-}
-
-.flip-card:hover .flip-front {
-  box-shadow: 0 0 0 2px rgba(55,138,221,0.35), 0 16px 40px rgba(55,138,221,0.2);
-}
-
-.flip-back {
-  background: var(--flip-back);
-  border: 2px solid rgba(255,255,255,0.3);
-  color: white; transform: rotateY(180deg);
-  display: flex; flex-direction: column; align-items: center;
-  justify-content: center; gap: 12px; text-align: center;
-}
-
-.flip-back .view-btn {
-  margin-top: 8px; padding: 10px 22px;
-  background: white; color: #10367D; border-radius: 30px;
-  font-weight: 600; font-size: 14px; transition: 0.2s; border: none; cursor: pointer;
-}
-
-.flip-back .view-btn:hover { background: #e0e7ff; }
-
-/* ===== PROJECT TAGS ===== */
-.tag {
-  background: var(--tag-bg); color: var(--tag-text);
-  padding: 3px 10px; border-radius: 20px;
-  font-size: 11px; font-weight: 600;
-}
-
-/* ===== FADE ANIMATION ===== */
-.fade { opacity: 0; transform: translateY(40px); }
-.fade.show { opacity: 1; transform: translateY(0); transition: 0.75s cubic-bezier(0.22,1,0.36,1); }
-
-/* ===== SKILL BARS ===== */
-.skill-item {
-  background: var(--card-bg);
-  color: var(--card-text);
-  padding: 18px 20px;
-  border-radius: 16px;
-  transition: transform 0.3s, box-shadow 0.35s;
-}
-
-.skill-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 32px rgba(0,0,0,0.18);
-}
-
-.skill-header {
-  display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
-}
-
-.skill-header img { width: 36px; height: 36px; object-fit: contain; }
-
-.skill-name { font-weight: 700; font-size: 15px; }
-.skill-sub { font-size: 12px; opacity: 0.6; margin-top: 2px; }
-
-.skill-bar-track {
-  width: 100%; height: 6px;
-  background: var(--skill-track);
-  border-radius: 10px; overflow: hidden;
-}
-
-.skill-bar-fill {
-  height: 100%; border-radius: 10px;
-  width: 0%;
-  transition: width 1.4s cubic-bezier(0.22,1,0.36,1);
-}
-
-.skill-percent {
-  font-size: 12px; font-weight: 600;
-  text-align: right; margin-top: 5px;
-  opacity: 0.7;
-}
-
-/* ===== EXPERIENCE / TIMELINE ===== */
-.timeline { position: relative; padding-left: 32px; }
-
-.timeline::before {
-  content: '';
-  position: absolute; left: 6px; top: 0; bottom: 0;
-  width: 2px;
-  background: var(--timeline-line);
-  border-radius: 2px;
-}
-
-.timeline-item {
-  position: relative; margin-bottom: 28px;
-}
-
-.timeline-dot {
-  position: absolute; left: -30px; top: 4px;
-  width: 14px; height: 14px;
-  border-radius: 50%;
-  background: var(--timeline-dot);
-  border: 2px solid var(--bg-primary);
-  box-shadow: 0 0 0 3px rgba(255,255,255,0.2);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-[data-theme="light"] .timeline-dot {
-  border-color: var(--bg-primary);
-  box-shadow: 0 0 0 3px rgba(16,54,125,0.12);
-}
-
-.timeline-item:hover .timeline-dot {
-  transform: scale(1.4);
-  box-shadow: 0 0 0 6px rgba(255,255,255,0.15);
-}
-
-/* ===== MODAL ===== */
-#modal {
-  position: fixed; inset: 0;
-  background: var(--modal-overlay);
-  display: none; align-items: center; justify-content: center;
-  z-index: 999; padding: 20px;
-}
-
-#modal.open { display: flex; }
-
-.modal-box {
-  width: 100%; max-width: 920px;
-  background: var(--modal-bg); border-radius: 20px;
-  overflow: hidden; display: flex; flex-direction: column;
-  max-height: 90vh;
-  animation: slideUp 0.3s cubic-bezier(0.22,1,0.36,1);
-}
-
-@keyframes slideUp {
-  from { transform: translateY(30px); opacity: 0; }
-  to   { transform: translateY(0);    opacity: 1; }
-}
-
-.modal-header {
-  padding: 14px 20px;
-  display: flex; justify-content: space-between; align-items: center;
-  border-bottom: 1px solid #eee; background: var(--modal-header);
-}
-
-.modal-header h4 { color: var(--modal-title); font-weight: 700; font-size: 15px; margin: 0; flex: 1; padding-right: 12px; }
-
-.modal-close-btn {
-  width: 36px; height: 36px; border-radius: 50%; border: none;
-  background: transparent; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: 0.2s; flex-shrink: 0;
-}
-
-.modal-close-btn:hover { background: rgba(0,0,0,0.08); }
-
-.modal-desc {
-  padding: 16px 20px; color: var(--modal-text); line-height: 1.7;
-  font-size: 14px; border-bottom: 1px solid #eee;
-  overflow-y: auto; max-height: 120px;
-}
-
-.embed-tabs {
-  display: flex; gap: 8px; padding: 10px 20px;
-  background: var(--embed-area); border-bottom: 1px solid var(--progress-bar-border);
-}
-
-.embed-tab {
-  padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
-  cursor: pointer; border: 2px solid transparent;
-  background: transparent; color: var(--embed-tab-text); opacity: 0.6; transition: 0.2s;
-}
-
-.embed-tab.active { background: var(--embed-tab-active-bg); color: var(--embed-tab-active-text); opacity: 1; }
-
-.embed-frame { display: none; width: 100%; height: 500px; border: none; }
-.embed-frame.active { display: block; }
-
-.no-file-msg { display: none; padding: 40px; text-align: center; color: #aaa; font-size: 14px; }
-
-/* ===== CERTIFICATE CARD ===== */
-.cert-card {
-  background: var(--card-bg); color: var(--card-text);
-  padding: 16px; border-radius: 16px;
-  transition: transform 0.3s, box-shadow 0.35s;
-}
-
-.cert-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 32px rgba(0,0,0,0.2);
-}
-
-.cert-card img {
-  border-radius: 10px; margin-bottom: 10px; width: 100%;
-  transition: opacity 0.3s;
-}
-
-.cert-card:hover img { opacity: 0.92; }
+[data-theme="light"] .stat-box { border-color: rgba(16,54,125,0.1); }
+.stat-box:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.22); }
+.stat-number { font-size: 36px; font-weight: 700; line-height: 1; color: var(--text-primary); }
+.stat-label  { font-size: 13px; margin-top: 6px; color: var(--text-muted); }
 
 /* ===== SECTION HEADING ===== */
 .section-heading {
@@ -545,64 +290,206 @@ nav {
   position: relative;
   display: inline-block;
 }
-
 .section-heading::after {
   content: '';
-  position: absolute;
-  bottom: -8px; left: 0;
+  position: absolute; bottom: -8px; left: 0;
   width: 48px; height: 3px;
   background: rgba(255,255,255,0.6);
   border-radius: 3px;
   transition: width 0.4s ease;
 }
-
-[data-theme="light"] .section-heading::after {
-  background: rgba(16,54,125,0.4);
-}
-
+[data-theme="light"] .section-heading::after { background: rgba(16,54,125,0.4); }
 .section-heading:hover::after { width: 100%; }
 
-/* ===== SCROLL TO TOP ===== */
-#back-to-top {
-  position: fixed; bottom: 88px; right: 28px;
-  width: 44px; height: 44px; border-radius: 50%;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.2);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; z-index: 200;
-  opacity: 0; transform: translateY(12px);
-  transition: all 0.3s ease;
-  color: white; font-size: 18px;
+/* ===== GRID ===== */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+@media(min-width:768px){ .grid-2 { grid-template-columns: 1fr 1fr; } }
+
+/* ===== CARDS ===== */
+.card {
+  background: var(--card-bg); color: var(--card-text);
+  padding: 20px; border-radius: 16px;
+  transition: transform 0.3s, box-shadow 0.35s;
+}
+.card:hover { transform: translateY(-8px); box-shadow: 0 18px 40px rgba(0,0,0,0.22); }
+
+/* ===== FLIP CARDS ===== */
+.flip-card { perspective: 1000px; cursor: pointer; }
+.flip-inner {
+  position: relative; width: 100%; min-height: 220px;
+  transition: transform 0.6s; transform-style: preserve-3d;
+}
+.flip-card:hover .flip-inner { transform: rotateY(180deg); }
+.flip-front, .flip-back {
+  position: absolute; inset: 0;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: 16px; padding: 20px;
+}
+.flip-front {
+  background: var(--card-bg); color: var(--card-text); overflow: hidden;
+  transition: box-shadow 0.35s;
+}
+.flip-card:hover .flip-front {
+  box-shadow: 0 0 0 2px rgba(55,138,221,0.4), 0 16px 40px rgba(55,138,221,0.18);
+}
+.flip-back {
+  background: var(--flip-back);
+  border: 2px solid rgba(255,255,255,0.3);
+  color: white; transform: rotateY(180deg);
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 12px; text-align: center;
+}
+.flip-back .view-btn {
+  margin-top: 8px; padding: 10px 22px;
+  background: white; color: #10367D; border-radius: 30px;
+  font-weight: 600; font-size: 14px; transition: background 0.2s; border: none; cursor: pointer;
+}
+.flip-back .view-btn:hover { background: #e0e7ff; }
+
+.project-title  { font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+.project-desc   { font-size: 13px; opacity: 0.75; line-height: 1.5; }
+.tags-row       { margin-top: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+.tag {
+  background: var(--tag-bg); color: var(--tag-text);
+  padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
 }
 
-[data-theme="light"] #back-to-top {
-  background: rgba(16,54,125,0.08);
-  border-color: rgba(16,54,125,0.2);
-  color: #10367D;
-}
+/* ===== FADE ANIMATION ===== */
+.fade { opacity: 0; transform: translateY(40px); }
+.fade.show { opacity: 1; transform: translateY(0); transition: 0.75s cubic-bezier(0.22,1,0.36,1); }
 
-#back-to-top.visible { opacity: 1; transform: translateY(0); }
-#back-to-top:hover { transform: translateY(-4px); background: rgba(255,255,255,0.2); }
+/* ===== EXPERIENCE / TIMELINE ===== */
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: '';
+  position: absolute; left: 6px; top: 0; bottom: 0;
+  width: 2px; background: var(--timeline-line); border-radius: 2px;
+}
+.timeline-item { position: relative; margin-bottom: 28px; }
+.timeline-dot {
+  position: absolute; left: -30px; top: 6px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--timeline-dot);
+  border: 2px solid var(--bg-primary);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.timeline-item:hover .timeline-dot {
+  transform: scale(1.4);
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.12);
+}
+.exp-card {
+  background: var(--card-bg); color: var(--card-text);
+  padding: 20px; border-radius: 16px;
+  display: flex; gap: 15px; align-items: flex-start;
+  transition: transform 0.3s, box-shadow 0.35s;
+}
+.exp-card:hover { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(0,0,0,0.2); }
+.exp-logo {
+  width: 50px; height: 50px; object-fit: contain;
+  border-radius: 8px; background: #f0f4ff; padding: 5px; flex-shrink: 0;
+}
+.exp-title { font-weight: 700; font-size: 17px; }
+.exp-sub   { opacity: 0.65; font-size: 14px; margin-top: 4px; }
+.exp-body  { margin-top: 14px; line-height: 1.8; font-size: 14px; }
+.exp-body p { margin-bottom: 4px; }
+
+/* ===== SKILLS ===== */
+.skill-item {
+  background: var(--card-bg); color: var(--card-text);
+  padding: 18px 20px; border-radius: 16px;
+  transition: transform 0.3s, box-shadow 0.35s;
+}
+.skill-item:hover { transform: translateY(-6px); box-shadow: 0 14px 32px rgba(0,0,0,0.18); }
+.skill-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.skill-header img { width: 36px; height: 36px; object-fit: contain; }
+.skill-name { font-weight: 700; font-size: 15px; }
+.skill-sub  { font-size: 12px; opacity: 0.6; margin-top: 2px; }
+.skill-bar-track {
+  width: 100%; height: 6px; background: var(--skill-track);
+  border-radius: 10px; overflow: hidden;
+}
+.skill-bar-fill {
+  height: 100%; border-radius: 10px; width: 0%;
+  transition: width 1.4s cubic-bezier(0.22,1,0.36,1);
+}
+.skill-percent { font-size: 12px; font-weight: 600; text-align: right; margin-top: 5px; opacity: 0.7; }
+
+/* ===== CERT CARD ===== */
+.cert-card {
+  background: var(--card-bg); color: var(--card-text);
+  padding: 16px; border-radius: 16px;
+  transition: transform 0.3s, box-shadow 0.35s;
+}
+.cert-card:hover { transform: translateY(-6px); box-shadow: 0 14px 32px rgba(0,0,0,0.2); }
+.cert-card img { border-radius: 10px; margin-bottom: 10px; width: 100%; display: block; }
+.cert-title   { font-weight: 700; font-size: 14px; }
+.cert-sub     { opacity: 0.65; font-size: 13px; margin-top: 4px; }
+
+/* ===== MODAL ===== */
+#modal {
+  position: fixed; inset: 0;
+  background: var(--modal-overlay);
+  display: none; align-items: center; justify-content: center;
+  z-index: 999; padding: 20px;
+}
+#modal.open { display: flex; }
+.modal-box {
+  width: 100%; max-width: 920px;
+  background: var(--modal-bg); border-radius: 20px;
+  overflow: hidden; display: flex; flex-direction: column;
+  max-height: 90vh;
+  animation: slideUp 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+.modal-header {
+  padding: 14px 20px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid #eee; background: var(--modal-header);
+}
+.modal-header h4 { color: var(--modal-title); font-weight: 700; font-size: 15px; margin: 0; flex: 1; padding-right: 12px; }
+.modal-close-btn {
+  width: 36px; height: 36px; border-radius: 50%; border: none;
+  background: transparent; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: background 0.2s; flex-shrink: 0;
+}
+.modal-close-btn:hover { background: rgba(0,0,0,0.08); }
+.modal-desc {
+  padding: 16px 20px; color: var(--modal-text); line-height: 1.7;
+  font-size: 14px; border-bottom: 1px solid #eee;
+  overflow-y: auto; max-height: 120px;
+}
+.embed-tabs {
+  display: flex; gap: 8px; padding: 10px 20px;
+  background: var(--embed-area); border-bottom: 1px solid #dde;
+}
+.embed-tab {
+  padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
+  cursor: pointer; border: 2px solid transparent;
+  background: transparent; color: #10367D; opacity: 0.6; transition: all 0.2s;
+}
+.embed-tab.active { background: var(--embed-tab-active-bg); color: white; opacity: 1; }
+.embed-frame { display: none; width: 100%; height: 500px; border: none; }
+.embed-frame.active { display: block; }
+.no-file-msg { display: none; padding: 40px; text-align: center; color: #aaa; font-size: 14px; }
 
 </style>
 </head>
 <body>
 
-<!-- SCROLL PROGRESS BAR -->
 <div id="scroll-progress"></div>
-
-<!-- CUSTOM CURSOR -->
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
-
-<!-- PARTICLE CANVAS -->
 <canvas id="particles-canvas"></canvas>
 
-<!-- DARK/LIGHT TOGGLE -->
 <button id="theme-toggle" onclick="toggleTheme()" title="Toggle theme">☀️</button>
-
-<!-- BACK TO TOP -->
 <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
 
 <!-- NAVBAR -->
@@ -617,71 +504,49 @@ nav {
   </div>
 </nav>
 
-<!-- ===== HOME ===== -->
+<!-- HOME -->
 <section id="home" class="hero section">
   <div class="container">
-    <img src="foto.jpg" alt="Hafizh Photo" class="profile fade">
-    <h1 class="hero-title fade mt-6">Hi, I'm Hafizh Abdan Dzikri</h1>
-    <p id="typing" class="mt-4 fade text-lg"></p>
-    <div class="socials fade">
-      <a href="https://www.linkedin.com/in/hafizh-abdan-dzikri-4699b51a2/" target="_blank" class="social-btn">
-        <svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.49 6S0 4.88 0 3.5 1.12 1 2.49 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7.5 0h4.7v2.2h.1c.7-1.2 2.4-2.5 5-2.5 5.3 0 6.3 3.5 6.3 8V24h-5v-7.1c0-1.7 0-3.9-2.4-3.9-2.4 0-2.8 1.9-2.8 3.8V24h-5V8z"/></svg>
-      </a>
-      <a href="https://github.com/hafizhabdan31" target="_blank" class="social-btn">
-        <svg viewBox="0 0 24 24"><path d="M12 .5C5.4.5 0 5.9 0 12.6c0 5.3 3.4 9.8 8.2 11.4.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.5-1.4-1.9-1.4-1.9-1.2-.8.1-.8.1-.8 1.3.1 2 .4 2 .4 1.2 2.1 3.2 1.5 4 .1.1-.9.5-1.5.9-1.8-2.7-.3-5.5-1.4-5.5-6.2 0-1.4.5-2.6 1.3-3.5-.1-.3-.6-1.7.1-3.6 0 0 1.1-.4 3.6 1.3 1-.3 2.1-.5 3.2-.5s2.2.2 3.2.5c2.5-1.7 3.6-1.3 3.6-1.3.7 1.9.2 3.3.1 3.6.8.9 1.3 2.1 1.3 3.5 0 4.8-2.9 5.9-5.6 6.2.5.4.9 1.2.9 2.4v3.6c0 .3.2.7.8.6 4.8-1.6 8.2-6.1 8.2-11.4C24 5.9 18.6.5 12 .5z"/></svg>
-      </a>
-      <a href="https://instagram.com/hafizhabdan_" target="_blank" class="social-btn">
-        <svg viewBox="0 0 24 24"><path d="M7.75 2C4.57 2 2 4.57 2 7.75v8.5C2 19.43 4.57 22 7.75 22h8.5C19.43 22 22 19.43 22 16.25v-8.5C22 4.57 19.43 2 16.25 2h-8.5zm0 2h8.5C18.55 4 20 5.45 20 7.75v8.5c0 2.3-1.45 3.75-3.75 3.75h-8.5C5.45 20 4 18.55 4 16.25v-8.5C4 5.45 5.45 4 7.75 4zm4.25 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm5.5-.75a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5z"/></svg>
-      </a>
-    </div>
-    <p class="about-text fade">
-      Undergraduate mathematics student with good interpersonal skills. I'm a nice, fun and friendly person — honest and reliable. I work well in a team but also on my own as I like to set myself goals and achieve them. I have good listening skills and a pleasant approach. I am trustworthy and have a strong interest in technology and data analytics.
-    </p>
-
-    <!-- STATS COUNTER -->
-    <div class="stats-row fade">
-      <div class="stat-box">
-        <div class="stat-number" data-target="3">0</div>
-        <div class="stat-label">Projects</div>
+    <div class="hero-inner">
+      <img src="foto.jpg" alt="Hafizh Photo" class="profile fade">
+      <h1 class="hero-title fade">Hi, I'm Hafizh Abdan Dzikri</h1>
+      <p id="typing" class="fade"></p>
+      <div class="socials fade">
+        <a href="https://www.linkedin.com/in/hafizh-abdan-dzikri-4699b51a2/" target="_blank" class="social-btn">
+          <svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.49 6S0 4.88 0 3.5 1.12 1 2.49 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7.5 0h4.7v2.2h.1c.7-1.2 2.4-2.5 5-2.5 5.3 0 6.3 3.5 6.3 8V24h-5v-7.1c0-1.7 0-3.9-2.4-3.9-2.4 0-2.8 1.9-2.8 3.8V24h-5V8z"/></svg>
+        </a>
+        <a href="https://github.com/hafizhabdan31" target="_blank" class="social-btn">
+          <svg viewBox="0 0 24 24"><path d="M12 .5C5.4.5 0 5.9 0 12.6c0 5.3 3.4 9.8 8.2 11.4.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.5-1.4-1.9-1.4-1.9-1.2-.8.1-.8.1-.8 1.3.1 2 .4 2 .4 1.2 2.1 3.2 1.5 4 .1.1-.9.5-1.5.9-1.8-2.7-.3-5.5-1.4-5.5-6.2 0-1.4.5-2.6 1.3-3.5-.1-.3-.6-1.7.1-3.6 0 0 1.1-.4 3.6 1.3 1-.3 2.1-.5 3.2-.5s2.2.2 3.2.5c2.5-1.7 3.6-1.3 3.6-1.3.7 1.9.2 3.3.1 3.6.8.9 1.3 2.1 1.3 3.5 0 4.8-2.9 5.9-5.6 6.2.5.4.9 1.2.9 2.4v3.6c0 .3.2.7.8.6 4.8-1.6 8.2-6.1 8.2-11.4C24 5.9 18.6.5 12 .5z"/></svg>
+        </a>
+        <a href="https://instagram.com/hafizhabdan_" target="_blank" class="social-btn">
+          <svg viewBox="0 0 24 24"><path d="M7.75 2C4.57 2 2 4.57 2 7.75v8.5C2 19.43 4.57 22 7.75 22h8.5C19.43 22 22 19.43 22 16.25v-8.5C22 4.57 19.43 2 16.25 2h-8.5zm0 2h8.5C18.55 4 20 5.45 20 7.75v8.5c0 2.3-1.45 3.75-3.75 3.75h-8.5C5.45 20 4 18.55 4 16.25v-8.5C4 5.45 5.45 4 7.75 4zm4.25 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm5.5-.75a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5z"/></svg>
+        </a>
       </div>
-      <div class="stat-box">
-        <div class="stat-number" data-target="11">0</div>
-        <div class="stat-label">Certificates</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-number" data-target="1">0</div>
-        <div class="stat-label">Internship</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-number" data-target="3">0</div>
-        <div class="stat-label">Skills</div>
+      <p class="about-text fade">
+        Undergraduate mathematics student with good interpersonal skills. I'm a nice, fun and friendly person — honest and reliable. I work well in a team but also on my own as I like to set myself goals and achieve them. I have good listening skills and a pleasant approach. I am trustworthy and have a strong interest in technology and data analytics.
+      </p>
+      <div class="stats-row fade">
+        <div class="stat-box"><div class="stat-number" data-target="3">0</div><div class="stat-label">Projects</div></div>
+        <div class="stat-box"><div class="stat-number" data-target="11">0</div><div class="stat-label">Certificates</div></div>
+        <div class="stat-box"><div class="stat-number" data-target="1">0</div><div class="stat-label">Internship</div></div>
+        <div class="stat-box"><div class="stat-number" data-target="3">0</div><div class="stat-label">Skills</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== PROJECTS ===== -->
+<!-- PROJECTS -->
 <section id="projects" class="section">
   <div class="container">
     <h2 class="section-heading fade">Projects</h2>
     <div class="grid-2">
 
-      <div class="flip-card fade"
-           onclick="openModal(
-             'Prediksi Potensi Nasabah untuk Membuka Deposito',
-             'Penelitian ini bertujuan untuk memprediksi potensi nasabah dalam membuka deposito menggunakan pendekatan machine learning guna meningkatkan efisiensi marketing dan profit bank. Dataset yang digunakan dianalisis melalui tahapan preprocessing, feature engineering, serta pemodelan menggunakan algoritma. Hasil evaluasi menunjukkan bahwa model LightGBM dipilih sebagai model terbaik dengan performa recall yang tinggi dan risiko kesalahan yang lebih terkendali.',
-             'project1.pdf',
-             'https://docs.google.com/presentation/d/1TlejguqK5Aq-NyYtKU6NgL12upWHQOPQJDQQ8neqFQg/edit?usp=sharing'
-           )">
+      <div class="flip-card fade" onclick="openModal('Prediksi Potensi Nasabah untuk Membuka Deposito','Penelitian ini bertujuan untuk memprediksi potensi nasabah dalam membuka deposito menggunakan pendekatan machine learning guna meningkatkan efisiensi marketing dan profit bank. Dataset dianalisis melalui preprocessing, feature engineering, serta pemodelan. Hasil evaluasi menunjukkan model LightGBM sebagai model terbaik dengan performa recall tinggi.','project1.pdf','https://docs.google.com/presentation/d/1TlejguqK5Aq-NyYtKU6NgL12upWHQOPQJDQQ8neqFQg/edit?usp=sharing')">
         <div class="flip-inner">
           <div class="flip-front">
-            <h3 class="font-bold" style="margin-bottom:8px;">Prediksi Potensi Nasabah untuk Membuka Deposito</h3>
-            <p style="font-size:13px;opacity:0.75;line-height:1.5;">Machine learning untuk memprediksi potensi nasabah membuka deposito. Model LightGBM dipilih sebagai model terbaik dengan performa recall tinggi.</p>
-            <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;">
-              <span class="tag">Machine Learning</span>
-              <span class="tag">LightGBM</span>
-              <span class="tag">XGBoost</span>
-            </div>
+            <p class="project-title">Prediksi Potensi Nasabah untuk Membuka Deposito</p>
+            <p class="project-desc">Machine learning untuk memprediksi potensi nasabah membuka deposito. Model LightGBM dipilih sebagai model terbaik dengan performa recall tinggi.</p>
+            <div class="tags-row"><span class="tag">Machine Learning</span><span class="tag">LightGBM</span><span class="tag">XGBoost</span></div>
           </div>
           <div class="flip-back">
             <svg width="36" height="36" fill="white" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
@@ -691,22 +556,12 @@ nav {
         </div>
       </div>
 
-      <div class="flip-card fade"
-           onclick="openModal(
-             'Analisis Sentimen Pengguna Kereta Cepat Whoosh',
-             'Penelitian ini bertujuan menganalisis sentimen publik terhadap Kereta Cepat Whoosh berdasarkan data tweet dari aplikasi X menggunakan pendekatan Machine Learning dan NLP. Model yang dibandingkan meliputi TF-IDF + SVM, IndoBERT, dan IndoBERTweet. IndoBERTweet memberikan performa terbaik setelah augmentasi data dengan akurasi sekitar 90%.',
-             'project2.pdf',
-             ''
-           )">
+      <div class="flip-card fade" onclick="openModal('Analisis Sentimen Pengguna Kereta Cepat Whoosh','Penelitian ini menganalisis sentimen publik terhadap Kereta Cepat Whoosh berdasarkan data tweet dari aplikasi X menggunakan Machine Learning dan NLP. Model yang dibandingkan meliputi TF-IDF + SVM, IndoBERT, dan IndoBERTweet. IndoBERTweet memberikan performa terbaik dengan akurasi sekitar 90% setelah augmentasi data.','project2.pdf','')">
         <div class="flip-inner">
           <div class="flip-front">
-            <h3 class="font-bold" style="margin-bottom:8px;">Analisis Sentimen Pengguna Kereta Cepat Whoosh</h3>
-            <p style="font-size:13px;opacity:0.75;line-height:1.5;">NLP untuk menganalisis sentimen tweet tentang Kereta Cepat Whoosh. IndoBERTweet mencapai akurasi ~90% setelah data augmentasi.</p>
-            <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;">
-              <span class="tag">NLP</span>
-              <span class="tag">IndoBERTweet</span>
-              <span class="tag">Sentiment Analysis</span>
-            </div>
+            <p class="project-title">Analisis Sentimen Pengguna Kereta Cepat Whoosh</p>
+            <p class="project-desc">NLP untuk menganalisis sentimen tweet tentang Kereta Cepat Whoosh. IndoBERTweet mencapai akurasi ~90% setelah data augmentasi.</p>
+            <div class="tags-row"><span class="tag">NLP</span><span class="tag">IndoBERTweet</span><span class="tag">Sentiment Analysis</span></div>
           </div>
           <div class="flip-back">
             <svg width="36" height="36" fill="white" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
@@ -716,22 +571,12 @@ nav {
         </div>
       </div>
 
-      <div class="flip-card fade"
-           onclick="openModal(
-             'IndoBERT untuk Deteksi Dini Risiko Bunuh Diri di Media Sosial',
-             'Membangun model klasifikasi berbasis IndoBERT untuk mendeteksi dini risiko bunuh diri pada unggahan media sosial berbahasa Indonesia. Proyek mencakup pengumpulan dan pelabelan data, pra-pemrosesan teks, fine-tuning model NLP, serta evaluasi performa menggunakan Focal Loss untuk menangani ketidakseimbangan kelas.',
-             'project3.pdf',
-             ''
-           )">
+      <div class="flip-card fade" onclick="openModal('IndoBERT untuk Deteksi Dini Risiko Bunuh Diri di Media Sosial','Membangun model klasifikasi berbasis IndoBERT untuk mendeteksi dini risiko bunuh diri pada unggahan media sosial berbahasa Indonesia. Proyek mencakup pengumpulan dan pelabelan data, pra-pemrosesan teks, fine-tuning model NLP, serta evaluasi menggunakan Focal Loss untuk menangani ketidakseimbangan kelas.','project3.pdf','')">
         <div class="flip-inner">
           <div class="flip-front">
-            <h3 class="font-bold" style="margin-bottom:8px;">IndoBERT untuk Deteksi Dini Risiko Bunuh Diri di Media Sosial</h3>
-            <p style="font-size:13px;opacity:0.75;line-height:1.5;">Fine-tuning IndoBERT untuk klasifikasi teks bahasa Indonesia. Menggunakan Focal Loss untuk menangani class imbalance.</p>
-            <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;">
-              <span class="tag">NLP</span>
-              <span class="tag">IndoBERT</span>
-              <span class="tag">Classification</span>
-            </div>
+            <p class="project-title">IndoBERT untuk Deteksi Dini Risiko Bunuh Diri di Media Sosial</p>
+            <p class="project-desc">Fine-tuning IndoBERT untuk klasifikasi teks bahasa Indonesia. Menggunakan Focal Loss untuk menangani class imbalance.</p>
+            <div class="tags-row"><span class="tag">NLP</span><span class="tag">IndoBERT</span><span class="tag">Classification</span></div>
           </div>
           <div class="flip-back">
             <svg width="36" height="36" fill="white" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
@@ -745,20 +590,19 @@ nav {
   </div>
 </section>
 
-<!-- ===== EXPERIENCE ===== -->
+<!-- EXPERIENCE -->
 <section id="experience" class="section">
   <div class="container">
     <h2 class="section-heading fade">Experience</h2>
     <div class="timeline fade">
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="card" style="display:flex;gap:15px;align-items:flex-start;">
-          <img src="bca-syariah.png" alt="BCA Syariah"
-               style="width:50px;height:50px;object-fit:contain;border-radius:8px;background:#f0f4ff;padding:5px;flex-shrink:0;">
+        <div class="exp-card">
+          <img src="bca-syariah.png" alt="BCA Syariah" class="exp-logo">
           <div>
-            <h3 class="font-bold text-lg">Product Development Intern</h3>
-            <p style="opacity:0.65;font-size:14px;margin-top:2px;">BCA Syariah • Aug 2025</p>
-            <div style="margin-top:14px;line-height:1.8;font-size:14px;">
+            <div class="exp-title">Product Development Intern</div>
+            <div class="exp-sub">BCA Syariah • Aug 2025</div>
+            <div class="exp-body">
               <p>• Assisted in processing and analyzing onboarding data using Microsoft Excel, including PivotTable and filtering features, and presented insights through PowerPoint visualizations.</p>
               <p>• Categorized customer feedback and reviews from the App Store and Google Play Store related to the BSya mobile application to identify common issues and improvement opportunities.</p>
               <p>• Utilized VLOOKUP functions in Excel to track SMS blast delivery statuses, monitoring whether messages were successfully sent, rejected, or still ongoing.</p>
@@ -770,140 +614,65 @@ nav {
   </div>
 </section>
 
-<!-- ===== SKILLS ===== -->
+<!-- SKILLS -->
 <section id="skills" class="section">
   <div class="container">
     <h2 class="section-heading fade">Skills</h2>
     <div class="grid-2">
-
       <div class="skill-item fade" data-skill="85">
         <div class="skill-header">
           <img src="icons/python.png" alt="Python">
-          <div>
-            <div class="skill-name">Python</div>
-            <div class="skill-sub">Data analysis, ML modeling, NLP</div>
-          </div>
+          <div><div class="skill-name">Python</div><div class="skill-sub">Data analysis, ML modeling, NLP</div></div>
         </div>
-        <div class="skill-bar-track">
-          <div class="skill-bar-fill" style="background: linear-gradient(90deg, #378ADD, #185FA5);"></div>
-        </div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="background:linear-gradient(90deg,#378ADD,#185FA5);"></div></div>
         <div class="skill-percent">85%</div>
       </div>
-
       <div class="skill-item fade" data-skill="75">
         <div class="skill-header">
           <img src="icons/sql.png" alt="SQL">
-          <div>
-            <div class="skill-name">SQL</div>
-            <div class="skill-sub">MySQL, Data querying & management</div>
-          </div>
+          <div><div class="skill-name">SQL</div><div class="skill-sub">MySQL, Data querying & management</div></div>
         </div>
-        <div class="skill-bar-track">
-          <div class="skill-bar-fill" style="background: linear-gradient(90deg, #1D9E75, #0F6E56);"></div>
-        </div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="background:linear-gradient(90deg,#1D9E75,#0F6E56);"></div></div>
         <div class="skill-percent">75%</div>
       </div>
-
       <div class="skill-item fade" data-skill="80">
         <div class="skill-header">
           <img src="icons/excel.png" alt="Excel">
-          <div>
-            <div class="skill-name">Excel</div>
-            <div class="skill-sub">PivotTable, VLOOKUP, Data visualization</div>
-          </div>
+          <div><div class="skill-name">Excel</div><div class="skill-sub">PivotTable, VLOOKUP, Data visualization</div></div>
         </div>
-        <div class="skill-bar-track">
-          <div class="skill-bar-fill" style="background: linear-gradient(90deg, #D4537E, #993556);"></div>
-        </div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="background:linear-gradient(90deg,#D4537E,#993556);"></div></div>
         <div class="skill-percent">80%</div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ===== COURSES ===== -->
+<!-- COURSES -->
 <section id="courses" class="section">
   <div class="container">
     <h2 class="section-heading fade">Courses & Certifications</h2>
     <div class="grid-2">
-
-      <div class="cert-card fade">
-        <img src="Certificate-Hafizh Abdan Dzikri-AI For Everyone.jpg" alt="Certificate">
-        <h3 class="font-bold">AI for Everyone</h3>
-        <p style="opacity:0.65;font-size:13px;margin-top:4px;">KORIKA • 2026</p>
-      </div>
-
-      <div class="cert-card fade">
-        <img src="Sertifikat Fundamental Database MySQL.jpg" alt="Certificate">
-        <h3 class="font-bold">Fundamental Database MySQL</h3>
-        <p style="opacity:0.65;font-size:13px;margin-top:4px;">Coding Studio • 2025</p>
-      </div>
-
-      <div class="cert-card fade">
-        <img src="Introduction to Excel.jpg" alt="Certificate">
-        <h3 class="font-bold">Introduction to Excel</h3>
-        <p style="opacity:0.65;font-size:13px;margin-top:4px;">DataCamp • 2025</p>
-      </div>
-
-      <div class="cert-card fade">
-        <img src="Learning Data Analytics 1 Foundations.jpg" alt="Certificate">
-        <h3 class="font-bold">Learning Data Analytics 1: Foundations</h3>
-        <p style="opacity:0.65;font-size:13px;margin-top:4px;">LinkedIn • 2025</p>
-      </div>
-
-      <div class="cert-card fade">
-        <img src="Guided Lab Python Data Structures Project.jpg" alt="Certificate">
-        <h3 class="font-bold">Guided Lab: Python Data Structures Project</h3>
-        <p style="opacity:0.65;font-size:13px;margin-top:4px;">LinkedIn • 2025</p>
-      </div>
-
-      <div class="cert-card fade">
-        <img src="Communication Foundations.jpg" alt="Certificate">
-        <h3 class="font-bold">Communication Foundations</h3>
-        <p style="opacity:0.65;font-size:13px;margin-top:4px;">LinkedIn • 2025</p>
-      </div>
-
-      <div class="cert-card fade">
-        <img src="FoundationsDataData.jpg" alt="Certificate">
-        <h3 class="font-bold">Foundations: Data, Data, Everywhere</h3>
-        <p style="opacity:0.65;font-size:13px;margin-top:4px;">Google • 2026</p>
-      </div>
-
-      <div class="cert-card fade">
-        <img src="IntroductionSQL.jpg" alt="Certificate">
-        <h3 class="font-bold">Introduction to SQL</h3>
-        <p style="opacity:0.65;font-size:13px;margin-top:4px;">DataCamp • 2026</p>
-      </div>
-
-      <div class="cert-card fade">
-        <img src="IntermediateSQL.jpg" alt="Certificate">
-        <h3 class="font-bold">Intermediate SQL</h3>
-        <p style="opacity:0.65;font-size:13px;margin-top:4px;">DataCamp • 2026</p>
-      </div>
-
-      <div class="cert-card fade">
-        <img src="AskQuestions.jpg" alt="Certificate">
-        <h3 class="font-bold">Ask Questions to Make Data-Driven Decisions</h3>
-        <p style="opacity:0.65;font-size:13px;margin-top:4px;">Google • 2026</p>
-      </div>
-
-      <div class="cert-card fade">
-        <img src="PrepareDataforExploration.jpg" alt="Certificate">
-        <h3 class="font-bold">Prepare Data for Exploration</h3>
-        <p style="opacity:0.65;font-size:13px;margin-top:4px;">Google • 2026</p>
-      </div>
-
+      <div class="cert-card fade"><img src="Certificate-Hafizh Abdan Dzikri-AI For Everyone.jpg" alt="Certificate"><div class="cert-title">AI for Everyone</div><div class="cert-sub">KORIKA • 2026</div></div>
+      <div class="cert-card fade"><img src="Sertifikat Fundamental Database MySQL.jpg" alt="Certificate"><div class="cert-title">Fundamental Database MySQL</div><div class="cert-sub">Coding Studio • 2025</div></div>
+      <div class="cert-card fade"><img src="Introduction to Excel.jpg" alt="Certificate"><div class="cert-title">Introduction to Excel</div><div class="cert-sub">DataCamp • 2025</div></div>
+      <div class="cert-card fade"><img src="Learning Data Analytics 1 Foundations.jpg" alt="Certificate"><div class="cert-title">Learning Data Analytics 1: Foundations</div><div class="cert-sub">LinkedIn • 2025</div></div>
+      <div class="cert-card fade"><img src="Guided Lab Python Data Structures Project.jpg" alt="Certificate"><div class="cert-title">Guided Lab: Python Data Structures Project</div><div class="cert-sub">LinkedIn • 2025</div></div>
+      <div class="cert-card fade"><img src="Communication Foundations.jpg" alt="Certificate"><div class="cert-title">Communication Foundations</div><div class="cert-sub">LinkedIn • 2025</div></div>
+      <div class="cert-card fade"><img src="FoundationsDataData.jpg" alt="Certificate"><div class="cert-title">Foundations: Data, Data, Everywhere</div><div class="cert-sub">Google • 2026</div></div>
+      <div class="cert-card fade"><img src="IntroductionSQL.jpg" alt="Certificate"><div class="cert-title">Introduction to SQL</div><div class="cert-sub">DataCamp • 2026</div></div>
+      <div class="cert-card fade"><img src="IntermediateSQL.jpg" alt="Certificate"><div class="cert-title">Intermediate SQL</div><div class="cert-sub">DataCamp • 2026</div></div>
+      <div class="cert-card fade"><img src="AskQuestions.jpg" alt="Certificate"><div class="cert-title">Ask Questions to Make Data-Driven Decisions</div><div class="cert-sub">Google • 2026</div></div>
+      <div class="cert-card fade"><img src="PrepareDataforExploration.jpg" alt="Certificate"><div class="cert-title">Prepare Data for Exploration</div><div class="cert-sub">Google • 2026</div></div>
     </div>
   </div>
 </section>
 
-<!-- ===== MODAL ===== -->
+<!-- MODAL -->
 <div id="modal" onclick="handleOverlayClick(event)">
   <div class="modal-box">
     <div class="modal-header">
       <h4 id="modalTitle">Project Title</h4>
-      <button class="modal-close-btn" onclick="closeModal()" title="Tutup">
+      <button class="modal-close-btn" onclick="closeModal()">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
           <path d="M6 6L18 18M6 18L18 6" stroke="#333" stroke-width="2" stroke-linecap="round"/>
         </svg>
@@ -913,303 +682,133 @@ nav {
     <div class="embed-tabs" id="embedTabs"></div>
     <iframe id="framePDF" class="embed-frame" title="PDF Viewer"></iframe>
     <iframe id="framePPT" class="embed-frame" title="PPT Viewer"></iframe>
-    <div id="noFileMsg" class="no-file-msg">
-      <p>📄 File tidak tersedia.</p>
-    </div>
+    <div id="noFileMsg" class="no-file-msg"><p>📄 File tidak tersedia.</p></div>
   </div>
 </div>
 
-<!-- ===== SCRIPTS ===== -->
 <script>
-
-/* ===== PARTICLE BACKGROUND ===== */
-(function() {
+/* ===== PARTICLES ===== */
+(function(){
   const canvas = document.getElementById('particles-canvas');
   const ctx = canvas.getContext('2d');
-  let W, H, particles = [], mouse = { x: -999, y: -999 };
-  const MAX = 70, CONNECT_DIST = 130;
-
-  function resize() {
-    W = canvas.width  = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-
-  function Particle() {
-    this.x = Math.random() * W;
-    this.y = Math.random() * H;
-    this.vx = (Math.random() - 0.5) * 0.45;
-    this.vy = (Math.random() - 0.5) * 0.45;
-    this.r  = Math.random() * 2 + 1;
-  }
-
-  Particle.prototype.update = function() {
-    this.x += this.vx;
-    this.y += this.vy;
-    if (this.x < 0 || this.x > W) this.vx *= -1;
-    if (this.y < 0 || this.y > H) this.vy *= -1;
-  };
-
-  function isLight() { return document.documentElement.dataset.theme === 'light'; }
-
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    const dotColor = isLight() ? 'rgba(16,54,125,0.5)' : 'rgba(255,255,255,0.6)';
-    const lineColor = isLight() ? 'rgba(16,54,125,' : 'rgba(255,255,255,';
-
-    particles.forEach(p => {
-      p.update();
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = dotColor;
-      ctx.fill();
-    });
-
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const d  = Math.sqrt(dx*dx + dy*dy);
-        if (d < CONNECT_DIST) {
-          const alpha = (1 - d / CONNECT_DIST) * 0.28;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = lineColor + alpha + ')';
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
-        }
+  let W, H, particles = [], mouse = {x:-999,y:-999};
+  const MAX=70, DIST=130;
+  function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
+  function P(){ this.x=Math.random()*W; this.y=Math.random()*H; this.vx=(Math.random()-.5)*.45; this.vy=(Math.random()-.5)*.45; this.r=Math.random()*2+1; }
+  P.prototype.update=function(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>W)this.vx*=-1; if(this.y<0||this.y>H)this.vy*=-1; };
+  function isLight(){ return document.documentElement.dataset.theme==='light'; }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    var dc=isLight()?'rgba(16,54,125,0.5)':'rgba(255,255,255,0.6)', lc=isLight()?'rgba(16,54,125,':'rgba(255,255,255,';
+    particles.forEach(function(p){ p.update(); ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle=dc; ctx.fill(); });
+    for(var i=0;i<particles.length;i++){
+      for(var j=i+1;j<particles.length;j++){
+        var dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y, d=Math.sqrt(dx*dx+dy*dy);
+        if(d<DIST){ ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.strokeStyle=lc+(1-d/DIST)*.28+')'; ctx.lineWidth=.8; ctx.stroke(); }
       }
-
-      const dx = particles[i].x - mouse.x;
-      const dy = particles[i].y - mouse.y;
-      const d  = Math.sqrt(dx*dx + dy*dy);
-      if (d < 120) {
-        const alpha = (1 - d / 120) * 0.55;
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(mouse.x, mouse.y);
-        ctx.strokeStyle = lineColor + alpha + ')';
-        ctx.lineWidth = 1;
-        ctx.stroke();
-      }
+      var dx=particles[i].x-mouse.x, dy=particles[i].y-mouse.y, d=Math.sqrt(dx*dx+dy*dy);
+      if(d<120){ ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(mouse.x,mouse.y); ctx.strokeStyle=lc+(1-d/120)*.55+')'; ctx.lineWidth=1; ctx.stroke(); }
     }
     requestAnimationFrame(draw);
   }
-
-  resize();
-  for (let i = 0; i < MAX; i++) particles.push(new Particle());
-  window.addEventListener('resize', resize);
-  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+  resize(); for(var i=0;i<MAX;i++) particles.push(new P());
+  window.addEventListener('resize',resize);
+  window.addEventListener('mousemove',function(e){ mouse.x=e.clientX; mouse.y=e.clientY; });
   draw();
 })();
 
 /* ===== CUSTOM CURSOR ===== */
-(function() {
-  const dot  = document.getElementById('cursor');
-  const ring = document.getElementById('cursor-ring');
-  let rx = 0, ry = 0;
-
-  document.addEventListener('mousemove', e => {
-    dot.style.left  = e.clientX + 'px';
-    dot.style.top   = e.clientY + 'px';
-    rx += (e.clientX - rx) * 0.12;
-    ry += (e.clientY - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top  = ry + 'px';
-  });
-
-  function animRing() {
-    requestAnimationFrame(animRing);
-  }
-  animRing();
-
-  document.querySelectorAll('a,button,.flip-card,.card,.social-btn').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      dot.style.transform  = 'translate(-50%,-50%) scale(2.2)';
-      ring.style.transform = 'translate(-50%,-50%) scale(1.5)';
-      ring.style.opacity   = '0.4';
-    });
-    el.addEventListener('mouseleave', () => {
-      dot.style.transform  = 'translate(-50%,-50%) scale(1)';
-      ring.style.transform = 'translate(-50%,-50%) scale(1)';
-      ring.style.opacity   = '1';
-    });
+(function(){
+  var dot=document.getElementById('cursor'), ring=document.getElementById('cursor-ring'), rx=0,ry=0,mx=0,my=0;
+  document.addEventListener('mousemove',function(e){ mx=e.clientX; my=e.clientY; dot.style.left=mx+'px'; dot.style.top=my+'px'; });
+  function animR(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animR); } animR();
+  document.querySelectorAll('a,button,.flip-card,.card,.social-btn,.skill-item,.cert-card,.exp-card').forEach(function(el){
+    el.addEventListener('mouseenter',function(){ dot.style.transform='translate(-50%,-50%) scale(2.2)'; ring.style.transform='translate(-50%,-50%) scale(1.5)'; ring.style.opacity='.4'; });
+    el.addEventListener('mouseleave',function(){ dot.style.transform='translate(-50%,-50%) scale(1)'; ring.style.transform='translate(-50%,-50%) scale(1)'; ring.style.opacity='1'; });
   });
 })();
 
-/* ===== SCROLL PROGRESS BAR ===== */
-window.addEventListener('scroll', () => {
-  const scrollTop = window.scrollY;
-  const docH = document.documentElement.scrollHeight - window.innerHeight;
-  const pct = (scrollTop / docH) * 100;
-  document.getElementById('scroll-progress').style.width = pct + '%';
-
-  const btn = document.getElementById('back-to-top');
-  if (scrollTop > 400) btn.classList.add('visible');
-  else btn.classList.remove('visible');
+/* ===== SCROLL PROGRESS + BACK TO TOP ===== */
+window.addEventListener('scroll',function(){
+  var st=window.scrollY, dh=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('scroll-progress').style.width=(st/dh*100)+'%';
+  var btn=document.getElementById('back-to-top');
+  if(st>400) btn.classList.add('visible'); else btn.classList.remove('visible');
 });
 
 /* ===== THEME TOGGLE ===== */
-function toggleTheme() {
-  const html = document.documentElement;
-  const isLight = html.dataset.theme === 'light';
-  html.dataset.theme = isLight ? 'dark' : 'light';
-  document.getElementById('theme-toggle').textContent = isLight ? '☀️' : '🌙';
-  document.body.style.cursor = isLight ? 'none' : 'auto';
+function toggleTheme(){
+  var html=document.documentElement, isLight=html.dataset.theme==='light';
+  html.dataset.theme=isLight?'':' light';
+  if(!isLight){ html.setAttribute('data-theme','light'); } else { html.removeAttribute('data-theme'); }
+  document.getElementById('theme-toggle').textContent=isLight?'☀️':'🌙';
 }
 
 /* ===== NAVBAR ===== */
-const links     = document.querySelectorAll('.nav-link');
-const indicator = document.getElementById('indicator');
-const sections  = document.querySelectorAll('section');
-
-function moveIndicator(el) {
-  indicator.style.width = el.offsetWidth + 'px';
-  indicator.style.left  = el.offsetLeft + 'px';
-}
-
-function setActive(link) {
-  links.forEach(l => l.classList.remove('active'));
-  link.classList.add('active');
-  moveIndicator(link);
-}
-
-links.forEach(link => link.addEventListener('click', () => setActive(link)));
-
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 180) current = s.id; });
-  links.forEach(l => { if (l.getAttribute('href') === '#' + current) setActive(l); });
+var links=document.querySelectorAll('.nav-link'), indicator=document.getElementById('indicator'), sections=document.querySelectorAll('section');
+function moveIndicator(el){ indicator.style.width=el.offsetWidth+'px'; indicator.style.left=el.offsetLeft+'px'; }
+function setActive(link){ links.forEach(function(l){l.classList.remove('active');}); link.classList.add('active'); moveIndicator(link); }
+links.forEach(function(link){ link.addEventListener('click',function(){ setActive(link); }); });
+window.addEventListener('scroll',function(){
+  var current='';
+  sections.forEach(function(s){ if(window.scrollY>=s.offsetTop-180) current=s.id; });
+  links.forEach(function(l){ if(l.getAttribute('href')==='#'+current) setActive(l); });
 });
-
-requestAnimationFrame(() => moveIndicator(links[0]));
+requestAnimationFrame(function(){ moveIndicator(links[0]); });
 
 /* ===== FADE ON SCROLL ===== */
-const fades = document.querySelectorAll('.fade');
-
-function showOnScroll() {
-  fades.forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight * 0.88) {
+var fades=document.querySelectorAll('.fade'), countersStarted=false;
+function showOnScroll(){
+  fades.forEach(function(el){
+    if(el.getBoundingClientRect().top<window.innerHeight*.88){
       el.classList.add('show');
-      // trigger skill bars
-      if (el.classList.contains('skill-item')) animateSkillBar(el);
-      // trigger counters
-      if (el.classList.contains('stats-row')) animateCounters();
+      if(el.classList.contains('skill-item')){ var fill=el.querySelector('.skill-bar-fill'), pct=el.dataset.skill||0; setTimeout(function(){ fill.style.width=pct+'%'; },100); }
+      if(el.classList.contains('stats-row') && !countersStarted){ countersStarted=true; animateCounters(); }
     }
   });
 }
-
-window.addEventListener('scroll', showOnScroll);
+window.addEventListener('scroll',showOnScroll);
 showOnScroll();
 
-/* ===== SKILL BAR ANIMATION ===== */
-let skillsAnimated = false;
-
-function animateSkillBar(el) {
-  const fill = el.querySelector('.skill-bar-fill');
-  const pct  = el.dataset.skill || 0;
-  setTimeout(() => { fill.style.width = pct + '%'; }, 100);
-}
-
-/* ===== COUNTER ANIMATION ===== */
-let countersStarted = false;
-
-function animateCounters() {
-  if (countersStarted) return;
-  countersStarted = true;
-  document.querySelectorAll('.stat-number').forEach(el => {
-    const target = parseInt(el.dataset.target, 10);
-    const duration = 1800;
-    const start = performance.now();
-    function step(now) {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const ease = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.floor(ease * target) + (progress < 1 ? '' : '+');
-      if (progress < 1) requestAnimationFrame(step);
-      else el.textContent = target + '+';
-    }
+/* ===== COUNTERS ===== */
+function animateCounters(){
+  document.querySelectorAll('.stat-number').forEach(function(el){
+    var target=parseInt(el.dataset.target,10), dur=1800, start=performance.now();
+    function step(now){ var p=Math.min((now-start)/dur,1), ease=1-Math.pow(1-p,3); el.textContent=Math.floor(ease*target)+(p<1?'':'+'); if(p<1) requestAnimationFrame(step); else el.textContent=target+'+'; }
     requestAnimationFrame(step);
   });
 }
 
-/* ===== TYPING EFFECT ===== */
-const text = "Math Student | Ex-Product Development Intern at BCA Syariah";
-let i = 0;
-function typeWriter() {
-  if (i < text.length) {
-    document.getElementById('typing').innerHTML += text[i];
-    i++;
-    setTimeout(typeWriter, 40);
-  }
-}
+/* ===== TYPING ===== */
+var txt="Math Student | Ex-Product Development Intern at BCA Syariah", ti=0;
+function typeWriter(){ if(ti<txt.length){ document.getElementById('typing').innerHTML+=txt[ti]; ti++; setTimeout(typeWriter,40); } }
 typeWriter();
 
 /* ===== MODAL ===== */
-function openModal(title, desc, pdfSrc, pptSrc) {
-  document.getElementById('modalTitle').textContent = title;
-  document.getElementById('modalDesc').textContent  = desc;
-  const framePDF  = document.getElementById('framePDF');
-  const framePPT  = document.getElementById('framePPT');
-  const tabs      = document.getElementById('embedTabs');
-  const noFileMsg = document.getElementById('noFileMsg');
-  framePDF.classList.remove('active'); framePPT.classList.remove('active');
-  framePDF.src = ''; framePPT.src = '';
-  tabs.innerHTML = ''; noFileMsg.style.display = 'none';
-  const hasPDF = pdfSrc && pdfSrc.trim() !== '';
-  const hasPPT = pptSrc && pptSrc.trim() !== '';
-  if (!hasPDF && !hasPPT) {
-    noFileMsg.style.display = 'block';
-  } else {
-    if (hasPDF) {
-      const btn = document.createElement('button');
-      btn.className = 'embed-tab active'; btn.textContent = '📄 PDF';
-      btn.onclick = () => switchTab('pdf', pdfSrc, pptSrc);
-      tabs.appendChild(btn);
-    }
-    if (hasPPT) {
-      const btn = document.createElement('button');
-      btn.className = 'embed-tab' + (hasPDF ? '' : ' active');
-      btn.textContent = '📊 Presentasi';
-      btn.onclick = () => switchTab('ppt', pdfSrc, pptSrc);
-      tabs.appendChild(btn);
-    }
-    if (hasPDF) { framePDF.src = pdfSrc; framePDF.classList.add('active'); }
-    else         { framePPT.src = pptSrc; framePPT.classList.add('active'); }
+function openModal(title,desc,pdfSrc,pptSrc){
+  document.getElementById('modalTitle').textContent=title;
+  document.getElementById('modalDesc').textContent=desc;
+  var fP=document.getElementById('framePDF'), fS=document.getElementById('framePPT'), tabs=document.getElementById('embedTabs'), nf=document.getElementById('noFileMsg');
+  fP.classList.remove('active'); fS.classList.remove('active'); fP.src=''; fS.src=''; tabs.innerHTML=''; nf.style.display='none';
+  var hasPDF=pdfSrc&&pdfSrc.trim()!=='', hasPPT=pptSrc&&pptSrc.trim()!=='';
+  if(!hasPDF&&!hasPPT){ nf.style.display='block'; }
+  else {
+    if(hasPDF){ var b=document.createElement('button'); b.className='embed-tab active'; b.textContent='📄 PDF'; b.onclick=function(){switchTab('pdf',pdfSrc,pptSrc);}; tabs.appendChild(b); }
+    if(hasPPT){ var b2=document.createElement('button'); b2.className='embed-tab'+(hasPDF?'':' active'); b2.textContent='📊 Presentasi'; b2.onclick=function(){switchTab('ppt',pdfSrc,pptSrc);}; tabs.appendChild(b2); }
+    if(hasPDF){ fP.src=pdfSrc; fP.classList.add('active'); } else { fS.src=pptSrc; fS.classList.add('active'); }
   }
   document.getElementById('modal').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
-
-function switchTab(which, pdfSrc, pptSrc) {
-  const framePDF = document.getElementById('framePDF');
-  const framePPT = document.getElementById('framePPT');
-  const btns = document.querySelectorAll('.embed-tab');
-  framePDF.classList.remove('active'); framePPT.classList.remove('active');
-  if (which === 'pdf') {
-    framePDF.src = pdfSrc; framePDF.classList.add('active');
-    btns[0].classList.add('active');
-    if (btns[1]) btns[1].classList.remove('active');
-  } else {
-    framePPT.src = pptSrc; framePPT.classList.add('active');
-    btns[btns.length-1].classList.add('active');
-    if (btns.length > 1) btns[0].classList.remove('active');
-  }
+function switchTab(which,pdfSrc,pptSrc){
+  var fP=document.getElementById('framePDF'), fS=document.getElementById('framePPT'), btns=document.querySelectorAll('.embed-tab');
+  fP.classList.remove('active'); fS.classList.remove('active');
+  if(which==='pdf'){ fP.src=pdfSrc; fP.classList.add('active'); btns[0].classList.add('active'); if(btns[1]) btns[1].classList.remove('active'); }
+  else { fS.src=pptSrc; fS.classList.add('active'); btns[btns.length-1].classList.add('active'); if(btns.length>1) btns[0].classList.remove('active'); }
 }
-
-function closeModal() {
-  document.getElementById('modal').classList.remove('open');
-  document.body.style.overflow = '';
-  document.getElementById('framePDF').src = '';
-  document.getElementById('framePPT').src = '';
-}
-
-function handleOverlayClick(e) {
-  if (e.target === document.getElementById('modal')) closeModal();
-}
-
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
+function closeModal(){ document.getElementById('modal').classList.remove('open'); document.body.style.overflow=''; document.getElementById('framePDF').src=''; document.getElementById('framePPT').src=''; }
+function handleOverlayClick(e){ if(e.target===document.getElementById('modal')) closeModal(); }
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeModal(); });
 </script>
 </body>
 </html>
